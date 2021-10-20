@@ -11,10 +11,10 @@ namespace Project_WebApp
     {
         //Props
         [Key]
-        [Required]
         public string Title { get; set; }
         public bool? Public { get; set; }
         //Navigation props
+        [Required]
         public ICollection<Subject> Subjects { get; set; }
         //Constructor
         public Post(): base()

@@ -11,9 +11,9 @@ namespace Project_WebApp
     {
         //props
         [Key]
-        [Required]
         public int ImageId { get; set; }
         [Required]
+        [Display(Name = "User")]
         public int UserId { get; set; }
         [Required]
         public string Path { get; set; }
@@ -21,7 +21,9 @@ namespace Project_WebApp
         public string? Description { get; set; }
 
         //Navigatie props
+        [Required]
         public User User { get; set; }
+        [Required]
         public Post Post { get; set; }
         //Constructor
         public Image()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Project_WebApp
@@ -7,10 +8,14 @@ namespace Project_WebApp
     public class Comment : Message
     {
         //props
+        [Required]
+        [Display(Name = "Parent")]
         public int ParentId { get; set; }
-        public Message? Parent { get; set; }
+        [Required]
+        public Message Parent { get; set; }
         //Constructor
-        public Comment(): base() {
+        public Comment() : base()
+        {
 
         }
         //Methods

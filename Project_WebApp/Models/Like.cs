@@ -12,12 +12,16 @@ namespace Project_WebApp
         [Required]
         public int LikeId { get; set; }
         [Required]
+        [Display(Name = "User")]
         public int UserId { get; set; }
         [Required]
+        [Display(Name = "Post")]
         public int PostId { get; set; }
 
         //Navigatie props
+        [Required]
         public Post Post { get; set; }
+        [Required]
         public User User { get; set; }
     }
 }

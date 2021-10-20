@@ -9,17 +9,19 @@ namespace Project_WebApp
     {
         //Props
         [Key]
-        [Required]
         public int PostId { get; set; }
         [Required]
+        [Display(Name = "User")]
         public int UserId { get; set; }
         [Required]
         public string Text { get; set; }
         [Required]
         public DateTime Created { get; set; }
+
         //Navigation props
+        [Required]
         public User User { get; set; }
-        public ICollection<Image> Images { get; set; }
+        public ICollection<Image>? Images { get; set; }
         public ICollection<Like>? Likes { get; set; }
         public ICollection<Comment>? Comments { get; set; }
         //Extra getters

@@ -12,7 +12,6 @@ namespace Project_WebApp
     {
         //props
         [Key]
-        [Required]
         public int SubjectId { get; set; }
         [Required]
         public string Name { get; set; }

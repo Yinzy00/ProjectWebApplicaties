@@ -28,6 +28,7 @@ namespace Project_WebApp
         [Required]
         public DateTime Created { get; set; }
         [ForeignKey("ImageId")]
+        [Display(Name = "ProfilePicture")]
         public int? ProfilePictureId { get; set; }
 
         //Navigatieproperties
