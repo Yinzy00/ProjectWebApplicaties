@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Project_Models
+namespace Project_WebApp
 {
     public abstract class Message
     {
         //Props
-        public int Id { get; set; }
+        [Key]
+        [Required]
+        public int PostId { get; set; }
+        [Required]
         public int UserId { get; set; }
+        [Required]
         public string Text { get; set; }
+        [Required]
         public DateTime Created { get; set; }
+        //Navigation props
         public User User { get; set; }
-        public List<Image>? Images { get; set; }
-        public List<Like>? Likes { get; set; }
-        public List<Comment>? Comments { get; set; }
+        public ICollection<Image> Images { get; set; }
+        public ICollection<Like>? Likes { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
         //Extra getters
         public int AmountOfComments
         {

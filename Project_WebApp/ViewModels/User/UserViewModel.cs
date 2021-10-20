@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project_Models.ViewModels.User
+namespace Project_WebApp.ViewModels.User
 {
     public class UserViewModel
     {
         //props
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Username { get; set; }
         //Constructor
-        public UserViewModel(Project_Models.User u)
+        public UserViewModel(Project_WebApp.User u)
         {
             this.Id = u.Id;
-            this.Username = u.Username;
+            this.Username = u.UserName;
         }
         //Methods
     }

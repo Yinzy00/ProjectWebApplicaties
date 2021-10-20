@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Project_Models
+namespace Project_WebApp
 {
     /// <summary>
     /// A subject on 
@@ -10,12 +11,17 @@ namespace Project_Models
     public class Subject
     {
         //props
-        public int Id { get; set; }
+        [Key]
+        [Required]
+        public int SubjectId { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public DateTime Created { get; set; }
-
-        public List<Post>? Posts { get; set; }
+        //Navigation props
+        public ICollection<Post>? Posts { get; set; }
         //Extra getters & setters
         public int AmountOfPosts
         {

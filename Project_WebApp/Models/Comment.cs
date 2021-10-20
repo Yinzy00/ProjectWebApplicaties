@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project_Models
+namespace Project_WebApp
 {
     public class Comment : Message
     {

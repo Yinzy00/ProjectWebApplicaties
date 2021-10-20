@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project_Models.ViewModels.User
+namespace Project_WebApp.ViewModels.User
 {
     public class UserEditProfileViewModel : UserViewModel
     {
@@ -13,7 +13,7 @@ namespace Project_Models.ViewModels.User
         public DateTime DateOfBirth { get; set; }
         public ImageViewModel? ProfilePicture { get; set; }
         //Constructor
-        public UserEditProfileViewModel(Project_Models.User u): base(u)
+        public UserEditProfileViewModel(Project_WebApp.User u): base(u)
         {
             this.FirstName = u.FirstName;
             this.LastName = u.LastName;

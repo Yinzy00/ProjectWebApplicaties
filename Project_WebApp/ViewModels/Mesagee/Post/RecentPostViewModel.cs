@@ -1,9 +1,10 @@
-﻿using Project_Models.ViewModels.Subject;
+﻿using Project_WebApp.ViewModels.Subject;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
-namespace Project_Models.ViewModels.Message.Post
+namespace Project_WebApp.ViewModels.Message.Post
 {
     public class RecentPostViewModel
     {
@@ -13,12 +14,12 @@ namespace Project_Models.ViewModels.Message.Post
         public List<SubjectViewModel> Subjects { get; set; }
         public int AmountOfComments { get; set; }
         //Constructor
-        public RecentPostViewModel(Project_Models.Post p)
+        public RecentPostViewModel(Project_WebApp.Post p)
         {
             List<SubjectViewModel> subjects = new List<SubjectViewModel>();
-            p.Subjects.ForEach(s=>subjects.Add(new SubjectViewModel(s)));
+            p.Subjects.ToList().ToList().ForEach(s=>subjects.Add(new SubjectViewModel(s)));
 
-            this.Id = p.Id;
+            this.Id = p.PostId;
             this.Title = p.Title;
             this.Subjects = subjects;
             this.AmountOfComments = p.AmountOfComments;

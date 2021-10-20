@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project_Models.ViewModels.Subject
+namespace Project_WebApp.ViewModels.Subject
 {
     public class SubjectViewModel
     {
@@ -12,9 +12,9 @@ namespace Project_Models.ViewModels.Subject
         public string Description { get; set; }
         public int AmountOfPosts{ get; set; }
         //Constructor
-        public SubjectViewModel(Project_Models.Subject s)
+        public SubjectViewModel(Project_WebApp.Subject s)
         {
-            this.Id = s.Id;
+            this.Id = s.SubjectId;
             this.Name = s.Name;
             this.Description = s.Description;
             this.AmountOfPosts = s.AmountOfPosts;

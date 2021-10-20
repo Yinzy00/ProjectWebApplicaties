@@ -1,10 +1,11 @@
-﻿using Project_Models.ViewModels.Mesagee.Comment;
-using Project_Models.ViewModels.User;
+﻿using Project_WebApp.ViewModels.Mesagee.Comment;
+using Project_WebApp.ViewModels.User;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
-namespace Project_Models.ViewModels.Mesagee
+namespace Project_WebApp.ViewModels.Mesagee
 {
     public abstract class MessageViewModel
     {
@@ -18,15 +19,15 @@ namespace Project_Models.ViewModels.Mesagee
         public List<CommentViewModel>? Comments { get; set; }
 
         //Constructor
-        public MessageViewModel(Project_Models.Message m)
+        public MessageViewModel(Project_WebApp.Message m)
         {
             List<ImageViewModel> images = new List<ImageViewModel>();
-            m.Images.ForEach(i=>images.Add(new ImageViewModel(i)));
+            m.Images.ToList().ForEach(i=>images.Add(new ImageViewModel(i)));
 
             List<CommentViewModel> comments = new List<CommentViewModel>();
-            m.Comments.ForEach(c => comments.Add(new CommentViewModel(c)));
+            m.Comments.ToList().ForEach(c => comments.Add(new CommentViewModel(c)));
 
-            this.Id = m.Id;
+            this.Id = m.UserId;
             this.Text = m.Text;
             this.Created = m.Created;
             this.User = new UserViewModel(m.User);
