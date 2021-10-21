@@ -1,11 +1,11 @@
-﻿using Project_WebApp.ViewModels.Mesagee.Comment;
+﻿using Project_WebApp.ViewModels.Message.Comment;
 using Project_WebApp.ViewModels.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Project_WebApp.ViewModels.Mesagee
+namespace Project_WebApp.ViewModels.Message
 {
     public abstract class MessageViewModel
     {

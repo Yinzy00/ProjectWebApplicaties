@@ -1,4 +1,4 @@
-﻿using Project_WebApp.ViewModels.Mesagee;
+﻿using Project_WebApp.ViewModels.Message;
 using Project_WebApp.ViewModels.Subject;
 using System;
 using System.Collections.Generic;

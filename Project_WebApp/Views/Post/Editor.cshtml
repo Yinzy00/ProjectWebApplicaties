@@ -1,0 +1,13 @@
+﻿@model Project_WebApp.ViewModels.Message.Post.PostViewModel
+@{
+    ViewData["Title"] = "Nieuw bericht";
+    Layout = "~/Views/Shared/ProjectLayout.cshtml";
+}
+
+@if (Model != null)
+{
+    <div>Show post form with data of post with id @Model.Id</div>
+}
+else{
+    <div>Show new post form</div>
+};

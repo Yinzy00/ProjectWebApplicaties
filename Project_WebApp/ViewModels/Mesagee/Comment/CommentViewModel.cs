@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project_WebApp.ViewModels.Mesagee.Comment
+namespace Project_WebApp.ViewModels.Message.Comment
 {
     public class CommentViewModel : MessageViewModel
     {

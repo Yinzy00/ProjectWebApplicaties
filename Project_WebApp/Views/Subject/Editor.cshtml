@@ -1,0 +1,14 @@
+﻿@model Project_WebApp.ViewModels.Subject.SubjectViewModel
+@{
+    ViewData["Title"] = "Subject editor";
+    Layout = "~/Views/Shared/ProjectLayout.cshtml";
+}
+
+@if (Model != null)
+{
+    <div>Show subject form with data of post with id @Model.Id</div>
+}
+else
+{
+    <div>Show new subject form</div>
+};
