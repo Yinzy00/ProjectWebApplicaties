@@ -8,8 +8,7 @@ namespace Project_WebApp
     public abstract class Message
     {
         //Props
-        [Key]
-        public int PostId { get; set; }
+        public int Id { get; set; }
         [Required]
         [Display(Name = "User")]
         public int UserId { get; set; }
@@ -19,11 +18,10 @@ namespace Project_WebApp
         public DateTime Created { get; set; }
 
         //Navigation props
-        [Required]
         public User User { get; set; }
-        public ICollection<Image>? Images { get; set; }
-        public ICollection<Like>? Likes { get; set; }
-        public ICollection<Comment>? Comments { get; set; }
+        public ICollection<MessageImage> MessageImages { get; set; }
+        public ICollection<Like> Likes { get; set; }
+        public ICollection<Comment> Comments { get; set; }
         //Extra getters
         public int AmountOfComments
         {

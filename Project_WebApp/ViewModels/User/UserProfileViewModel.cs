@@ -14,8 +14,8 @@ namespace Project_WebApp.ViewModels.User
         //Constructor
         public UserProfileViewModel(Project_WebApp.User u): base(u)
         {
-            this.AmountOfPosts = u.Messages.ToList().FindAll(m=>m.GetType() == typeof(Post)).Count;
-            this.AmountOfComments = u.Messages.ToList().FindAll(m => m.GetType() == typeof(Comment)).Count;
+            this.AmountOfLikes = u.Messages.Where(m => m.GetType() == typeof(Post)).Count();
+            this.AmountOfComments = u.Messages.Where(m => m.GetType() == typeof(Comment)).Count();
             this.AmountOfLikes = u.AmountOfLikes;
         }
     }

@@ -14,18 +14,24 @@ namespace Project_WebApp.ViewModels.Message
         public string Text { get; set; }
         public DateTime Created { get; set; }
         public UserViewModel User { get; set; }
-        public List<ImageViewModel>? Images { get; set; }
+        public List<ImageViewModel> Images { get; set; }
         public int AmountOfLikes { get; set; }
-        public List<CommentViewModel>? Comments { get; set; }
+        public List<CommentViewModel> Comments { get; set; }
 
         //Constructor
         public MessageViewModel(Project_WebApp.Message m)
         {
             List<ImageViewModel> images = new List<ImageViewModel>();
-            m.Images.ToList().ForEach(i=>images.Add(new ImageViewModel(i)));
-
+            foreach (var MessageImage in m.MessageImages)
+            {
+                images.Add(new ImageViewModel(MessageImage.Image));
+            }
+            
             List<CommentViewModel> comments = new List<CommentViewModel>();
-            m.Comments.ToList().ForEach(c => comments.Add(new CommentViewModel(c)));
+            foreach (var comment in m.Comments)
+            {
+                comments.Add(new CommentViewModel(comment));
+            }
 
             this.Id = m.UserId;
             this.Text = m.Text;

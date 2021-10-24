@@ -9,11 +9,11 @@ namespace Project_WebApp.ViewModels
         //props
         public int Id { get; set; }
         public string Path { get; set; }
-        public string? Description { get; set; }
+        public string Description { get; set; }
         //Constructor
         public ImageViewModel(Image i)
         {
-            this.Id = i.ImageId;
+            this.Id = i.Id;
             this.Path = i.Path;
             this.Description = i.Description;
         }

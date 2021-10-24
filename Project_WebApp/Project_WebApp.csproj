@@ -6,11 +6,68 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211024163258_initialCreate.cs" />
+    <Compile Remove="Data\Migrations\20211024163258_initialCreate.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211024163809_initialCreate.cs" />
+    <Compile Remove="Data\Migrations\20211024163809_initialCreate.Designer.cs" />
+    <Compile Remove="Data\Migrations\20211024183019_test.cs" />
+    <Compile Remove="Data\Migrations\20211024183019_test.Designer.cs" />
+    <Compile Remove="Migrations\20211024183628_InitialCreate.cs" />
+    <Compile Remove="Migrations\20211024183628_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20211024184938_fix.cs" />
+    <Compile Remove="Migrations\20211024184938_fix.Designer.cs" />
+    <Compile Remove="Migrations\20211024205611_fix.cs" />
+    <Compile Remove="Migrations\20211024205611_fix.Designer.cs" />
+    <Compile Remove="Migrations\20211024210018_fix.cs" />
+    <Compile Remove="Migrations\20211024210018_fix.Designer.cs" />
+    <Compile Remove="Migrations\20211024210140_fix.cs" />
+    <Compile Remove="Migrations\20211024210140_fix.Designer.cs" />
+    <Compile Remove="Migrations\20211024210757_fix2.cs" />
+    <Compile Remove="Migrations\20211024210757_fix2.Designer.cs" />
+    <Compile Remove="Migrations\20211024211403_fix3.cs" />
+    <Compile Remove="Migrations\20211024211403_fix3.Designer.cs" />
+    <Compile Remove="Migrations\20211024212320_InitialCreate.cs" />
+    <Compile Remove="Migrations\20211024212320_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20211024213319_UserImages.cs" />
+    <Compile Remove="Migrations\20211024213319_UserImages.Designer.cs" />
+    <Compile Remove="Migrations\20211024213913_UserImages2.cs" />
+    <Compile Remove="Migrations\20211024213913_UserImages2.Designer.cs" />
+    <Compile Remove="Migrations\20211024220357_fix2.cs" />
+    <Compile Remove="Migrations\20211024220357_fix2.Designer.cs" />
+    <Compile Remove="Migrations\20211024220534_fix2.cs" />
+    <Compile Remove="Migrations\20211024220534_fix2.Designer.cs" />
+    <Compile Remove="Migrations\20211024222154_fix6.cs" />
+    <Compile Remove="Migrations\20211024222154_fix6.Designer.cs" />
+    <Compile Remove="Migrations\20211024222321_fix6.cs" />
+    <Compile Remove="Migrations\20211024222321_fix6.Designer.cs" />
+    <Compile Remove="Migrations\20211024222811_fix6.cs" />
+    <Compile Remove="Migrations\20211024222811_fix6.Designer.cs" />
+    <Compile Remove="Migrations\20211024223852_fix7.cs" />
+    <Compile Remove="Migrations\20211024223852_fix7.Designer.cs" />
+    <Compile Remove="Migrations\20211024224140_fix7.cs" />
+    <Compile Remove="Migrations\20211024224140_fix7.Designer.cs" />
+    <Compile Remove="Migrations\20211024224309_fix7.cs" />
+    <Compile Remove="Migrations\20211024224309_fix7.Designer.cs" />
+    <Compile Remove="Migrations\20211024224846_fix9.cs" />
+    <Compile Remove="Migrations\20211024224846_fix9.Designer.cs" />
+    <Compile Remove="Migrations\20211024225126_fix10.cs" />
+    <Compile Remove="Migrations\20211024225126_fix10.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.20" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.20" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.20" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

@@ -10,12 +10,11 @@ namespace Project_WebApp
     public class Post : Message
     {
         //Props
-        [Key]
         public string Title { get; set; }
         public bool? Public { get; set; }
         //Navigation props
         [Required]
-        public ICollection<Subject> Subjects { get; set; }
+        public ICollection<PostSubject> PostSubjects { get; set; }
         //Constructor
         public Post(): base()
         {
@@ -29,7 +28,7 @@ namespace Project_WebApp
         }
         public override void AddComment(Comment c)
         {
-            this.Comments.Add(c);
+            //this.Comments.Add(c);
         }
     }
 }

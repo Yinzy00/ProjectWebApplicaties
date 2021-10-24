@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Project_WebApp.Data;
 using Project_WebApp.ViewModels.Message.Post;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,11 @@ namespace Project_WebApp.Controllers
 {
     public class PostController : Controller
     {
-        List<Post> posts = new List<Post>();
-        public PostController()
+        //List<Post> posts = new List<Post>();
+        ApplicationDbContext DbContext;
+        public PostController(ApplicationDbContext dbContext)
         {
+            DbContext = dbContext;
             //int max = 50;
             //for (int i = 0; i < max; i++)
             //{
@@ -47,7 +50,7 @@ namespace Project_WebApp.Controllers
         /// <returns></returns>
         public IActionResult Index(int id)
         {
-            Post p = posts.Where(p => p.PostId == id).FirstOrDefault();
+            Post p = DbContext.Posts.Where(p => p.Id == id).FirstOrDefault();
             if (p != null)
             {
                 var vm = new PostViewModel(p);
@@ -68,8 +71,8 @@ namespace Project_WebApp.Controllers
         {
             if (id != null)
             {
-                Post p = posts.Where(p => p.PostId == id).FirstOrDefault();
-                if (p!=null)
+                Post p = DbContext.Posts.Where(p => p.Id == id).FirstOrDefault();
+                if (p != null)
                 {
                     var vm = new PostViewModel(p);
                     return View(vm);

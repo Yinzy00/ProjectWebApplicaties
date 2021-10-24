@@ -17,9 +17,12 @@ namespace Project_WebApp.ViewModels.Message.Post
         public RecentPostViewModel(Project_WebApp.Post p)
         {
             List<SubjectViewModel> subjects = new List<SubjectViewModel>();
-            p.Subjects.ToList().ToList().ForEach(s=>subjects.Add(new SubjectViewModel(s)));
+            foreach (var item in p.PostSubjects)
+            {
+                subjects.Add(new SubjectViewModel(item.Subject));
+            }
 
-            this.Id = p.PostId;
+            this.Id = p.Id;
             this.Title = p.Title;
             this.Subjects = subjects;
             this.AmountOfComments = p.AmountOfComments;

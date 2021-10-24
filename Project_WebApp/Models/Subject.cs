@@ -11,8 +11,8 @@ namespace Project_WebApp
     public class Subject
     {
         //props
-        [Key]
-        public int SubjectId { get; set; }
+        //[Key]
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -20,13 +20,13 @@ namespace Project_WebApp
         [Required]
         public DateTime Created { get; set; }
         //Navigation props
-        public ICollection<Post>? Posts { get; set; }
+        public ICollection<PostSubject> PostSubjects{ get; set; }
         //Extra getters & setters
         public int AmountOfPosts
         {
             get
             {
-                return Posts.Count;
+                return PostSubjects.Count;
             }
         }
         //Constructor

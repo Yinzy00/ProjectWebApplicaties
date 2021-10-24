@@ -8,10 +8,8 @@ namespace Project_WebApp
     public class Comment : Message
     {
         //props
-        [Required]
-        [Display(Name = "Parent")]
-        public int ParentId { get; set; }
-        [Required]
+        public int? ParentId { get; set; }
+        //Nav props
         public Message Parent { get; set; }
         //Constructor
         public Comment() : base()
@@ -21,7 +19,7 @@ namespace Project_WebApp
         //Methods
         public override void AddComment(Comment c)
         {
-            //Check current level
+            //    Check current level
             if (this.Parent.GetType() == typeof(Post))
             {
                 //If first level => add comment to comment

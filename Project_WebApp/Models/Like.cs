@@ -10,18 +10,14 @@ namespace Project_WebApp
         //props
         [Key]
         [Required]
-        public int LikeId { get; set; }
-        [Required]
-        [Display(Name = "User")]
+        public int Id { get; set; }
+        //[Required]
         public int UserId { get; set; }
         [Required]
-        [Display(Name = "Post")]
-        public int PostId { get; set; }
+        public int MessageId { get; set; }
 
         //Navigatie props
-        [Required]
-        public Post Post { get; set; }
-        [Required]
+        public Message Message{ get; set; }
         public User User { get; set; }
     }
 }

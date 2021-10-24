@@ -14,11 +14,13 @@ namespace Project_WebApp.ViewModels.Message.Post
         public List<SubjectViewModel> Subjects { get; set; }
         public bool? Public { get; set; }
         //Constructor
-        public PostViewModel(Project_WebApp.Post p):base(p)
+        public PostViewModel(Project_WebApp.Post p) : base(p)
         {
             List<SubjectViewModel> subjects = new List<SubjectViewModel>();
-            p.Subjects.ToList().ForEach(s=>subjects.Add(new SubjectViewModel(s)));
-
+            foreach (var item in p.PostSubjects)
+            {
+                subjects.Add(new SubjectViewModel(item.Subject));
+            }
             this.Title = p.Title;
             this.Subjects = subjects;
             this.Public = p.Public;

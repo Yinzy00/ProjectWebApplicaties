@@ -11,7 +11,7 @@ namespace Project_WebApp.ViewModels.User
         public string LastName { get; set; }
         public string Email { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public ImageViewModel? ProfilePicture { get; set; }
+        public ImageViewModel ProfilePicture { get; set; }
         //Constructor
         public UserEditProfileViewModel(Project_WebApp.User u): base(u)
         {

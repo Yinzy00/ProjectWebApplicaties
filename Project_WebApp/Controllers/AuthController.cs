@@ -8,7 +8,6 @@ namespace Project_WebApp.Controllers
 {
     public class AuthController : Controller
     {
-
         public IActionResult Index()
         {
             return View();
@@ -26,6 +25,10 @@ namespace Project_WebApp.Controllers
             return View();
         }
         public IActionResult LogOut()
+        {
+            return View();
+        }
+        public IActionResult NoAcces()
         {
             return View();
         }

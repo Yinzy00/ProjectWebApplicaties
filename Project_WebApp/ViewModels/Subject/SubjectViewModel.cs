@@ -14,7 +14,7 @@ namespace Project_WebApp.ViewModels.Subject
         //Constructor
         public SubjectViewModel(Project_WebApp.Subject s)
         {
-            this.Id = s.SubjectId;
+            this.Id = s.Id;
             this.Name = s.Name;
             this.Description = s.Description;
             this.AmountOfPosts = s.AmountOfPosts;
