@@ -13,7 +13,7 @@ a.navbar-brand {
         margin-right: 50px;
     }
 
-.driehoekContainer {
+#HeaderDriehoekContainer {
     position: absolute;
     right: 0px;
     /*width:100%;*/
@@ -22,7 +22,7 @@ a.navbar-brand {
 }
 
 @media only screen and (min-width: 768px) {
-    .driehoek {
+    #HeaderDriehoek {
         --width: calc(100%-50%);
         width: 0;
         height: 0;
@@ -33,7 +33,7 @@ a.navbar-brand {
 }
 
 @media only screen and (max-width: 768px) {
-    .driehoek {
+    #HeaderDriehoek {
         visibility: hidden;
     }
 }
@@ -101,11 +101,19 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
+    /*margin-bottom: 60px;*/
 }
-
+/*
+main{
+    position:relative;
+    min-height:100%;
+    height:auto;
+    margin:0px;
+    padding:0px;
+}
+*/
 .footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
@@ -113,6 +121,7 @@ body {
     background-color: #F4F5F7;
     padding-top: 25px;
     padding-bottom: 25px;
+    margin-top:25px;
 }
 
 /*Footer*/
@@ -128,6 +137,8 @@ body {
         text-decoration: none;
     }
 
+
+/*BRANDING*/
 .brandColor {
     color: #E8D500;
 }
@@ -135,6 +146,139 @@ body {
 .brandColorBg {
     background-color: #E8D500;
 }
-/*.btn-brand{
+.brandBtn {
+    background-color: #E8D500;
+    color:white;
+    font-weight:bold;
+    width:100%;
+}
+.brandBtn:hover{
+    color:white;
+}
 
+@media only screen and (min-width: 1000px) {
+    .Center50 {
+        width: 50%;
+        transform: translate(50%);
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .Center50 {
+        width: 100%;
+    }
+
+        .Center50 .row {
+            margin-bottom: 0px !important;
+        }
+
+            .Center50 .row > div {
+                margin-bottom: 10px;
+            }
+}
+/*Auth*/
+.AuthLogo{
+    width:150px;
+    margin-bottom:25px;
+}
+.AuthTitleContainer{
+    margin-bottom:20px;
+}
+.AuthDriehoekContainer {
+    position: absolute;
+    /*left: -700px;*/
+    left:0px;
+    /*width:100%;*/
+    top: 0px;
+    z-index: -1;
+    opacity:0.5;
+}
+
+@media only screen and (min-width: 768px) {
+    .AuthDriehoekContainer .AuthDriehoek {
+        left:0px;
+        width: 0;
+        height: 0;
+        opacity: 0.4;
+        /*border-top: 350px solid transparent;*/
+        /*border-left: 700px solid #555;*/
+        /*border-bottom: 350px solid transparent;*/
+        /*transform: rotate(45deg);*/
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .AuthDriehoekContainer .AuthDriehoek {
+        visibility: hidden;
+    }
+}
+
+/*Login*/
+#LoginFormContainer {
+    width: 80%;
+    margin: auto;
+}
+@media only screen and (min-width: 1000px) {
+    #LoginFormContainer {
+        width: 35%!important;
+    }
+}
+
+#LoginFormContainer .brandBtn{
+    width:100%;
+}
+#LoginFormContainer .input-group {
+    margin-bottom: 20px;
+}
+#LoginFormLogoContainer{
+    text-align:center;
+}
+#LoginForgotPassword{
+    text-align:right;
+}
+#LoginRememberMe{
+    position:relative;
+    width:50%;
+}
+#LoginForgotPassword{
+    position:absolute;
+    width:50%;
+    right:0px;
+    top:0px;
+}
+#LoginRememberMeForgotPasswordContainer{
+    position:relative;
+    padding-left:20px;
+    margin-bottom:55px;
+}
+/*#LoginButtonContainer{
+    text-align:right;
 }*/
+/*Registreren*/
+#RegisterFomContainer {
+    margin-top:50px;
+    margin-bottom:50px;
+}
+#RegisterFomContainer .row{
+    margin-bottom:25px;
+}
+#RegisterAcceptTermsContainer{
+    padding-left: 20px;
+}
+#btnRegistreren {
+    margin-right: 15px;
+}
+    /*NO ACCES*/
+    #NoAccesContainer {
+    /*width: 50%;*/
+    text-align: center;
+    /*transform: translateX(50%);*/
+    margin-top: 50px;
+}
+#NoAccesTitleContainer{
+    font-weight:bold;
+    margin-bottom:50px;
+}
+#NoAccesContainer .brandBtn {
+    margin-bottom: 50px;
+}

@@ -3,4 +3,45 @@
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
 
-Login windows
+<div id="LoginFormContainer">
+    <div id="LoginFormLogoContainer">
+        <img src="~/images/logo.png" alt="Logo" class="AuthLogo" />
+    </div>
+    <div class="AuthTitleContainer">
+        <h2>
+            Login
+        </h2>
+    </div>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="LoginEmailIcon">
+                <i class="fas fa-envelope"></i>
+            </span>
+        </div>
+        <input type="email" id="txtLoginEmail" placeholder="Email" class="form-control" aria-label="Email" aria-describedby="LoginEmailIcon" />
+    </div>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="LoginPasswordIcon">
+                <i class="fas fa-lock"></i>
+            </span>
+        </div>
+        <input type="password" id="txtLoginPassword" placeholder="Wachtwoord" class="form-control" aria-label="password" aria-describedby="LoginPasswordIcon"/>
+    </div>
+    <div id="LoginRememberMeForgotPasswordContainer">
+        <div id="LoginRememberMe">
+            <input type="checkbox" class="form-check-input" id="cbLoginRemindMe"/>
+            <label for="cbLoginRemindMe" class="form-check-label">Onthoud me</label>
+        </div>
+        <div id="LoginForgotPassword">
+            <a asp-controller="Auth" asp-action="ForgotPassword">Wachtwoord vergeten</a>
+        </div>
+    </div>
+    <div id="LoginButtonContainer">
+        <input type="button" class="btn brandBtn" value="Aanmelden"/>
+    </div>
+</div>
+<div class="AuthDriehoekContainer">
+    <div class="AuthDriehoek">
+    </div>
+</div>

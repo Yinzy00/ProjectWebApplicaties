@@ -2,11 +2,16 @@
     ViewData["Title"] = "Afgemeld";
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
-<div id="NoAccesContainer">
+<div id="NoAccesContainer" class="Center50">
     <div id="NoAccesTitleContainer">
         <h2>
             Om deze content te bekijken moet je aangemeld zijn<span class="brandColor">!</span>
         </h2>
-        <input type="button" class="btn brandColorBg" />
+    </div>
+    <div>
+        <a asp-controller="Auth" asp-action="Index" class="btn brandBtn">Aanmelden</a>
+    </div>
+    <div>
+        <a>Terug</a>
     </div>
 </div>

@@ -3,4 +3,107 @@
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
 
-Registreer scherm
+<div id="RegisterFomContainer" class="Center50">
+    <div id="LoginFormLogoContainer">
+        <img src="~/images/logo.png" alt="Logo" class="AuthLogo" />
+    </div>
+    <div id="RegisterTitleContainer" class="row">
+        <h2>Registreren</h2>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="RegisterUsernameIcon">
+                        <i class="fas fa-user"></i>
+                    </span>
+                </div>
+                <input type="text" id="txtRegisterUserName" placeholder="Gebruikersnaam" class="form-control" aria-label="Username" aria-describedby="RegisterUsernameIcon" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="RegisterLastnameIcon">
+                        <i class="fas fa-user"></i>
+                    </span>
+                </div>
+                <input type="text" id="txtRegisterLastName" placeholder="Naam" class="form-control" aria-label="LastName" aria-describedby="RegisterLastnameIcon" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="RegisterLastnameIcon">
+                        <i class="fas fa-user"></i>
+                    </span>
+                </div>
+                <input type="text" id="txtRegisterFirstName" placeholder="Voornaam" class="form-control" aria-label="FirstName" aria-describedby="RegisterFirstnameIcon" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="RegisterEmailIcon">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </div>
+                <input type="email" id="txtRegisterEmail" placeholder="Email" class="form-control" aria-label="Email" aria-describedby="RegisterEmailIcon" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="RegisterDateOfBirthIcon">
+                        <i class="fas fa-birthday-cake"></i>
+                    </span>
+                </div>
+                <input type="date" id="txtRegisterDateOfBirth" class="form-control" aria-label="DateOfBirth" aria-describedby="RegisterDateOfBirthIcon" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="RegisterPasswordIcon">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </div>
+                <input type="password" id="txtRegisterPassword" placeholder="Wachtwoord" class="form-control" aria-label="FirstName" aria-describedby="RegisterPasswordIcon" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="RegisterRepeatPasswordIcon">
+                        <i class="fas fa-redo-alt"></i>
+                    </span>
+                </div>
+                <input type="password" id="txtRegisterPassword" placeholder="Herhaal wachtwoord" class="form-control" aria-label="FirstName" aria-describedby="RegisterRepeatPasswordIcon" />
+            </div>
+        </div>
+    </div>
+    <div class="row" id="RegisterAcceptTermsContainer">
+        <div class="col-12">
+            <input type="checkbox" class="form-check-input" id="cbRegisterTermsOfConditions" />
+            <label class="form-check-label" for="cbRegisterTermsOfConditions">Algemene voorwaarden accepteren</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <input class="btn brandBtn" type="button" value="Registreren" id="btnRegistreren" />
+        </div>
+        <div class="col-md-6">
+            <a asp-controller="Auth" asp-action="Index" class="btn brandBtn" id="aRegistrerenLogin">Aanmelden</a>
+        </div>
+    </div>
+</div>
+<div class="AuthDriehoekContainer">
+    <div class="AuthDriehoek">
+    </div>
+</div>
