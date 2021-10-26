@@ -1,5 +1,8 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+h2 {
+    font-weight: 700;
+}
 
 a.navbar-brand {
     white-space: normal;
@@ -102,6 +105,7 @@ html {
 body {
     /* Margin bottom by footer height */
     /*margin-bottom: 60px;*/
+    font-family: 'Inter';
 }
 /*
 main{
@@ -121,7 +125,7 @@ main{
     background-color: #F4F5F7;
     padding-top: 25px;
     padding-bottom: 25px;
-    margin-top:25px;
+    margin-top: 25px;
 }
 
 /*Footer*/
@@ -146,15 +150,17 @@ main{
 .brandColorBg {
     background-color: #E8D500;
 }
+
 .brandBtn {
     background-color: #E8D500;
-    color:white;
-    font-weight:bold;
-    width:100%;
+    color: white;
+    font-weight: bold;
+    width: 100%;
 }
-.brandBtn:hover{
-    color:white;
-}
+
+    .brandBtn:hover {
+        color: white;
+    }
 
 @media only screen and (min-width: 1000px) {
     .Center50 {
@@ -177,26 +183,32 @@ main{
             }
 }
 /*Auth*/
-.AuthLogo{
-    width:150px;
-    margin-bottom:25px;
+.AuthLogo {
+    width: 150px;
+    margin-bottom: 25px;
 }
-.AuthTitleContainer{
-    margin-bottom:20px;
+
+.AuthLogoContainer {
+    text-align: center;
 }
+
+.AuthTitleContainer {
+    margin-bottom: 20px;
+}
+
 .AuthDriehoekContainer {
     position: absolute;
     /*left: -700px;*/
-    left:0px;
+    left: 0px;
     /*width:100%;*/
     top: 0px;
     z-index: -1;
-    opacity:0.5;
+    opacity: 0.5;
 }
 
 @media only screen and (min-width: 768px) {
     .AuthDriehoekContainer .AuthDriehoek {
-        left:0px;
+        left: 0px;
         width: 0;
         height: 0;
         opacity: 0.4;
@@ -218,67 +230,224 @@ main{
     width: 80%;
     margin: auto;
 }
+
 @media only screen and (min-width: 1000px) {
     #LoginFormContainer {
-        width: 35%!important;
+        width: 35% !important;
     }
 }
 
-#LoginFormContainer .brandBtn{
-    width:100%;
+#LoginFormContainer .brandBtn {
+    width: 100%;
 }
+
 #LoginFormContainer .input-group {
     margin-bottom: 20px;
 }
-#LoginFormLogoContainer{
+/*#LoginFormLogoContainer{
     text-align:center;
+}*/
+#LoginForgotPassword {
+    text-align: right;
 }
-#LoginForgotPassword{
-    text-align:right;
+
+#LoginRememberMe {
+    position: relative;
+    width: 50%;
 }
-#LoginRememberMe{
-    position:relative;
-    width:50%;
+
+#LoginForgotPassword {
+    position: absolute;
+    width: 50%;
+    right: 0px;
+    top: 0px;
 }
-#LoginForgotPassword{
-    position:absolute;
-    width:50%;
-    right:0px;
-    top:0px;
+
+#LoginRememberMeForgotPasswordContainer {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 55px;
 }
-#LoginRememberMeForgotPasswordContainer{
-    position:relative;
-    padding-left:20px;
-    margin-bottom:55px;
+
+.AuthFormContainer {
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
 }
 /*#LoginButtonContainer{
     text-align:right;
 }*/
 /*Registreren*/
-#RegisterFomContainer {
-    margin-top:50px;
-    margin-bottom:50px;
+#RegisterFomContainer .row {
+    margin-bottom: 25px;
 }
-#RegisterFomContainer .row{
-    margin-bottom:25px;
-}
-#RegisterAcceptTermsContainer{
+
+#RegisterAcceptTermsContainer {
     padding-left: 20px;
 }
+
 #btnRegistreren {
     margin-right: 15px;
 }
-    /*NO ACCES*/
-    #NoAccesContainer {
+/*ForgotPassword*/
+@media only screen and (min-width: 768px) {
+    .SmallAuthContainer {
+        /*height:400px;*/
+        width: 350px;
+        margin: auto;
+        padding-bottom: 100px;
+        padding-top: 50px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .SmallAuthContainer {
+        width: 100%;
+    }
+}
+
+#ForgotPasswordButtonContainer {
+    padding-top: 25px;
+}
+
+#RestorePasswordFormContainer > div {
+    padding-bottom: 25px;
+}
+/*NO ACCES*/
+#NoAccesContainer {
     /*width: 50%;*/
     text-align: center;
     /*transform: translateX(50%);*/
     margin-top: 50px;
 }
-#NoAccesTitleContainer{
-    font-weight:bold;
-    margin-bottom:50px;
+
+#NoAccesTitleContainer {
+    font-weight: bold;
+    margin-bottom: 50px;
 }
+
 #NoAccesContainer .brandBtn {
     margin-bottom: 50px;
+}
+/*Home*/
+/*@media only screen and (min-width: 768px) {
+    .HomeBgShape {
+        position: absolute;*/
+/*Header height*/
+/*top: 127px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .HomeBgShapeBlock {
+        height: 100px;
+        width: 100%;
+        background-color: #F4F5F7;
+        position: relative;
+        top: 0px;
+        left: 0px;
+    }
+
+    .HomeBgShapeCircle {
+        background-color: #F4F5F7;
+        height: 500px;
+        width: 100%;
+        border-radius: 50%;
+        position: relative;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .HomeBgShape {
+        visibility: collapse !important;
+        height: 0px !important;
+    }
+}*/
+
+#HomeTitleContainer h1 {
+    font-size: 80px;
+    margin-bottom: 50px;
+    font-weight: 900;
+}
+
+/*#Home2thPart {
+    width: 50%;
+    transform: translateX(50%);
+    text-align: center;
+    margin-top: 150px;
+}*/
+#Home2thPart {
+    text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+    #Home2thPart {
+        width: 50%;
+        transform: translateX(50%);
+        margin-top: 150px;
+        /*       text-align: center;
+        margin-top: 150px;*/
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #Home2thPart {
+        margin-top: 50px;
+    }
+}
+
+#Home2thPart h2 {
+    margin-bottom: 35px;
+}
+
+#HomeHr {
+    background-color: #BCBDBF;
+}
+
+#HomeImg1 {
+    width: 100%;
+}
+
+#HomeImg2 {
+    width: 100%;
+}
+
+#Home3thPart {
+    /*margin-top: 400px;*/
+    margin: 50px 0px;
+}
+
+#Home4thPart {
+    margin:50px 0px;
+    text-align:right;
+}
+#HomeAboutButton{
+    width:50%;
+    margin-top:50px;
+}
+/*RecentPost*/
+.RecentPost {
+    width: 100%;
+    background-color: #F9F9F9;
+    border: 1px solid #AFAFAF;
+    padding: 5px;
+    margin-top: 15px;
+}
+
+.RecentPostTitle {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.RecentPostSubjects {
+    margin: 15px 0px;
+}
+
+.SubjectTag {
+    /*width:150px;*/
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    text-align: center;
 }

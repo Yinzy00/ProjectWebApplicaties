@@ -3,8 +3,8 @@
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
 
-<div id="RegisterFomContainer" class="Center50">
-    <div id="LoginFormLogoContainer">
+<div id="RegisterFomContainer" class="Center50 AuthFormContainer">
+    <div class="AuthLogoContainer">
         <img src="~/images/logo.png" alt="Logo" class="AuthLogo" />
     </div>
     <div id="RegisterTitleContainer" class="row">
@@ -96,7 +96,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <input class="btn brandBtn" type="button" value="Registreren" id="btnRegistreren" />
+            <input class="btn brandBtn" type="button" value="Registreren" id="btnRegister" />
         </div>
         <div class="col-md-6">
             <a asp-controller="Auth" asp-action="Index" class="btn brandBtn" id="aRegistrerenLogin">Aanmelden</a>

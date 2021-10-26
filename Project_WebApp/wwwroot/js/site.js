@@ -11,10 +11,11 @@ let borderTextTransparent = "px solid transparent";
 
 
 function checkBodyHeight() {
-    let windowHeight = window.innerHeight;
+    //let windowHeight = window.innerHeight;
+    let htmlHeight = document.querySelector("html").clientHeight;
     let x = (document.querySelector("header").clientHeight + document.querySelector("main").clientHeight + document.querySelector("footer").clientHeight)
-    if (x < windowHeight) {
-        document.querySelector(".footer").style.position = "fixed";
+    if (x < htmlHeight) {
+        document.querySelector(".footer").style.position = "absolute";
     }
     else {
         document.querySelector(".footer").style.position = "relative";
@@ -29,11 +30,13 @@ checkBodyHeight();
 //AuthDriehoek.style.borderLeft = (windowWidth / 1.5) + borderTextColor;
 window.onresize = () => {
     let windowWidth = window.innerWidth;
-    let windowHeight = window.innerHeight;
+    //let windowHeight = window.innerHeight;
     let htmlHeight = document.querySelector("html").offsetHeight;
 
     let HeaderDriehoek = document.querySelector("#HeaderDriehoek");
     let AuthDriehoek = document.querySelector(".AuthDriehoek");
+
+    //let HomeBgShapeCircle = document.querySelector(".HomeBgShapeCircle");
 
     //windowHeight = window.innerHeight;
     //windowWidth = window.innerWidth;
@@ -45,6 +48,12 @@ window.onresize = () => {
         AuthDriehoek.style.borderTop = (htmlHeight / 2) + borderTextTransparent;
         AuthDriehoek.style.borderLeft = (windowWidth / 1.5) + borderTextColor;
     }
+    //if (HomeBgShapeCircle !== null) {
+    //    HomeBgShapeCircle.style.height = (windowWidth/1) + "px";
+    //    HomeBgShapeCircle.style.width = windowWidth + "px";
+    //    HomeBgShapeCircle.style.top = "-" + (windowWidth/2) + "px";
+    //    //HomeBgShapeCircle.style.width = windowWidth;
+    //}
 }
 
 window.onresize();

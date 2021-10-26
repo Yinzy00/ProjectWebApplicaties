@@ -2,8 +2,106 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <div id="HomeTitleContainer">
+        <h1>
+            Welkom<span class="brandColor">.</span>
+        </h1>
+    </div>
 </div>
+<hr id="HomeHr" />
+<div class="row">
+    <div id="Home2thPart">
+        <h2>
+            Opzoek naar een antwoord op uw vraag <span class="brandColor">?</span>
+        </h2>
+        <p>
+            Ons overzicht van onderwerpen, berichten en antwoordden kan je gratis bekijken om zo opzoek te gaan naar de juiste oplossing voor uw vraag of probleem!
+        </p>
+    </div>
+</div>
+<div class="row" id="Home3thPart">
+    <div class="col-md-5">
+        <h2>
+            Meest recente berichten<span class="brandColor">.</span>
+        </h2>
+        <div id="HomeRecentPosts">
+            <div class="RecentPost">
+                <div class="RecentPostTitle">
+                    Title bericht
+                </div>
+                <div class="RecentPostSubjects">
+                    <span class="SubjectTag brandColorBg">
+                        Onderwerp
+                    </span>
+                    <span class="SubjectTag brandColorBg">
+                        Onderwerp
+                    </span>
+                    <span class="SubjectTag brandColorBg">
+                        Onderwerp
+                    </span>
+                </div>
+            </div>
+            <div class="RecentPost">
+                <div class="RecentPostTitle">
+                    Title bericht
+                </div>
+                <div class="RecentPostSubjects">
+                    <span class="SubjectTag brandColorBg">
+                        Onderwerp
+                    </span>
+                    <span class="SubjectTag brandColorBg">
+                        Onderwerp
+                    </span>
+                    <span class="SubjectTag brandColorBg">
+                        Onderwerp
+                    </span>
+                </div>
+            </div>
+            <div class="RecentPost">
+                <div class="RecentPostTitle">
+                    Title bericht
+                </div>
+                <div class="RecentPostSubjects">
+                    <span class="SubjectTag brandColorBg">
+                        Onderwerp
+                    </span>
+                    <span class="SubjectTag brandColorBg">
+                        Onderwerp
+                    </span>
+                    <span class="SubjectTag brandColorBg">
+                        Onderwerp
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <img id="HomeImg1" src="~/images/klok.png" />
+    </div>
+</div>
+<div class="row" id="Home4thPart">
+    <div class="col-md-5">
+        <img id="HomeImg2" src="~/images/denken.jpg" />
+    </div>
+    <div class="col-md-7">
+        <div id="Home4thPartTitleContainer">
+            <h2>
+                Meer teweten komen over het forum en de ontwikkelaars<span class="brandColor">?</span>
+            </h2>
+        </div>
+        <div>
+            <a id="HomeAboutButton" asp-controller="Home" asp-action="About" class="btn brandBtn">Bekijk meer</a>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="HomeBgShape">
+    <div class="HomeBgShapeBlock">
+        
+    </div>
+    <div class="HomeBgShapeCircle">
+
+    </div>
+</div>*@  
