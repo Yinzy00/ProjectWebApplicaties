@@ -48,16 +48,16 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Register">Registreren</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Index">Aanmelden</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Aanmelden</a>
                                 </li>
                             }
                         }
                         @{
-                            if (!this.User.Identity.IsAuthenticated)
+                            if (this.User.Identity.IsAuthenticated)
                             {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        (USERNAME)
+                                       @this.User.Identity.Name
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li>
