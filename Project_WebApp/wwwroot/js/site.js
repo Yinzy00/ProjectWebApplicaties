@@ -1,6 +1,8 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
+//const { post } = require("jquery");
+
 // Write your JavaScript code.
 
 
@@ -58,6 +60,14 @@ window.onresize = () => {
 
 window.onresize();
 
-
-
+var PostEditorSubjectSelect = document.querySelector("#PostEditorSubjectSelect");
+if (PostEditorSubjectSelect != null) {
+    PostEditorSubjectSelect.addEventListener("change", () => {
+        document.querySelector("#PostEditorSubjects").innerHTML += `<span class="SubjectTag brandColorBg">
+                    ${PostEditorSubjectSelect.options[PostEditorSubjectSelect.selectedIndex].text}
+                </span>`
+        document.querySelector("#PostEditorHiddenSubjectField").value += PostEditorSubjectSelect.value + ",";
+        PostEditorSubjectSelect.remove(PostEditorSubjectSelect.selectedIndex);
+    });
+}
 

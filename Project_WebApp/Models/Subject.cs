@@ -12,8 +12,8 @@ namespace Project_WebApp
     public class Subject
     {
         //props
-        //[Key]
-        public int Id { get; set; }
+        [Key]
+        public int? Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -38,7 +38,6 @@ namespace Project_WebApp
 
         public Subject(CreateEditSubjectViewmodel model)
         {
-            Id = (int)model.Id;
             Name = model.Name;
             Description = model.Description;
             Created = new DateTime();

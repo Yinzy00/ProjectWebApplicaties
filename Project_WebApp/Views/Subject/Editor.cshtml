@@ -4,11 +4,23 @@
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
 
-@if (Model != null)
-{
-    <div>Show subject form with data of post with id @Model.Id</div>
-}
-else
-{
-    <div>Show new subject form</div>
-};
+<form asp-controller="Subject" asp-action="Editor">
+    <div id="PostEditorForm">
+        <div id="PostEditorTitleContainer">
+            <h2>
+                @ViewBag.FormTitle
+            </h2>
+        </div>
+        <div id="SubjectEditorTitleTxtContainer">
+            <input type="text" class="form-control" asp-for="Name" placeholder="Naam" />
+        </div>
+        <div id="SubjectEditorTextContainer">
+            <textarea class="form-control" asp-for="Description" placeholder="Beschrijving...">
+
+            </textarea>
+        </div>
+        <div id="SubjectEditorSubmitContainer">
+            <input type="submit" class="btn brandBtn"/>
+        </div>
+    </div>
+</form>

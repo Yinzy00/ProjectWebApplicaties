@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_WebApp.ViewModels.Message.Post;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -19,6 +20,26 @@ namespace Project_WebApp
         public Post(): base()
         {
 
+        }
+        public Post(CreateEditPostViewModel vm)
+        {
+            if (vm.Id!=null)
+            {
+                this.Id = (int)vm.Id;
+                vm.Subjects.ForEach(s =>
+                {
+                    this.PostSubjects.Add(new PostSubject()
+                    {
+                        PostId = this.Id,
+                        SubjectId = (int)s.Id
+                    });
+                });
+            }
+            this.Title = vm.Title;
+            this.Text = vm.Text;
+            this.Public = vm.Public;
+            this.Created = DateTime.Now;
+           /* vm.Subjects.ForEach(s=>PostSubjects.)*/;
         }
 
         //Methods

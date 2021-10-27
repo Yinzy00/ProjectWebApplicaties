@@ -10,6 +10,10 @@ namespace Project_WebApp.ViewModels.Subject
         public int? Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public CreateEditSubjectViewmodel()
+        {
+
+        }
         public CreateEditSubjectViewmodel(Project_WebApp.Subject s)
         {
             this.Id = s.Id;

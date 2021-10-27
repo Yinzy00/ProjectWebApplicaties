@@ -1,13 +1,52 @@
-﻿@model Project_WebApp.ViewModels.Message.Post.PostViewModel
+﻿@model Project_WebApp.ViewModels.Message.Post.CreateEditPostViewModel
 @{
     ViewData["Title"] = "Nieuw bericht";
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
 
-@if (Model != null)
-{
-    <div>Show post form with data of post with id @Model.Id</div>
-}
-else{
-    <div>Show new post form</div>
-};
+<form asp-controller="Post" asp-action="Editor">
+    <div id="PostEditorForm">
+        <div id="PostEditorTitleContainer">
+            <h2>
+                @ViewBag.FormTitle
+            </h2>
+        </div>
+        <div id="PostEditorSubjectDdlContainer">
+            <select id="PostEditorSubjectSelect" class="form-control">
+                <option disabled selected> -- select an option -- </option>
+                @foreach (var subject in ViewBag.Subjects)
+                {
+                    <option value="@subject.Id">@subject.Name</option>
+                }
+                @* ADD JAVASCRIPT TO ADD SUBJECTS TO DIV BELOW & SEND SUBJECTS TO CONTROLLER *@
+            </select>
+        </div>
+        <div id="PostEditorSubjects">
+            @if (Model != null)
+            {
+                if (Model.Subjects != null)
+                {
+                    foreach (var subj in Model.Subjects)
+                    {
+                        <span value="@subj.Id" class="SubjectTag brandColorBg">
+                            @subj.Name
+                        </span>
+                    }
+                }
+            }
+
+            <input type="hidden" id="PostEditorHiddenSubjectField" asp-for="SubjectsString" value="@(Model != null ? Model.SubjectsString : "")" />
+        </div>
+        <div id="PostEditorTitleTxtContainer">
+            <input type="text" class="form-control" asp-for="Title" />
+        </div>
+        <div id="PostEditorTextContainer">
+            <textarea class="form-control" asp-for="Text">
+
+            </textarea>
+        </div>
+        <div>
+            <input type="submit" class="btn brandBtn" />
+        </div>
+    </div>
+</form>
