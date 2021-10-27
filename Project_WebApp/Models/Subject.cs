@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_WebApp.ViewModels.Subject;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -33,6 +34,14 @@ namespace Project_WebApp
         public Subject()
         {
 
+        }
+
+        public Subject(CreateEditSubjectViewmodel model)
+        {
+            Id = (int)model.Id;
+            Name = model.Name;
+            Description = model.Description;
+            Created = new DateTime();
         }
         //Methods
     }

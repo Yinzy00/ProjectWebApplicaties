@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project_WebApp.Data;
+using Project_WebApp.Data.UnitOfWork;
 using Project_WebApp.ViewModels.Message.Post;
 using System;
 using System.Collections.Generic;
@@ -11,37 +12,10 @@ namespace Project_WebApp.Controllers
     public class PostController : Controller
     {
         //List<Post> posts = new List<Post>();
-        ApplicationDbContext DbContext;
-        public PostController(ApplicationDbContext dbContext)
+        IUnitOfWork _uow;
+        public PostController(IUnitOfWork uow)
         {
-            DbContext = dbContext;
-            //int max = 50;
-            //for (int i = 0; i < max; i++)
-            //{
-            //    posts.Add(new Post()
-            //    {
-            //        PostId = i,
-            //        Comments = new List<Comment>()
-            //    {
-            //        new Comment()
-            //        {
-            //            PostId = i+max,
-            //            Created = new DateTime(),
-            //            ParentId = i,
-            //            Text = "1th comment! on post " + i + "!",
-            //            UserId = 0
-            //        },
-            //        new Comment()
-            //        {
-            //            PostId = i+(max*2),
-            //            Created = new DateTime(),
-            //            ParentId = i,
-            //            Text = "2th comment! on past " + 1 + "!",
-            //            UserId = 1
-            //        },
-            //    }
-            //    });
-            //}
+            _uow = uow;
         }
         /// <summary>
         /// Show existing post by id
@@ -50,7 +24,7 @@ namespace Project_WebApp.Controllers
         /// <returns></returns>
         public IActionResult Index(int id)
         {
-            Post p = DbContext.Posts.Where(p => p.Id == id).FirstOrDefault();
+            Post p = _uow.PostRepository.GetAll().Where(p => p.Id == id).FirstOrDefault();
             if (p != null)
             {
                 var vm = new PostViewModel(p);
@@ -61,17 +35,32 @@ namespace Project_WebApp.Controllers
                 return View("PostNotFound");
             }
         }
-        /// <summary>
-        /// Create new post if id == null
-        /// Edit post by id if id != null
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public IActionResult Editor(int? id)
+        public async Task<IActionResult> Editor(int? id)
         {
             if (id != null)
             {
-                Post p = DbContext.Posts.Where(p => p.Id == id).FirstOrDefault();
+                Post p = await _uow.PostRepository.getById((int)id);
+                if (p != null)
+                {
+                    var vm = new PostViewModel(p);
+                    return View(vm);
+                }
+                else
+                {
+                    return View("PostNotFound");
+                }
+            }
+            else
+            {
+                return View(null);
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Editor(PostViewModel model)
+        {
+            if (model.Id != null)
+            {
+                Post p = await _uow.PostRepository.getById((int)model.Id);
                 if (p != null)
                 {
                     var vm = new PostViewModel(p);

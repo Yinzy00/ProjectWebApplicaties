@@ -27,7 +27,7 @@ namespace Project_WebApp
         public DateTime DateOfBirth { get; set; }
         [Required]
         public DateTime Created { get; set; }
-        [ForeignKey("Id")]
+        //[ForeignKey("Id")]
         [Display(Name = "ProfilePicture")]
         public int? ProfilePictureId { get; set; }
 

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Project_WebApp.Data.UnitOfWork;
+using Project_WebApp.ViewModels.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +13,11 @@ namespace Project_WebApp.Controllers
     {
         private UserManager<User> UserManager;
         private SignInManager<User> SignInManager;
+        private IUnitOfWork _uow;
         public AuthController(UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager, IUnitOfWork uow)
         {
+            _uow = uow;
             UserManager = userManager;
             SignInManager = signInManager;
         }
@@ -22,17 +26,20 @@ namespace Project_WebApp.Controllers
             return View();
         }
 
+        
+
         [HttpPost]
-        public async Task<IActionResult> LogIn(string userName, string password)
+        //public async Task<IActionResult> LogIn(string userName, string password)
+        public async Task<IActionResult> LogIn(LoginFormModel model)
         {
-            var result = await SignInManager.PasswordSignInAsync(userName, password, false, false);
+            var result = await SignInManager.PasswordSignInAsync(model.userName, model.password, false, false);
             if (result.Succeeded)
             {
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                ViewBag.Message = "resultaat is: " + result.ToString();
+                ViewBag.LoginMessage = "Foute gebruikersnaam of wachtwoord";
             }
             return View();
         }
@@ -40,35 +47,48 @@ namespace Project_WebApp.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public async Task<IActionResult> Register(string userName, string email, string firstName, string lastName,
-            DateTime dateOfBirth, string phoneNumber, string password)
+        public async Task<IActionResult> Register(RegisterFormModel model)
         {
             try
             {
-                ViewBag.Message = "Dit email adres is al in gebruik!";
-
-                User user = await UserManager.FindByEmailAsync(email);
-                if (user == null)
+                //ViewBag.RegisterMessage = "";
+                User user = await UserManager.FindByEmailAsync(model.email);
+                User UserNameCheck = _uow.UserRepository.GetAll().Where(u=>u.UserName == model.userName).First();
+                if (model.password == model.passwordRepeat)
                 {
-                    user = new User()
+                    if (user == null && UserNameCheck == null)
                     {
-                        UserName = userName,
-                        Email = email,
-                        FirstName = firstName,
-                        LastName = lastName,
-                        DateOfBirth = dateOfBirth,
-                        Created = new DateTime(),
-                        PhoneNumber = phoneNumber
-                    };
-                    IdentityResult result = await UserManager.CreateAsync(user, password);
-                    ViewBag.Message = "Account is aangemaakt!";
-                    return View("LogIn");
+                        user = new User()
+                        {
+                            UserName = model.userName,
+                            Email = model.email,
+                            FirstName = model.firstName,
+                            LastName = model.lastName,
+                            DateOfBirth = model.dateOfBirth,
+                            Created = new DateTime(),
+                            PhoneNumber = model.phoneNumber
+                        };
+                        IdentityResult result = await UserManager.CreateAsync(user, model.password);
+                        ViewBag.RegisterMessage = "Account is aangemaakt!";
+                        return View("LogIn");
+                    }
+                    else
+                    {
+                        ViewBag.RegisterMessage = "Dit email adres en of gebruikersnaam is al in gebruik!";
+                        return View();
+                    }
+                }
+                else
+                {
+                    ViewBag.RegisterMessage = "Wachtwoorden komen niet overeen!";
+                    return View();
                 }
             }
             catch (Exception ex)
             {
-                ViewBag.Message = ex.Message;
+                ViewBag.RegisterMessage = ex.Message;
             }
             //ViewBag.Message = userName + " - " + firstName + " - " + lastName + " " + password;
             return View();

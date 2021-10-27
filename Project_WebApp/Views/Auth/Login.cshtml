@@ -1,9 +1,16 @@
-﻿@{
+﻿@model Project_WebApp.ViewModels.Forms.LoginFormModel
+
+@{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
 
-<form asp-action="Login" asp-controller="Account">
+
+<div>
+    @ViewBag.LoginMessage
+</div>
+
+<form asp-action="Login" asp-controller="Auth">
 
     <div id="LoginFormContainer" class="AuthFormContainer">
         <div id="LoginFormLogoContainer" class="AuthLogoContainer">
@@ -16,12 +23,12 @@
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
-                <span class="input-group-text" id="LoginEmailIcon">
-                    <i class="fas fa-envelope"></i>
+                <span class="input-group-text" id="LoginUserNameIcon">
+                    <i class="fas fa-user"></i>
                 </span>
             </div>
 
-            <input type="text" name="userName" id="txtLoginUserName" placeholder="Email" class="form-control" aria-label="Email" aria-describedby="LoginEmailIcon" />
+            <input type="text" name="userName" asp-for="userName" id="txtLoginUserName" placeholder="Gebruikersnaam" class="form-control" aria-label="Username" aria-describedby="LoginUserNameIcon" />
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
@@ -29,7 +36,7 @@
                     <i class="fas fa-lock"></i>
                 </span>
             </div>
-            <input type="password" name="password" id="txtLoginPassword" placeholder="Wachtwoord" class="form-control" aria-label="password" aria-describedby="LoginPasswordIcon" />
+            <input type="password" name="password" asp-for="password" id="txtLoginPassword" placeholder="Wachtwoord" class="form-control" aria-label="password" aria-describedby="LoginPasswordIcon" />
         </div>
         <div id="LoginRememberMeForgotPasswordContainer">
             <div id="LoginRememberMe">

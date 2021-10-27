@@ -30,7 +30,7 @@ namespace Project_WebApp.Data
             builder.Entity<Image>().HasMany(i => i.MessageImages).WithOne(mi=>mi.Image).OnDelete(DeleteBehavior.Cascade);
             //Message
             builder.Entity<Message>().HasMany(m => m.MessageImages).WithOne(mi=>mi.Message).OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<Message>().HasMany(m => m.Likes).WithOne(l=>l.Message).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Message>().HasMany(m => m.Likes).WithOne(l => l.Message).OnDelete(DeleteBehavior.Cascade);
             //builder.Entity<Message>().HasMany(m => m.Comments).WithOne(c => c.Parent);//.OnDelete(DeleteBehavior.Cascade);
             //builder.Entity<Post>().HasMany(p => p.Comments).WithOne(c=>c.Parent as Post).OnDelete(DeleteBehavior.Cascade);
             //Post: Message

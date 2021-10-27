@@ -10,7 +10,7 @@ namespace Project_WebApp.ViewModels.Message
     public abstract class MessageViewModel
     {
         //props
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Text { get; set; }
         public DateTime Created { get; set; }
         public UserViewModel User { get; set; }
