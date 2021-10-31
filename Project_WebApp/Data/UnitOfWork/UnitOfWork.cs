@@ -29,7 +29,6 @@ namespace Project_WebApp.Data.UnitOfWork
         private IRepository<Image> imageRepository;
 
         private IRepository<Comment> commentRepository;
-
         public IRepository<User> UserRepository
         {
             get
