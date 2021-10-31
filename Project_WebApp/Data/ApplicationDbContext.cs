@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,8 +34,8 @@ namespace Project_WebApp.Data
             //Message
             builder.Entity<Message>().HasMany(m => m.MessageImages).WithOne(mi=>mi.Message).OnDelete(DeleteBehavior.Cascade);
             builder.Entity<Message>().HasMany(m => m.Likes).WithOne(l => l.Message).OnDelete(DeleteBehavior.Cascade);
-            //builder.Entity<Message>().HasMany(m => m.Comments).WithOne(c => c.Parent);//.OnDelete(DeleteBehavior.Cascade);
-            //builder.Entity<Post>().HasMany(p => p.Comments).WithOne(c=>c.Parent as Post).OnDelete(DeleteBehavior.Cascade);
+            //builder.Entity<Message>().HasMany(m => m.Comments).WithOne(c => c.Parent).OnDelete(DeleteBehavior.Cascade);
+            //builder.Entity<Post>().HasMany(p => p.Comments).WithOne(c => c.Parent as Post).OnDelete(DeleteBehavior.Cascade);
             //Post: Message
             builder.Entity<Post>().HasMany(p => p.PostSubjects).WithOne(ps=>ps.Post).OnDelete(DeleteBehavior.Cascade);
             //Subject
@@ -41,7 +44,7 @@ namespace Project_WebApp.Data
             //User
             builder.Entity<User>().ToTable("User");
             //Set profile picture to null
-            builder.Entity<User>().HasOne(u => u.ProfilePicture).WithOne(pp=>pp.IsProfilePictureOf).OnDelete(DeleteBehavior.SetNull);
+            //builder.Entity<User>().HasOne(u => u.ProfilePicture).WithOne(pp=>pp.IsProfilePictureOf).OnDelete(DeleteBehavior.SetNull);
             //Remove all pictures on delete user
             builder.Entity<User>().HasMany(u => u.Images).WithOne(i => i.User);//.OnDelete(DeleteBehavior.Cascade);
             //Remove all likes on delete user
@@ -53,6 +56,24 @@ namespace Project_WebApp.Data
             builder.Entity<Like>().ToTable("Like");
 
             //builder.Entity<Comment>().HasOne(c => c.Parent).WithMany(p => p.Comments).OnDelete(DeleteBehavior.Cascade);
+        }
+
+        //public static readonly ILoggerFactory loggerFactory = new LoggerFactory(new[] {
+        //      new ConsoleLoggerProvider((_, __) => true, true)
+        //});
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+
+
+            IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddLogging(builder => builder
+                .AddConsole()
+                .AddFilter(level => level >= LogLevel.Debug)
+            );
+            var loggerFactory = serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
+
+            optionsBuilder.UseLoggerFactory(loggerFactory);
         }
     }
 }
