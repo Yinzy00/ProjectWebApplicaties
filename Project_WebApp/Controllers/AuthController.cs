@@ -53,9 +53,9 @@ namespace Project_WebApp.Controllers
         {
             try
             {
-                //ViewBag.RegisterMessage = "";
+                ViewBag.RegisterMessage = "Foutmelding";
                 User user = await UserManager.FindByEmailAsync(model.email);
-                User UserNameCheck = _uow.UserRepository.GetAll().Where(u=>u.UserName == model.userName).First();
+                User UserNameCheck = _uow.UserRepository.Get(u => u.UserName == model.userName).FirstOrDefault();
                 if (model.password == model.passwordRepeat)
                 {
                     if (user == null && UserNameCheck == null)
@@ -104,7 +104,7 @@ namespace Project_WebApp.Controllers
         public async Task<IActionResult> LogOut()
         {
             await SignInManager.SignOutAsync();
-            return View("LogIn");
+            return Redirect("LogIn");
         }
         public IActionResult NoAcces()
         {

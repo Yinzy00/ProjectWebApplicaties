@@ -44,7 +44,7 @@ namespace Project_WebApp.Controllers
         {
             if (id != null)
             {
-                var user = _uow.UserRepository.GetAll().Where(u => u.Id == id).FirstOrDefault();
+                var user = _uow.UserRepository.Get(u => u.Id == id).FirstOrDefault();
                 if (user != null)
                 {
                     var vm = new UserEditProfileViewModel(user);
