@@ -54,6 +54,16 @@
     <Compile Remove="Migrations\20211024224846_fix9.Designer.cs" />
     <Compile Remove="Migrations\20211024225126_fix10.cs" />
     <Compile Remove="Migrations\20211024225126_fix10.Designer.cs" />
+    <Compile Remove="Migrations\20211028124442_FixedDeleteComments.cs" />
+    <Compile Remove="Migrations\20211028124442_FixedDeleteComments.Designer.cs" />
+    <Compile Remove="Migrations\20211028131323_FixedUserIds.cs" />
+    <Compile Remove="Migrations\20211028131323_FixedUserIds.Designer.cs" />
+    <Compile Remove="Migrations\20211028131345_FixedUserIds.cs" />
+    <Compile Remove="Migrations\20211028131345_FixedUserIds.Designer.cs" />
+    <Compile Remove="Migrations\20211028132202_FixedUserIdsAndImages.cs" />
+    <Compile Remove="Migrations\20211028132202_FixedUserIdsAndImages.Designer.cs" />
+    <Compile Remove="Migrations\20211028132320_FixedUserIdsAndImages.cs" />
+    <Compile Remove="Migrations\20211028132320_FixedUserIdsAndImages.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -67,7 +77,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
