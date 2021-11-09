@@ -27,7 +27,7 @@ namespace Project_WebApp.ViewModels.Message.Post
         public string Title { get; set; }
         public string Text { get; set; }
         public string SubjectsString { get; set; }
-        public List<SubjectViewModel> Subjects { get; set; }
+        public List<SubjectViewModel> Subjects { get; set; } = new List<SubjectViewModel>();
         public bool? Public { get; set; }
     }
 }
