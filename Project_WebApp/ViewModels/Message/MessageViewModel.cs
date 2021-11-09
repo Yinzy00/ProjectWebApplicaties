@@ -26,14 +26,14 @@ namespace Project_WebApp.ViewModels.Message
             {
                 images.Add(new ImageViewModel(MessageImage.Image));
             }
-            
+
             List<CommentViewModel> comments = new List<CommentViewModel>();
             foreach (var comment in m.Comments)
             {
                 comments.Add(new CommentViewModel(comment));
             }
 
-            this.Id = m.UserId;
+            this.Id = m.Id;
             this.Text = m.Text;
             this.Created = m.Created;
             this.User = new UserViewModel(m.User);

@@ -19,7 +19,7 @@ namespace Project_WebApp.ViewModels.User
             this.LastName = u.LastName;
             this.Email = u.Email;
             this.DateOfBirth = u.DateOfBirth;
-            this.ProfilePicture = new ImageViewModel(u.ProfilePicture);
+            //this.ProfilePicture = new ImageViewModel(u.ProfilePicture);
         }
     }
 }
