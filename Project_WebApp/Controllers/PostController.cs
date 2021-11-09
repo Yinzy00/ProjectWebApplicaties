@@ -26,12 +26,12 @@ namespace Project_WebApp.Controllers
         /// <returns></returns>
         public IActionResult Index(int id)
         {
-            
+
             //if(ViewBag.Subjects = null)
             //{
             //    ViewBag.Subjects = new List<Subject>();
             //}
-            Post p = _uow.PostRepository.Get(p=>p.Comments, p=>p.MessageImages, p=>p.User).FirstOrDefault();
+            Post p = _uow.PostRepository.Get(p => p.Comments, p => p.MessageImages, p => p.User).FirstOrDefault();
             if (p != null)
             {
                 var vm = new PostViewModel(p);
@@ -42,7 +42,7 @@ namespace Project_WebApp.Controllers
                 return View("PostNotFound");
             }
 
-        
+
         }
         public async Task<IActionResult> Editor(int? id)
         {
@@ -69,53 +69,76 @@ namespace Project_WebApp.Controllers
                 return View(null);
             }
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Editor(CreateEditPostViewModel model)
-        //{
-        //        else if(!ViewBag.New)
-        //    {
-                
-        //    }
-        //    //var CreatedPost = new Post(model);
-        //    //CreatedPost.PostSubjects = new List<PostSubject>();
-        //    //if (model.Id == null)
-        //    //{
-        //    //    _uow.PostRepository.Create(CreatedPost);
-        //    //    await _uow.Save();
-        //    //    CreatedPost = _uow.PostRepository.GetAll().Where(p=>p.Title == CreatedPost.Title && p.Created.Date == DateTime.Now.Date && p.Text == CreatedPost.Text).FirstOrDefault();
-        //    //}
-        //    //foreach (var s in model.SubjectsString.Split(',').ToList())
-        //    //{
-        //    //    if (!string.IsNullOrEmpty(s))
-        //    //    {
-        //    //        var subject = await _uow.SubjectRepository.getById(Convert.ToInt32(s));
-        //    //        if (subject != null)
-        //    //        {
-        //    //            CreatedPost.PostSubjects.Add(new PostSubject()
-        //    //            {
-        //    //                PostId = (int)CreatedPost.Id,
-        //    //                SubjectId = (int)subject.Id
-        //    //            });
-        //    //        }
-        //    //    }
-        //    //}
-        //    //    //_uow.PostRepository.Update(CreatedPost);
-        //    await _uow.Save();
-        //    return View("Index");
-        //}
+
         public async Task<IActionResult> Update(CreateEditPostViewModel model)
         {
-            var Post = await _uow.PostRepository.getById((int)model.Id);
-            return View();
+            var post = await _uow.PostRepository.getById((int)model.Id);
+            post = await FillPostObjectWithModel(post, model);
+            //post.Public = model.Public;
+            //post.Text = model.Text;
+            //post.Title = model.Title;
+            //model.SubjectsString.Split(',').ToList().ForEach(i =>
+            //{
+            //    if (!string.IsNullOrEmpty(i))
+            //    {
+            //        var subject = _uow.SubjectRepository.Get(s => s.Id == Convert.ToInt32(i)).FirstOrDefault();
+            //        if (subject != null)
+            //        {
+            //            post.PostSubjects.Add(new PostSubject()
+            //            {
+            //                Post = post,
+            //                Subject = subject
+            //            });
+            //        }
+            //    }
+            //});
+
+            return Redirect("Index/" + post.Id);
         }
         public async Task<IActionResult> Create(CreateEditPostViewModel model)
         {
-            var CreatedPost = new Post(model);
+            var CreatedPost = new Post();
             CreatedPost.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            CreatedPost.PostSubjects = new List<PostSubject>();
-            _uow.PostRepository.Create(CreatedPost);
-            //await _uow.Save();
-            //CreatedPost = _uow.PostRepository.GetAll().Where(p => p.Title == CreatedPost.Title && p.Created.Date == DateTime.Now.Date && p.Text == CreatedPost.Text).FirstOrDefault();
+            CreatedPost = await FillPostObjectWithModel(CreatedPost, model);
+            ////_uow.PostRepository.Create(CreatedPost);
+            //foreach (var s in model.SubjectsString.Split(',').ToList())
+            //{
+            //    if (!string.IsNullOrEmpty(s))
+            //    {
+            //        var subject = await _uow.SubjectRepository.getById(Convert.ToInt32(s));
+            //        if (subject != null)
+            //        {
+            //            CreatedPost.PostSubjects.Add(new PostSubject()
+            //            {
+            //                Post = CreatedPost,
+            //                Subject = subject
+            //            }); ;
+            //        }
+            //    }
+            //}
+            await _uow.Save();
+            return View("Index/" + CreatedPost.Id);
+        }
+
+        public async Task<Post> FillPostObjectWithModel(Post p, CreateEditPostViewModel model)
+        {
+            //if (model.Id != null)
+            //{
+            //    p.Id = (int)model.Id;
+            //    model.Subjects.ForEach(s =>
+            //    {
+            //        p.PostSubjects.Add(new PostSubject()
+            //        {
+            //            PostId = p.Id,
+            //            SubjectId = (int)s.Id
+            //        });
+            //    });
+            //}
+            p.Title = model.Title;
+            p.Text = model.Text;
+            p.Public = model.Public;
+            p.Created = DateTime.Now;
+
             foreach (var s in model.SubjectsString.Split(',').ToList())
             {
                 if (!string.IsNullOrEmpty(s))
@@ -123,20 +146,15 @@ namespace Project_WebApp.Controllers
                     var subject = await _uow.SubjectRepository.getById(Convert.ToInt32(s));
                     if (subject != null)
                     {
-                        CreatedPost.PostSubjects.Add(new PostSubject()
+                        p.PostSubjects.Add(new PostSubject()
                         {
-                            Post = CreatedPost,
+                            Post = p,
                             Subject = subject
-                            //PostId = (int)CreatedPost.Id,
-                            //SubjectId = (int)subject.Id
                         }); ;
                     }
                 }
             }
-            await _uow.Save();
-            //_uow.PostRepository.Update(CreatedPost);
-            //return Index(CreatedPost.Id);
-            return View(new PostViewModel(CreatedPost));
+            return p;
         }
         public IActionResult PostNotFound()
         {
