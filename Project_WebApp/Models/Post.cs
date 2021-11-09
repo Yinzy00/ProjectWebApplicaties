@@ -1,4 +1,5 @@
-﻿using Project_WebApp.ViewModels.Message.Post;
+﻿using Project_WebApp.Data.UnitOfWork;
+using Project_WebApp.ViewModels.Message.Post;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,31 +16,11 @@ namespace Project_WebApp
         public bool? Public { get; set; }
         //Navigation props
         [Required]
-        public ICollection<PostSubject> PostSubjects { get; set; }
+        public ICollection<PostSubject> PostSubjects { get; set; } = new List<PostSubject>();
         //Constructor
         public Post(): base()
         {
 
-        }
-        public Post(CreateEditPostViewModel vm)
-        {
-            if (vm.Id!=null)
-            {
-                this.Id = (int)vm.Id;
-                vm.Subjects.ForEach(s =>
-                {
-                    this.PostSubjects.Add(new PostSubject()
-                    {
-                        PostId = this.Id,
-                        SubjectId = (int)s.Id
-                    });
-                });
-            }
-            this.Title = vm.Title;
-            this.Text = vm.Text;
-            this.Public = vm.Public;
-            this.Created = DateTime.Now;
-           /* vm.Subjects.ForEach(s=>PostSubjects.)*/;
         }
 
         //Methods

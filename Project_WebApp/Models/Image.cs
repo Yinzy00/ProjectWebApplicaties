@@ -14,7 +14,8 @@ namespace Project_WebApp
         public int Id { get; set; }
         [Required]
         [Display(Name = "User")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
+        public bool IsProfilePicture { get; set; }
         [Required]
         public string Path { get; set; }
         [MaxLength(60)]
@@ -22,7 +23,7 @@ namespace Project_WebApp
 
         //Navigatie props]
         public User User { get; set; }
-        public User IsProfilePictureOf { get; set; }
+        //public User IsProfilePictureOf { get; set; }
         public ICollection<MessageImage> MessageImages { get; set; }
         //Constructor
         public Image()

@@ -11,7 +11,7 @@ namespace Project_WebApp
         public int Id { get; set; }
         [Required]
         [Display(Name = "User")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         [Required]
         public string Text { get; set; }
         [Required]
@@ -19,9 +19,9 @@ namespace Project_WebApp
 
         //Navigation props
         public User User { get; set; }
-        public ICollection<MessageImage> MessageImages { get; set; }
-        public ICollection<Like> Likes { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public ICollection<MessageImage> MessageImages { get; set; } = new List<MessageImage>();
+        public ICollection<Like> Likes { get; set; } = new List<Like>();
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>(); 
         //Extra getters
         public int AmountOfComments
         {

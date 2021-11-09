@@ -27,12 +27,12 @@ namespace Project_WebApp
         public DateTime DateOfBirth { get; set; }
         [Required]
         public DateTime Created { get; set; }
-        //[ForeignKey("Id")]
+        [ForeignKey("Id")]
         [Display(Name = "ProfilePicture")]
         public int? ProfilePictureId { get; set; }
 
         //Navigatieproperties
-        public Image ProfilePicture { get; set; }
+        //public Image ProfilePicture { get; set; }
         public ICollection<Image> Images { get; set; }
         public ICollection<Message> Messages { get; set; }
         public ICollection<Like> Likes { get; set; }
