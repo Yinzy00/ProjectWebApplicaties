@@ -19,7 +19,10 @@ namespace Project_WebApp.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var subjects = _uow.SubjectRepository.Get(s=>s.PostSubjects);
+            List<SubjectViewModel> l = new List<SubjectViewModel>();
+            subjects.ToList().ForEach(s=>l.Add(new SubjectViewModel(s)));
+            return View(l);
         }
         public async Task<IActionResult> Editor(int? id)
         {
@@ -62,12 +65,28 @@ namespace Project_WebApp.Controllers
             }
             else
             {
-                _uow.SubjectRepository.Create(new Project_WebApp.Subject(model));
+                var NewSubject = new Project_WebApp.Subject(model);
+                NewSubject.Created = DateTime.Now;
+                _uow.SubjectRepository.Create(NewSubject);
             }
             await _uow.Save();
             return View(null);
         }
 
+        public IActionResult Detail(int id)
+        {
+            //var subject =_uow.SubjectRepository.Get(s=>s.Id == id, s=>s.PostSubjects).FirstOrDefault();
+            var subject = _uow._SubjectRepository.GetSubjectByIdIncludePosts(id);
+            if (subject!=null)
+            {
+                return View(new SubjectDetailViewModel(subject));
+
+            }
+            else
+            {
+                return View("SubjectNotFound");
+            }
+        }
         public IActionResult SubjectNotFound()
         {
             return View();
