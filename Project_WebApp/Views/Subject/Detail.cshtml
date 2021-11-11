@@ -1,0 +1,59 @@
+﻿@model Project_WebApp.ViewModels.Subject.SubjectDetailViewModel
+@{
+    ViewData["Title"] = "Subject detail";
+    Layout = "~/Views/Shared/ProjectLayout.cshtml";
+}
+<div class="row">
+    <div class="col">
+        <div class="SubjectBox">
+            <h2 class="SubjectBoxTitle brandColor">
+                @Model.Name
+            </h2>
+            <div class="SubjectBoxDescriptionDetail">
+                @Model.Description
+            </div>
+            <div class="SubjectBoxAmountOfPosts">
+                Bevat @Model.AmountOfPosts Berichten
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <h2>
+            Berichten binnen dit onderwerp:
+        </h2>
+    </div>
+    <div class="col-md-4">
+        <input type="search" class="form-control" placeholder="Zoeken..." />
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div id="HomeRecentPosts">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Titel</th>
+                        <th scope="col">Aantal comments</th>
+                    </tr>
+                </thead>
+
+                @foreach (var post in Model.RecentPosts)
+                {
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>
+                            <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">
+                                @post.Title
+                            </a>
+                        </td>
+                        <td>@post.AmountOfComments</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

@@ -7,7 +7,6 @@ namespace Project_WebApp.ViewModels.Subject
     public class SubjectViewModel : CreateEditSubjectViewmodel
     {
         //props
-       
         public int AmountOfPosts{ get; set; }
         //Constructor
         public SubjectViewModel(Project_WebApp.Subject s): base(s)
