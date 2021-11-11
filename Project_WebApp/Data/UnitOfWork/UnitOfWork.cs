@@ -29,6 +29,7 @@ namespace Project_WebApp.Data.UnitOfWork
         private IRepository<Image> imageRepository;
 
         private IRepository<Comment> commentRepository;
+
         public IRepository<User> UserRepository
         {
             get
@@ -133,6 +134,36 @@ namespace Project_WebApp.Data.UnitOfWork
         public async Task Save()
         {
             await DbContext.SaveChangesAsync();
+        }
+
+
+
+
+
+        //CUSTOM
+        private IPostRepository _postRepository;
+        private ISubjectRepository _subjectRepository;
+        public IPostRepository _PostRepository
+        {
+            get
+            {
+                if (this._postRepository == null)
+                {
+                    this._postRepository = new PostRepository(DbContext);
+                }
+                return this._postRepository;
+            }
+        }
+        public ISubjectRepository _SubjectRepository
+        {
+            get
+            {
+                if (this._subjectRepository == null)
+                {
+                    this._subjectRepository = new SubjectRepository(DbContext);
+                }
+                return this._subjectRepository;
+            }
         }
     }
 }

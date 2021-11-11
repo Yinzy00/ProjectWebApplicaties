@@ -17,6 +17,9 @@ namespace Project_WebApp.Data.UnitOfWork
         IRepository<Image> ImageRepository { get; }
         IRepository<Comment> CommentRepository { get; }
 
+        //Custom
+        IPostRepository _PostRepository { get; }
+        ISubjectRepository _SubjectRepository { get; }
         Task Save();
     }
 }
