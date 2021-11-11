@@ -17,7 +17,14 @@ namespace Project_WebApp.ViewModels.Message.Post
             this.Id = p.Id;
             this.Title = p.Title;
             this.Text = p.Text;
-            this.Public = p.Public;
+            if (p.Public != null)
+            {
+                this.Public = (bool)p.Public;
+            }
+            else
+            {
+                this.Public = false;
+            }
             foreach (var s in p.PostSubjects)
             {
                 this.Subjects.Add(new SubjectViewModel(s.Subject));
@@ -28,6 +35,6 @@ namespace Project_WebApp.ViewModels.Message.Post
         public string Text { get; set; }
         public string SubjectsString { get; set; }
         public List<SubjectViewModel> Subjects { get; set; } = new List<SubjectViewModel>();
-        public bool? Public { get; set; }
+        public bool Public { get; set; }
     }
 }
