@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Project_WebApp.Data.UnitOfWork;
 using Project_WebApp.Models;
+using Project_WebApp.ViewModels.Message.Post;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,14 +15,20 @@ namespace Project_WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger)
+        private IUnitOfWork _uow;
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork uow)
         {
+            _uow = uow;
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View();
+            List<RecentPostViewModel> pvm = new List<RecentPostViewModel>();
+            var posts = _uow._PostRepository.GetAllPostsIncludeSubjects();
+            posts = posts.Skip(posts.Count() - 3);
+            posts.ToList().ForEach(p=>pvm.Add(new RecentPostViewModel(p)));
+            return View(pvm);
         }
 
         public IActionResult Privacy()

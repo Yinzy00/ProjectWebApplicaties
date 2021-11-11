@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<Project_WebApp.ViewModels.Message.Post.RecentPostViewModel>
+
+@{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
@@ -28,54 +30,29 @@
             Meest recente berichten<span class="brandColor">.</span>
         </h2>
         <div id="HomeRecentPosts">
-            <div class="RecentPost">
-                <div class="RecentPostTitle">
-                    Title bericht
+            @foreach (var post in Model)
+            {
+                <div class="RecentPost">
+                    <div class="RecentPostTitle">
+                        <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id" class="NoStyleUrl">
+                            @post.Title
+                        </a>
+                    </div>
+                    <div class="RecentPostSubjects">
+                        @foreach (var subject in post.Subjects)
+                        {
+                            <span class="SubjectTag brandColorBg" id="Subject_@subject.Id">
+                                <a class="SubjectTagTooltip" asp-controller="Subject" asp-action="Detail" asp-route-id="@subject.Id">
+                                    @subject.Name
+                                    <span class="SubjectTagTooltipText">
+                                        Bevat @subject.AmountOfPosts berichten
+                                    </span>
+                                </a>
+                            </span>
+                        }
+                    </div>
                 </div>
-                <div class="RecentPostSubjects">
-                    <span class="SubjectTag brandColorBg">
-                        Onderwerp
-                    </span>
-                    <span class="SubjectTag brandColorBg">
-                        Onderwerp
-                    </span>
-                    <span class="SubjectTag brandColorBg">
-                        Onderwerp
-                    </span>
-                </div>
-            </div>
-            <div class="RecentPost">
-                <div class="RecentPostTitle">
-                    Title bericht
-                </div>
-                <div class="RecentPostSubjects">
-                    <span class="SubjectTag brandColorBg">
-                        Onderwerp
-                    </span>
-                    <span class="SubjectTag brandColorBg">
-                        Onderwerp
-                    </span>
-                    <span class="SubjectTag brandColorBg">
-                        Onderwerp
-                    </span>
-                </div>
-            </div>
-            <div class="RecentPost">
-                <div class="RecentPostTitle">
-                    Title bericht
-                </div>
-                <div class="RecentPostSubjects">
-                    <span class="SubjectTag brandColorBg">
-                        Onderwerp
-                    </span>
-                    <span class="SubjectTag brandColorBg">
-                        Onderwerp
-                    </span>
-                    <span class="SubjectTag brandColorBg">
-                        Onderwerp
-                    </span>
-                </div>
-            </div>
+            }
         </div>
     </div>
     <div class="col-md-7">
