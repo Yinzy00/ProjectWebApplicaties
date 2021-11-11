@@ -15,7 +15,6 @@ namespace Project_WebApp
         public string Title { get; set; }
         public bool? Public { get; set; }
         //Navigation props
-        [Required]
         public ICollection<PostSubject> PostSubjects { get; set; } = new List<PostSubject>();
         //Constructor
         public Post(): base()

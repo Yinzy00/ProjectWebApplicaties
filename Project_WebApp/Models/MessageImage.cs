@@ -13,9 +13,7 @@ namespace Project_WebApp
         public int ImageId { get; set; }
 
         //Nav props
-        [Required]
         public Image Image { get; set; }
-        [Required]
         public Message Message { get; set; }
     }
 }

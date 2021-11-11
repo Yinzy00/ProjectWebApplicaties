@@ -21,7 +21,7 @@ namespace Project_WebApp
         [MaxLength(60)]
         public string Description { get; set; }
 
-        //Navigatie props]
+        //Navigatie props
         public User User { get; set; }
         //public User IsProfilePictureOf { get; set; }
         public ICollection<MessageImage> MessageImages { get; set; }

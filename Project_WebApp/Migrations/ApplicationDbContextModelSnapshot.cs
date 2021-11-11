@@ -165,19 +165,20 @@ namespace Project_WebApp.Migrations
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
 
+                    b.Property<bool>("IsProfilePicture")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Image");
                 });
@@ -192,17 +193,14 @@ namespace Project_WebApp.Migrations
                     b.Property<int>("MessageId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MessageId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Like");
                 });
@@ -347,9 +345,6 @@ namespace Project_WebApp.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("ProfilePictureId")
-                        .HasColumnType("int");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -369,10 +364,6 @@ namespace Project_WebApp.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("ProfilePictureId")
-                        .IsUnique()
-                        .HasFilter("[ProfilePictureId] IS NOT NULL");
 
                     b.ToTable("User");
                 });
@@ -457,7 +448,9 @@ namespace Project_WebApp.Migrations
                 {
                     b.HasOne("Project_WebApp.User", "User")
                         .WithMany("Images")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Project_WebApp.Like", b =>
@@ -470,7 +463,7 @@ namespace Project_WebApp.Migrations
 
                     b.HasOne("Project_WebApp.User", "User")
                         .WithMany("Likes")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Project_WebApp.Message", b =>
@@ -487,7 +480,7 @@ namespace Project_WebApp.Migrations
                     b.HasOne("Project_WebApp.Image", "Image")
                         .WithMany("MessageImages")
                         .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Project_WebApp.Message", "Message")
@@ -510,14 +503,6 @@ namespace Project_WebApp.Migrations
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Project_WebApp.User", b =>
-                {
-                    b.HasOne("Project_WebApp.Image", "ProfilePicture")
-                        .WithOne("IsProfilePictureOf")
-                        .HasForeignKey("Project_WebApp.User", "ProfilePictureId")
-                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("Project_WebApp.Comment", b =>
