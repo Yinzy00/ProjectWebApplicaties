@@ -60,14 +60,38 @@ window.onresize = () => {
 
 window.onresize();
 
+//Post editor SUBJECT DROPDOWNLIST
+var removed = [];
 var PostEditorSubjectSelect = document.querySelector("#PostEditorSubjectSelect");
 if (PostEditorSubjectSelect != null) {
     PostEditorSubjectSelect.addEventListener("change", () => {
-        document.querySelector("#PostEditorSubjects").innerHTML += `<span class="SubjectTag brandColorBg">
-                    ${PostEditorSubjectSelect.options[PostEditorSubjectSelect.selectedIndex].text}
-                </span>`
-        document.querySelector("#PostEditorHiddenSubjectField").value += PostEditorSubjectSelect.value + ",";
-        PostEditorSubjectSelect.remove(PostEditorSubjectSelect.selectedIndex);
+        var selected = PostEditorSubjectSelect.options[PostEditorSubjectSelect.selectedIndex];
+        document.querySelector("#PostEditorSubjects").innerHTML += `<span id="Subject_${selected.value}" class="SubjectTag brandColorBg">
+                    ${selected.text}
+                &nbsp;&nbsp;<span class="SubjectTagDeleteButton" onClick="RemoveSubjectFromPost(${selected.value})">X</span></span>`
+
+        removed.push(selected);
+        selected.style.display = "none";
+        PostEditorSubjectSelect.selectedIndex = 0;
+        SetSubjectsValue();
+        
     });
+}
+
+function RemoveSubjectFromPost(id) {
+    var element = removed.find(i => i.value == id);
+    element.style.display = "inline";
+    removed = removed.filter(e=>e.value != id);
+    var el = document.querySelector(`#Subject_${id}`);
+    el.parentNode.removeChild(el);
+    SetSubjectsValue();
+}
+
+function SetSubjectsValue() {
+    document.querySelector("#PostEditorHiddenSubjectField").value = "";
+    removed.forEach(e => {
+        document.querySelector("#PostEditorHiddenSubjectField").value += e.value + ",";
+    });
+    console.log(document.querySelector("#PostEditorHiddenSubjectField").value);
 }
 

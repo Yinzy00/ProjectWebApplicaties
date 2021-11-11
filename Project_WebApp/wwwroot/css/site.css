@@ -140,7 +140,11 @@ main{
         color: black;
         text-decoration: none;
     }
-
+    /*Custom*/
+a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
+    /*text-decoration: none;*/
+    color: inherit;
+}
 
 /*BRANDING*/
 .brandColor {
@@ -419,12 +423,13 @@ main{
 }
 
 #Home4thPart {
-    margin:50px 0px;
-    text-align:right;
+    margin: 50px 0px;
+    text-align: right;
 }
-#HomeAboutButton{
-    width:50%;
-    margin-top:50px;
+
+#HomeAboutButton {
+    width: 50%;
+    margin-top: 50px;
 }
 /*RecentPost*/
 .RecentPost {
@@ -447,7 +452,94 @@ main{
 .SubjectTag {
     /*width:150px;*/
     margin-right: 10px;
+    display: inline-block;
+    margin-top: 10px;
     padding: 5px 10px;
     border-radius: 20px;
     text-align: center;
+    color: white !important;
+}
+
+.SubjectTagDeleteButton:hover {
+    cursor: pointer;
+}
+
+.SubjectTagTooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    color: white !important;
+}
+
+    .SubjectTagTooltip .SubjectTagTooltipText {
+        visibility: hidden;
+        width: 120px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+        .SubjectTagTooltip .SubjectTagTooltipText::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+    .SubjectTagTooltip:hover .SubjectTagTooltipText {
+        visibility: visible;
+        opacity: 1;
+    }
+
+
+/*Post editor*/
+#PostEditorSubjectDdlContainer {
+    margin-bottom: 25px;
+}
+
+#PostEditorTitleTxtContainer, #PostEditorTextContainer, #PostEditorSubmitContainer {
+    margin-top: 25px;
+}
+/*Subject Editor*/
+#SubjectEditorTitleTxtContainer, #SubjectEditorTextContainer {
+    margin-bottom: 25px;
+}
+
+.SubjectBox {
+    width: 100%;
+    margin: 50px 5px;
+}
+
+.SubjectBoxTitle {
+    margin-bottom: 15px;
+}
+
+.SubjectBoxDescription {
+    height: 200px;
+    overflow: hidden;
+}
+
+#SubjectBoxDescriptionDetail {
+}
+
+.SubjectBoxLinkDetail {
+    margin-top: 15px;
+}
+
+.SubjectBoxAmountOfPosts {
+    margin-top: 20px;
+    font-weight: bold;
 }
