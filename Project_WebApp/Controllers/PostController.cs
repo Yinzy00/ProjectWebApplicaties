@@ -100,7 +100,7 @@ namespace Project_WebApp.Controllers
             var CreatedPost = new Post();
             CreatedPost.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             CreatedPost = await FillPostObjectWithModel(CreatedPost, model);
-            ////_uow.PostRepository.Create(CreatedPost);
+            _uow.PostRepository.Create(CreatedPost);
             //foreach (var s in model.SubjectsString.Split(',').ToList())
             //{
             //    if (!string.IsNullOrEmpty(s))
@@ -150,7 +150,7 @@ namespace Project_WebApp.Controllers
                         {
                             Post = p,
                             Subject = subject
-                        }); ;
+                        });
                     }
                 }
             }
