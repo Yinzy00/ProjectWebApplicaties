@@ -46,27 +46,34 @@ namespace Project_WebApp.Controllers
         }
         public async Task<IActionResult> Editor(int? id)
         {
-            ViewBag.FormTitle = "Nieuw bericht";
-            ViewBag.New = true;
-            ViewBag.Subjects = _uow.SubjectRepository.Get();
-            if (id != null)
+            if (this.User.Identity.IsAuthenticated)
             {
-                Post p = await _uow.PostRepository.getById((int)id);
-                if (p != null)
+                ViewBag.FormTitle = "Nieuw bericht";
+                ViewBag.New = true;
+                ViewBag.Subjects = _uow.SubjectRepository.Get();
+                if (id != null)
                 {
-                    var vm = new CreateEditPostViewModel(p);
-                    ViewBag.FormTitle = "Bericht bewerken";
-                    ViewBag.New = false;
-                    return View(vm);
+                    Post p = await _uow.PostRepository.getById((int)id);
+                    if (p != null)
+                    {
+                        var vm = new CreateEditPostViewModel(p);
+                        ViewBag.FormTitle = "Bericht bewerken";
+                        ViewBag.New = false;
+                        return View(vm);
+                    }
+                    else
+                    {
+                        return View("PostNotFound");
+                    }
                 }
                 else
                 {
-                    return View("PostNotFound");
+                    return View(null);
                 }
             }
             else
             {
-                return View(null);
+                return Redirect("../Auth/NoAcces");
             }
         }
 

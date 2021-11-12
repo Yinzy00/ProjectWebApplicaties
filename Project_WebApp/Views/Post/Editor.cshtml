@@ -3,7 +3,6 @@
     ViewData["Title"] = ViewBag.FormTitle;
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
-
     <form asp-controller="Post" asp-action="@(ViewBag.New ? "Create" : "Update")">
         <div id="PostEditorForm">
             <div id="PostEditorTitleContainer">
@@ -37,17 +36,17 @@
                 <input type="hidden" id="PostEditorHiddenSubjectField" asp-for="SubjectsString" value="@(Model != null ? Model.SubjectsString : "")" />
             </div>
             <div id="PostEditorTitleTxtContainer">
-                <input type="text" class="form-control" asp-for="Title" />
+                <input placeholder="Titel" type="text" class="form-control" asp-for="Title" />
             </div>
             <div id="PostEditorTextContainer">
-                <textarea class="form-control" asp-for="Text">
+                <textarea placeholder="Bericht..." class="form-control" asp-for="Text">
 
             </textarea>
             </div>
-            <div>
-                <input type="checkbox" asp-for="Public" id="cbPublic" />
-                <label for="cbPublic">
-                    Openbaar
+            <div id="PostEditorPublicContainer">
+                <input type="checkbox" asp-for="Public" class="form-check-inline" id="cbPublic" />
+                <label for="cbPublic" class="form-check-label">
+                    Openbaar bericht
                 </label>
             </div>
             <div id="PostEditorSubmitContainer">
