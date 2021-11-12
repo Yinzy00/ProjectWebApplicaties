@@ -16,6 +16,12 @@ a.navbar-brand {
         margin-right: 50px;
     }
 
+#navbarDropdown:hover{
+    cursor:pointer;
+}
+#navbarDropdownMenu{
+    left:-100%;
+}
 #HeaderDriehoekContainer {
     position: absolute;
     right: 0px;
@@ -59,18 +65,24 @@ a {
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+.nav-link.active {
+    /*border-bottom: 1px solid #E8D500;*/
+    font-weight: bold;
+    color: #E8D500!important;
+}
+.nav-link.active:hover {
+    color: #E8D500 !important;
+}
+    /*.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
-}
-
-/* Sticky footer styles
+}*/
+    /* Sticky footer styles
 -------------------------------------------------- */
-html {
-    font-size: 14px;
-}
+    html {
+        font-size: 14px;
+    }
 
 @media (min-width: 768px) {
     html {
@@ -509,13 +521,22 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
 #PostEditorSubjectDdlContainer {
     margin-bottom: 25px;
 }
-
-#PostEditorTitleTxtContainer, #PostEditorTextContainer, #PostEditorSubmitContainer {
+#PostEditorTextContainer textarea {
+    min-height: 200px;
+}
+#PostEditorTitleTxtContainer, 
+#PostEditorTextContainer, 
+#PostEditorSubmitContainer, 
+#PostEditorPublicContainer {
     margin-top: 25px;
 }
 /*Subject Editor*/
 #SubjectEditorTitleTxtContainer, #SubjectEditorTextContainer {
     margin-bottom: 25px;
+}
+
+#SubjectEditorTextContainer textarea{
+    min-height:200px;
 }
 
 .SubjectBox {
@@ -542,4 +563,15 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
 .SubjectBoxAmountOfPosts {
     margin-top: 20px;
     font-weight: bold;
+}
+
+
+/*Subject list*/
+#btnNewSubjectContainer {
+    margin-bottom: 25px;
+}
+#btnNewSubject {
+    width: 200px;
+    position: relative;
+    float: right;
 }
