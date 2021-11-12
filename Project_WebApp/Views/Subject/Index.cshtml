@@ -1,53 +1,73 @@
-﻿@model List<Project_WebApp.ViewModels.Subject.SubjectViewModel>
+﻿@model Project_WebApp.ViewModels.SubjectViewModels.SubjectListViewModel
 
 @{
     ViewData["Title"] = "Onderwerpen";
+    ViewData["Active"] = "Onderwerpen";
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
 
-Overzicht van onderwerpen
-
-<a asp-area="" asp-controller="Subject" asp-action="Editor">
-    Onderwerp aanmaken
-</a>
-<div class="row">
+<div class="row" id="btnNewSubjectContainer">
     <div class="col-md-6">
-        <input type="search" class="form-control" placeholder="Zoeken..." />
+        <h2>
+            Onderwerpen
+        </h2>
     </div>
-    <div class="col-md-6">
-        <select class="form-control" aria-label="Filter">
-            <option disabled selected>Filter</option>
-            <option value="0">Naam A-Z</option>
-            <option value="1">Naam Z-A</option>
-            <option value="2">Recent gemaakt</option>
-            <option value="2">Populair</option>
-        </select>
+        <div class="col-md-6">
+            <a id="btnNewSubject" asp-controller="Subject" asp-action="Editor" class="btn brandBtn">
+                Onderwerp aanmaken
+            </a>
+        </div>
     </div>
-</div>
-@for (int i = 0; i < Model.Count; i = i +2)
-{
-    <div class="row">
-        @for (int _i = 0; _i < 2; _i++)
-        {
-            @if(Model.Count >= (i + _i) + 1)
-            {
-                <div class="col-md-6">
-                    <div class="SubjectBox">
-                        <h2 class="SubjectBoxTitle brandColor">
-                            @Model[i + _i].Name
-                        </h2>
-                        <div class="SubjectBoxDescription">
-                            @Model[i + _i].Description
+    <form asp-controller="Subject" asp-action="Filter">
+        <div class="row">
+            <div class="col-md-6">
+                @*<div class="input-group mb-3">*@
+                <input name="SearchValue" type="search" asp-for="SearchValue" class="form-control" placeholder="Zoeken..." />
+                @*<div class="input-group-append">
+                            <input class="btn brandBtn" style="border:1px solid; border-color: #ced4da; border-left: none;" type="submit" value="Zoek" />
                         </div>
-                        <div class="SubjectBoxLinkDetail">
-                            <a asp-controller="Subject" asp-action="Detail" asp-route-id="@Model[i + _i].Id" asp->Meer details...</a>
-                        </div>
-                        <div class="SubjectBoxAmountOfPosts">
-                            Bevat @Model[i + _i].AmountOfPosts Berichten
-                        </div>
+                    </div>*@
+            </div>
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <select name="FilterData" class="form-control" aria-label="Filter" asp-for="FilterData">
+                        <option disabled>Selecteer een filter</option>
+                        <option value="0" selected>Naam A-Z</option>
+                        <option value="1">Naam Z-A</option>
+                        <option value="2">Recent gemaakt</option>
+                        <option value="3">Populair</option>
+                    </select>
+                    <div class="input-group-append">
+                        <input class="btn brandBtn" style="border:1px solid; border-color: #ced4da; border-left: none;" type="submit" value="Filter" />
                     </div>
                 </div>
+            </div>
+        </div>
+    </form>
+    @for (int i = 0; i < Model.SubjectViewModels.Count; i = i + 2)
+    {
+        <div class="row">
+            @for (int _i = 0; _i < 2; _i++)
+            {
+                @if (Model.SubjectViewModels.Count >= (i + _i) + 1)
+                {
+                    <div class="col-md-6">
+                        <div class="SubjectBox">
+                            <h2 class="SubjectBoxTitle brandColor">
+                                @Model.SubjectViewModels[i + _i].Name
+                            </h2>
+                            <div class="SubjectBoxDescription">
+                                @Model.SubjectViewModels[i + _i].Description
+                            </div>
+                            <div class="SubjectBoxLinkDetail">
+                                <a asp-controller="Subject" asp-action="Detail" asp-route-id="@Model.SubjectViewModels[i + _i].Id" asp->Meer details...</a>
+                            </div>
+                            <div class="SubjectBoxAmountOfPosts">
+                                Bevat @Model.SubjectViewModels[i + _i].AmountOfPosts Berichten
+                            </div>
+                        </div>
+                    </div>
+                }
             }
-        }
-    </div>
-}
+        </div>
+    }

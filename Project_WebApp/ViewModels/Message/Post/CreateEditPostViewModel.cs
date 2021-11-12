@@ -1,4 +1,4 @@
-﻿using Project_WebApp.ViewModels.Subject;
+﻿using Project_WebApp.ViewModels.SubjectViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

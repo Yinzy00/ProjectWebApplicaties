@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project_WebApp.ViewModels.Subject
+namespace Project_WebApp.ViewModels.SubjectViewModels
 {
     public class SubjectViewModel : CreateEditSubjectViewmodel
     {
