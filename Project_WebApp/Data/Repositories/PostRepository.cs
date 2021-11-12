@@ -15,8 +15,24 @@ namespace Project_WebApp.Data.Repositories
         }
         public IEnumerable<Post> GetAllPostsIncludeSubjects()
         {
-            var list = _dbContext.Set<Post>().Include(p=>p.PostSubjects).ThenInclude(ps=>ps.Subject).ToList();
+            var list = _dbContext.Set<Post>()
+                .Include(p=>p.PostSubjects)
+                .ThenInclude(ps=>ps.Subject)
+                .ToList();
             return list;
+        }
+        public Post GetPostByIdForPostViewMode(int id)
+        {
+            var post = _dbContext.Set<Post>()
+                .Include(p => p.User)
+                .Include(p => p.Comments)
+                .Include(p => p.MessageImages)
+                .Include(p => p.PostSubjects)
+                .ThenInclude(ps => ps.Subject)
+                .ThenInclude(s=>s.PostSubjects)
+                .Where(p=>p.Id == id)
+                .FirstOrDefault();
+            return post;
         }
     }
 }
