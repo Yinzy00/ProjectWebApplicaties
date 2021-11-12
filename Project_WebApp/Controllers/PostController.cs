@@ -31,7 +31,7 @@ namespace Project_WebApp.Controllers
             //{
             //    ViewBag.Subjects = new List<Subject>();
             //}
-            Post p = _uow.PostRepository.Get(p => p.Comments, p => p.MessageImages, p => p.User).FirstOrDefault();
+            Post p = _uow._PostRepository.GetPostByIdForPostViewMode(id);
             if (p != null)
             {
                 var vm = new PostViewModel(p);

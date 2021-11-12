@@ -516,7 +516,28 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
         opacity: 1;
     }
 
-
+/*View Post*/
+.ShowPostTitle{
+    margin-top:25px;
+}
+.ShowPostUserImage {
+    width: 100px;
+}
+.ShowPostTextContainer, .ShowPostLikeAndCommentButtonContainer {
+    margin-top: 25px;
+}
+.ShowPostLikeAndComment{
+    font-size:50px;
+    margin-right: 25px;
+    color:black;
+}
+    .ShowPostLikeAndComment:hover {
+        cursor: pointer;
+    }
+.ShowPostLikeAndCommentButtonContainerPart{
+    width:50%;
+    display:table-cell;
+}
 /*Post editor*/
 #PostEditorSubjectDdlContainer {
     margin-bottom: 25px;

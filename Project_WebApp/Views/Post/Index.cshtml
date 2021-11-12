@@ -3,5 +3,49 @@
     ViewData["Title"] = "Post";
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
-Post bekijken 
-post : @Model.Title
+<div class="row">
+    <div class="col-md-2">
+        <img src="~/images/persoon.png" class="rounded-circle ShowPostUserImage" />
+    </div>
+    <div class="col-md-10 mt-4 mt-md-0">
+        <h4>
+            @Model.User.Username
+        </h4>
+        <div>
+            Geplaatst op @Model.Created
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <h2 class="ShowPostTitle">
+            @Model.Title
+        </h2>
+        <div>
+            @foreach (var subject in Model.Subjects)
+            {
+                <span class="SubjectTag brandColorBg" id="Subject_@subject.Id">
+                    <a class="SubjectTagTooltip" asp-controller="Subject" asp-action="Detail" asp-route-id="@subject.Id">
+                        @subject.Name
+                        <span class="SubjectTagTooltipText">
+                            Bevat @subject.AmountOfPosts berichten
+                        </span>
+                    </a>
+                </span>
+            }
+        </div>
+        <div class="ShowPostTextContainer">
+            @Model.Text
+        </div>
+        <div class="ShowPostLikeAndCommentButtonContainer">
+            <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
+                <i id="btLike" class="far fa-thumbs-up ShowPostLikeAndComment" onclick="Like(this)"></i>
+            </div>
+            <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
+                <a href="#CommentSection">
+                    <i class="far fa-comment ShowPostLikeAndComment"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

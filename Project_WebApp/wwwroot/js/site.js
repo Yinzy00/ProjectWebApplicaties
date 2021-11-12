@@ -95,3 +95,21 @@ function SetSubjectsValue() {
     console.log(document.querySelector("#PostEditorHiddenSubjectField").value);
 }
 
+//View post
+function Like(element) {
+    //var parent = element.parentNode;
+    //parent.removeChild(element);
+    var classes = Array.from(element.classList);
+    console.log(classes);
+    classes = classes.filter(c => c == "fas")
+    var amount = classes.length;
+    if (amount > 0) {
+        element.classList.remove("fas");
+        element.classList.add("far");
+    }
+    else {
+        element.classList.remove("far");
+        element.classList.add("fas");
+    }
+    //parent.insertAdjacentHTML('beforeend', '<i class="fas fa-thumbs-up solid ShowPostLikeAndComment"></i>');
+}
