@@ -31,13 +31,13 @@
                     @*<partial name="_LoginPartial" />*@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                            <a class="nav-link text-dark @(ViewData["Active"] == "About" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark @(ViewData["Active"] == "Privacy" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Subject" asp-action="Index">Onderwerpen</a>
+                            <a class="nav-link text-dark @(ViewData["Active"] == "Onderwerpen" ? "active" : "")" asp-area="" asp-controller="Subject" asp-action="Index">Onderwerpen</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
@@ -59,7 +59,7 @@
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                        @this.User.Identity.Name
                                     </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <ul class="dropdown-menu" id="navbarDropdownMenu" aria-labelledby="navbarDropdown">
                                         <li>
                                             <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Profiel</a>
                                         </li>
