@@ -171,7 +171,7 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
     background-color: #E8D500;
     color: white;
     font-weight: bold;
-    width: 100%;
+    width: 150px;
 }
 
     .brandBtn:hover {
@@ -537,6 +537,9 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
 .ShowPostLikeAndCommentButtonContainerPart{
     width:50%;
     display:table-cell;
+}
+.CommentSection {
+    margin-top: 25px;
 }
 /*Post editor*/
 #PostEditorSubjectDdlContainer {
