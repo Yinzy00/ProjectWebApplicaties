@@ -541,6 +541,9 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
 .CommentSection {
     margin-top: 25px;
 }
+.CommentSectionTextarea {
+    height: 200px!important;
+}
 /*Post editor*/
 #PostEditorSubjectDdlContainer {
     margin-bottom: 25px;

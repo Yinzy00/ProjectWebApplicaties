@@ -47,5 +47,13 @@
                 </a>
             </div>
         </div>
+        <div class="CommentSection">
+            <div class="ShowPostNewCommentContainerPart">
+                <form asp-controller="Post" asp-action="PostComment">
+                    <textarea name="comment" class="form-control CommentSectionTextarea" placeholder="Comment..."></textarea>
+                    <input type="submit" class="btn brandBtn float-right mt-3" value="Plaatsen" />
+                </form>
+            </div>
+        </div>
     </div>
 </div>
