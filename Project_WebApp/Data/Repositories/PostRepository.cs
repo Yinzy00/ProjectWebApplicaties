@@ -25,7 +25,9 @@ namespace Project_WebApp.Data.Repositories
         {
             var post = _dbContext.Set<Post>()
                 .Include(p => p.User)
-                .Include(p => p.Comments)
+                .Include(p => p.Comments)//Layer 1
+                .ThenInclude(c=>c.Comments)//Layer 2
+                .ThenInclude(c=>c.Comments)//Layer 3 (Max layer)
                 .Include(p => p.MessageImages)
                 .Include(p => p.PostSubjects)
                 .ThenInclude(ps => ps.Subject)

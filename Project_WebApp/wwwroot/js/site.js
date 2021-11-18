@@ -117,3 +117,21 @@ function Like(element, postId) {
     //Add ajax call to add like to db
     //parent.insertAdjacentHTML('beforeend', '<i class="fas fa-thumbs-up solid ShowPostLikeAndComment"></i>');
 }
+function Comment(element, mainPostId) {
+    var postId = element.id.split('_')[1];
+    document.querySelector("#Post_" + postId).innerHTML += `
+<div class="row CommentSectionContainer">
+    <div class="col">
+        <div class="CommentSection">
+            <div class="ShowPostNewCommentContainerPart">
+                <form action="/Post/PostComment/${mainPostId}" method="post">
+                    <textarea name="Text" class="form-control CommentSectionTextarea" placeholder="Comment..."></textarea>
+                    <input type="submit" class="btn brandBtn float-right mt-3" value="Plaatsen" />
+                    <input type="hidden" value="${postId}" name="ParentId" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+`;
+}

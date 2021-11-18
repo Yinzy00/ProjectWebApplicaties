@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project_WebApp.Data;
 using Project_WebApp.Data.UnitOfWork;
+using Project_WebApp.ViewModels.Message.Comment;
 using Project_WebApp.ViewModels.Message.Post;
 using System;
 using System.Collections.Generic;
@@ -81,25 +82,6 @@ namespace Project_WebApp.Controllers
         {
             var post = await _uow.PostRepository.getById((int)model.Id);
             post = await FillPostObjectWithModel(post, model);
-            //post.Public = model.Public;
-            //post.Text = model.Text;
-            //post.Title = model.Title;
-            //model.SubjectsString.Split(',').ToList().ForEach(i =>
-            //{
-            //    if (!string.IsNullOrEmpty(i))
-            //    {
-            //        var subject = _uow.SubjectRepository.Get(s => s.Id == Convert.ToInt32(i)).FirstOrDefault();
-            //        if (subject != null)
-            //        {
-            //            post.PostSubjects.Add(new PostSubject()
-            //            {
-            //                Post = post,
-            //                Subject = subject
-            //            });
-            //        }
-            //    }
-            //});
-
             return Redirect("Index/" + post.Id);
         }
         public async Task<IActionResult> Create(CreateEditPostViewModel model)
@@ -108,39 +90,12 @@ namespace Project_WebApp.Controllers
             CreatedPost.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             CreatedPost = await FillPostObjectWithModel(CreatedPost, model);
             _uow.PostRepository.Create(CreatedPost);
-            //foreach (var s in model.SubjectsString.Split(',').ToList())
-            //{
-            //    if (!string.IsNullOrEmpty(s))
-            //    {
-            //        var subject = await _uow.SubjectRepository.getById(Convert.ToInt32(s));
-            //        if (subject != null)
-            //        {
-            //            CreatedPost.PostSubjects.Add(new PostSubject()
-            //            {
-            //                Post = CreatedPost,
-            //                Subject = subject
-            //            }); ;
-            //        }
-            //    }
-            //}
             await _uow.Save();
             return View("Index/" + CreatedPost.Id);
         }
 
         public async Task<Post> FillPostObjectWithModel(Post p, CreateEditPostViewModel model)
         {
-            //if (model.Id != null)
-            //{
-            //    p.Id = (int)model.Id;
-            //    model.Subjects.ForEach(s =>
-            //    {
-            //        p.PostSubjects.Add(new PostSubject()
-            //        {
-            //            PostId = p.Id,
-            //            SubjectId = (int)s.Id
-            //        });
-            //    });
-            //}
             p.Title = model.Title;
             p.Text = model.Text;
             p.Public = model.Public;
@@ -162,6 +117,20 @@ namespace Project_WebApp.Controllers
                 }
             }
             return p;
+        }
+        public async Task<IActionResult> PostComment(CommentViewModel vm)
+        {
+            Comment createdComment = new Comment()
+            {
+                UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value,
+                Created = DateTime.Now,
+                Text = vm.Text,
+                ParentId = vm.ParentId,
+                MessageImages = null
+            };
+            _uow.CommentRepository.Create(createdComment);
+            await _uow.Save();
+            return Redirect("../Index/" + vm.Id);
         }
         public IActionResult PostNotFound()
         {

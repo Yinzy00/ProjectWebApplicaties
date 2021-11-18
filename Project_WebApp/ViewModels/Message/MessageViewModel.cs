@@ -41,5 +41,9 @@ namespace Project_WebApp.ViewModels.Message
             this.AmountOfLikes = m.AmountOfComments;
             this.Comments = comments;
         }
+        public MessageViewModel()
+        {
+
+        }
     }
 }

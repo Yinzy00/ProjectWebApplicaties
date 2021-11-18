@@ -16,12 +16,14 @@ a.navbar-brand {
         margin-right: 50px;
     }
 
-#navbarDropdown:hover{
-    cursor:pointer;
+#navbarDropdown:hover {
+    cursor: pointer;
 }
-#navbarDropdownMenu{
-    left:-100%;
+
+#navbarDropdownMenu {
+    left: -100%;
 }
+
 #HeaderDriehoekContainer {
     position: absolute;
     right: 0px;
@@ -65,24 +67,26 @@ a {
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
+
 .nav-link.active {
     /*border-bottom: 1px solid #E8D500;*/
     font-weight: bold;
-    color: #E8D500!important;
-}
-.nav-link.active:hover {
     color: #E8D500 !important;
 }
-    /*.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+
+    .nav-link.active:hover {
+        color: #E8D500 !important;
+    }
+/*.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
 }*/
-    /* Sticky footer styles
+/* Sticky footer styles
 -------------------------------------------------- */
-    html {
-        font-size: 14px;
-    }
+html {
+    font-size: 14px;
+}
 
 @media (min-width: 768px) {
     html {
@@ -152,7 +156,7 @@ main{
         color: black;
         text-decoration: none;
     }
-    /*Custom*/
+/*Custom*/
 a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
     /*text-decoration: none;*/
     color: inherit;
@@ -517,42 +521,63 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
     }
 
 /*View Post*/
-.ShowPostTitle{
-    margin-top:25px;
+.ShowPost {
+    margin-top: 25px;
 }
+
+.ShowPostTitle {
+    margin-top: 25px;
+}
+
 .ShowPostUserImage {
     width: 100px;
 }
+
 .ShowPostTextContainer, .ShowPostLikeAndCommentButtonContainer {
     margin-top: 25px;
 }
-.ShowPostLikeAndComment{
-    font-size:50px;
+
+.ShowPostLikeAndComment {
+    font-size: 50px;
     margin-right: 25px;
-    color:black;
+    color: black;
 }
+
     .ShowPostLikeAndComment:hover {
         cursor: pointer;
     }
-.ShowPostLikeAndCommentButtonContainerPart{
-    width:50%;
-    display:table-cell;
+
+.ShowPostLikeAndCommentButtonContainerPart {
+    width: 50%;
+    display: table-cell;
 }
-.ShowPostHr{
+
+.ShowPostHr {
     margin: 25px 0px;
 }
+
+@media only screen and (min-width: 768px) {
+    .CommentSectionContainer > .col {
+        padding: 0px;
+    }
+}
+
 .CommentSection {
     margin-top: 25px;
 }
+
 .CommentSectionTextarea {
-    height: 200px!important;
+    height: 200px !important;
 }
+
 .Comment {
-    margin-top: 50px;
+    margin: 50px 0px;
 }
-.CommentTextContainer{
-    margin-top:15px;
+
+.CommentTextContainer {
+    margin-top: 15px;
 }
+
 .Sub.Comment {
     margin-left: 100px;
 }
@@ -560,12 +585,14 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
 #PostEditorSubjectDdlContainer {
     margin-bottom: 25px;
 }
+
 #PostEditorTextContainer textarea {
     min-height: 200px;
 }
-#PostEditorTitleTxtContainer, 
-#PostEditorTextContainer, 
-#PostEditorSubmitContainer, 
+
+#PostEditorTitleTxtContainer,
+#PostEditorTextContainer,
+#PostEditorSubmitContainer,
 #PostEditorPublicContainer {
     margin-top: 25px;
 }
@@ -574,9 +601,9 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
     margin-bottom: 25px;
 }
 
-#SubjectEditorTextContainer textarea{
-    min-height:200px;
-}
+    #SubjectEditorTextContainer textarea {
+        min-height: 200px;
+    }
 
 .SubjectBox {
     width: 100%;
@@ -609,6 +636,7 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
 #btnNewSubjectContainer {
     margin-bottom: 25px;
 }
+
 #btnNewSubject {
     width: 200px;
     position: relative;
