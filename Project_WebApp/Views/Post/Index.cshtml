@@ -39,7 +39,7 @@
         </div>
         <div class="ShowPostLikeAndCommentButtonContainer">
             <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
-                <i id="btLike" class="far fa-thumbs-up ShowPostLikeAndComment" onclick="Like(this)"></i>
+                <i id="btLike_@Model.Id" class="far fa-thumbs-up ShowPostLikeAndComment" onclick="Like(this, @Model.Id)"></i>
             </div>
             <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
                 <a href="#CommentSection">
@@ -47,6 +47,10 @@
                 </a>
             </div>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
         <div class="CommentSection">
             <div class="ShowPostNewCommentContainerPart">
                 <form asp-controller="Post" asp-action="PostComment">
@@ -54,6 +58,48 @@
                     <input type="submit" class="btn brandBtn float-right mt-3" value="Plaatsen" />
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <hr class="ShowPostHr" />
+        <div class="CommentsContainer">
+            <div>
+                <h2>
+                    Alle antwoorden:
+                </h2>
+            </div>
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="Comment">
+                    <div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="~/images/persoon.png" class="rounded-circle ShowPostUserImage" />
+                            </div>
+                            <div class="col-md-10">
+                                <h4>
+                                    Commenter name
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="CommentTextContainer">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et libero at ex bibendum congue sed ac nibh. Maecenas at faucibus dui. In lacinia porta vestibulum. Praesent vitae gravida risus. Donec sit amet aliquet diam. Nam vel nunc erat. Ut tempor nec mauris ac convallis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam consequat orci eget magna aliquam rutrum non nec velit. Donec a purus tellus. Quisque tempor convallis metus, ut semper lorem rhoncus vitae.
+                    </div>
+                    <div class="ShowPostLikeAndCommentButtonContainer">
+                        <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
+                            <i id="btLike_@Model.Id" class="far fa-thumbs-up ShowPostLikeAndComment" onclick="Like(this, @Model.Id)"></i>
+                        </div>
+                        <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
+                            <a href="#CommentSection">
+                                <i class="far fa-comment ShowPostLikeAndComment"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>

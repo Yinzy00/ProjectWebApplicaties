@@ -1,6 +1,8 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
+const { post } = require("jquery");
+
 //const { post } = require("jquery");
 
 // Write your JavaScript code.
@@ -96,7 +98,7 @@ function SetSubjectsValue() {
 }
 
 //View post
-function Like(element) {
+function Like(element, postId) {
     //var parent = element.parentNode;
     //parent.removeChild(element);
     var classes = Array.from(element.classList);
@@ -111,5 +113,7 @@ function Like(element) {
         element.classList.remove("far");
         element.classList.add("fas");
     }
+    alert("PostId = " + postId);
+    //Add ajax call to add like to db
     //parent.insertAdjacentHTML('beforeend', '<i class="fas fa-thumbs-up solid ShowPostLikeAndComment"></i>');
 }

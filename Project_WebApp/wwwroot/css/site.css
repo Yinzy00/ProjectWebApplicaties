@@ -538,11 +538,23 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
     width:50%;
     display:table-cell;
 }
+.ShowPostHr{
+    margin: 25px 0px;
+}
 .CommentSection {
     margin-top: 25px;
 }
 .CommentSectionTextarea {
     height: 200px!important;
+}
+.Comment {
+    margin-top: 50px;
+}
+.CommentTextContainer{
+    margin-top:15px;
+}
+.Sub.Comment {
+    margin-left: 100px;
 }
 /*Post editor*/
 #PostEditorSubjectDdlContainer {
