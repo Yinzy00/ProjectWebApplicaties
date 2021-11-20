@@ -32,6 +32,7 @@ namespace Project_WebApp.Controllers
             //{
             //    ViewBag.Subjects = new List<Subject>();
             //}
+            ViewData["CurrentUser"] = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             Post p = _uow._PostRepository.GetPostByIdForPostViewMode(id);
             if (p != null)
             {
@@ -118,19 +119,49 @@ namespace Project_WebApp.Controllers
             }
             return p;
         }
-        public async Task<IActionResult> PostComment(CommentViewModel vm)
+        //public async Task<IActionResult> PostComment(CommentViewModel vm)
+        //{
+        //    Comment createdComment = new Comment()
+        //    {
+        //        UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value,
+        //        Created = DateTime.Now,
+        //        Text = vm.Text,
+        //        ParentId = vm.ParentId,
+        //        MessageImages = null
+        //    };
+        //    _uow.CommentRepository.Create(createdComment);
+        //    await _uow.Save();
+        //    return Redirect("../Index/" + vm.Id);
+        //}
+        public async Task PostComment(string text, int postId)
         {
             Comment createdComment = new Comment()
             {
                 UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value,
                 Created = DateTime.Now,
-                Text = vm.Text,
-                ParentId = vm.ParentId,
+                Text = text,
+                ParentId = postId,
                 MessageImages = null
             };
             _uow.CommentRepository.Create(createdComment);
             await _uow.Save();
-            return Redirect("../Index/" + vm.Id);
+        }
+        public async Task PostLike(int id, bool up)
+        {
+            //
+            var x = _uow.LikeRepository.Get();
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var postid = id;
+            var like = new Like() { MessageId = id, UserId = userId };
+            if (up)
+            {
+                _uow.LikeRepository.Create(like);
+            }
+            else
+            {
+                _uow.LikeRepository.DeleteWhere(l=>l.MessageId == like.MessageId && l.UserId == like.UserId);
+            }
+            await _uow.Save();
         }
         public IActionResult PostNotFound()
         {
