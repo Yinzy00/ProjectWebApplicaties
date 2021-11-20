@@ -16,6 +16,7 @@ namespace Project_WebApp.ViewModels.Message
         public UserViewModel User { get; set; }
         public List<ImageViewModel> Images { get; set; }
         public int AmountOfLikes { get; set; }
+        public List<string> LikersIds { get; set; } = new List<string>();
         public List<CommentViewModel> Comments { get; set; }
 
         //Constructor
@@ -40,6 +41,8 @@ namespace Project_WebApp.ViewModels.Message
             this.Images = images;
             this.AmountOfLikes = m.AmountOfComments;
             this.Comments = comments;
+            
+            m.Likes.ToList().ForEach(l=>LikersIds.Add(l.UserId));
         }
         public MessageViewModel()
         {
