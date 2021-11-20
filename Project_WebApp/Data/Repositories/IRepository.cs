@@ -35,6 +35,7 @@ namespace Project_WebApp.Data.Repositories
         Task<T> getById(int id);
         void Create(T entity);
         void Delete(T entity);
+        void DeleteWhere(Expression<Func<T, bool>>conditions);
         void Update(T entity);
     }
 }

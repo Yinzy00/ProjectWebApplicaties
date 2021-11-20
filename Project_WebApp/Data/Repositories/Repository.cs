@@ -23,6 +23,11 @@ namespace Project_WebApp.Data.Repositories
         {
             _dbContext.Set<T>().Remove(entity);
         }
+        public void DeleteWhere(Expression<Func<T, bool>> conditions)
+        {
+            var x = _dbContext.Set<T>().Where(conditions);
+            _dbContext.Set<T>().RemoveRange(x);
+        }
         public IEnumerable<T> Get()
         {
             return _dbContext.Set<T>().ToList();
