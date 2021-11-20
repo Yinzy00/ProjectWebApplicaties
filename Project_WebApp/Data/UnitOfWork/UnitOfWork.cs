@@ -136,10 +136,6 @@ namespace Project_WebApp.Data.UnitOfWork
             await DbContext.SaveChangesAsync();
         }
 
-
-
-
-
         //CUSTOM
         private IPostRepository _postRepository;
         private ISubjectRepository _subjectRepository;
