@@ -63,11 +63,11 @@ window.onresize = () => {
 window.onresize();
 
 //Post editor SUBJECT DROPDOWNLIST
-var removed = [];
-var PostEditorSubjectSelect = document.querySelector("#PostEditorSubjectSelect");
+let removed = [];
+let PostEditorSubjectSelect = document.querySelector("#PostEditorSubjectSelect");
 if (PostEditorSubjectSelect != null) {
     PostEditorSubjectSelect.addEventListener("change", () => {
-        var selected = PostEditorSubjectSelect.options[PostEditorSubjectSelect.selectedIndex];
+        let selected = PostEditorSubjectSelect.options[PostEditorSubjectSelect.selectedIndex];
         document.querySelector("#PostEditorSubjects").innerHTML += `<span id="Subject_${selected.value}" class="SubjectTag brandColorBg">
                     ${selected.text}
                 &nbsp;&nbsp;<span class="SubjectTagDeleteButton" onClick="RemoveSubjectFromPost(${selected.value})">X</span></span>`
@@ -76,15 +76,15 @@ if (PostEditorSubjectSelect != null) {
         selected.style.display = "none";
         PostEditorSubjectSelect.selectedIndex = 0;
         SetSubjectsValue();
-        
+
     });
 }
 
 function RemoveSubjectFromPost(id) {
     var element = removed.find(i => i.value == id);
     element.style.display = "inline";
-    removed = removed.filter(e=>e.value != id);
-    var el = document.querySelector(`#Subject_${id}`);
+    removed = removed.filter(e => e.value != id);
+    let el = document.querySelector(`#Subject_${id}`);
     el.parentNode.removeChild(el);
     SetSubjectsValue();
 }
@@ -98,40 +98,104 @@ function SetSubjectsValue() {
 }
 
 //View post
-function Like(element, postId) {
+function PostLike(element, postId) {
     //var parent = element.parentNode;
     //parent.removeChild(element);
-    var classes = Array.from(element.classList);
+    let classes = Array.from(element.classList);
     console.log(classes);
     classes = classes.filter(c => c == "fas")
-    var amount = classes.length;
+    let amount = classes.length;
+    var xhttp = new XMLHttpRequest();
     if (amount > 0) {
         element.classList.remove("fas");
         element.classList.add("far");
+        xhttp.open("POST", `/Post/PostLike/${postId}?up=false`, true);
     }
     else {
         element.classList.remove("far");
         element.classList.add("fas");
+        xhttp.open("POST", `/Post/PostLike/${postId}?up=true`, true);
     }
-    alert("PostId = " + postId);
+    xhttp.send();
+    //alert("PostId = " + postId);
     //Add ajax call to add like to db
     //parent.insertAdjacentHTML('beforeend', '<i class="fas fa-thumbs-up solid ShowPostLikeAndComment"></i>');
 }
-function Comment(element, mainPostId) {
-    var postId = element.id.split('_')[1];
-    document.querySelector("#Post_" + postId).innerHTML += `
+var currentCommentContainer = null;
+function AddCommentBox(element, mainPostId) {
+    let postId = element.id.split('_')[1];
+    var element = document.querySelector("#Post_" + postId);
+    if (currentCommentContainer != null && element != currentCommentContainer.parentNode) {
+        currentCommentContainer.parentNode.removeChild(currentCommentContainer);
+    }
+    if (!element.innerHTML.includes("class=\"CommentSection\"")) {
+        element.innerHTML += `
 <div class="row CommentSectionContainer">
     <div class="col">
         <div class="CommentSection">
             <div class="ShowPostNewCommentContainerPart">
-                <form action="/Post/PostComment/${mainPostId}" method="post">
+                <form id="frmComment">
                     <textarea name="Text" class="form-control CommentSectionTextarea" placeholder="Comment..."></textarea>
-                    <input type="submit" class="btn brandBtn float-right mt-3" value="Plaatsen" />
-                    <input type="hidden" value="${postId}" name="ParentId" />
+                    <input type="button" class="btn brandBtn float-right mt-3" value="Plaatsen" onClick="PostComment(${mainPostId})" />
+                    <input type="hidden" value="${postId}" name="ParentId" class="postIdBox" />
                 </form>
             </div>
         </div>
     </div>
 </div>
 `;
+//        element.innerHTML += `
+//<div class="row CommentSectionContainer">
+//    <div class="col">
+//        <div class="CommentSection">
+//            <div class="ShowPostNewCommentContainerPart">
+//                <form action="/Post/PostComment/${mainPostId}" method="post">
+//                    <textarea name="Text" class="form-control CommentSectionTextarea" placeholder="Comment..."></textarea>
+//                    <input type="submit" class="btn brandBtn float-right mt-3" value="Plaatsen" />
+//                    <input type="hidden" value="${postId}" name="ParentId" />
+//                </form>
+//            </div>
+//        </div>
+//    </div>
+//</div>
+//`;
+        currentCommentContainer = document.querySelector(".CommentSectionContainer");
+    }
+    currentCommentContainer.scrollIntoView(false);
+}
+
+function PostComment(mainPostId) {
+    var xhttp = new XMLHttpRequest();
+    let commentBox = document.querySelector(".CommentSectionTextarea");
+    let postIdBox = document.querySelector(".postIdBox");
+    let formData = new FormData();
+    formData.append('text', commentBox.value);
+    formData.append('postId', postIdBox.value);
+    xhttp.open("POST", `/Post/PostComment`, true);
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            currentCommentContainer.parentNode.removeChild(currentCommentContainer);
+            currentCommentContainer = null;
+            GetPosts(mainPostId);
+        }
+    };
+    xhttp.send(formData);
+}
+
+
+function GetPosts(id) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", `/Post/Index/${id}`, true);
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let domParser = new DOMParser();
+            let doc = domParser.parseFromString(this.responseText, "text/html");
+            document.querySelector("#PostsContent").innerHTML = doc.querySelector("#PostsContent").innerHTML;
+            //document.querySelector("#PostsContent").innerHTML =
+            //    this.responseText;
+        }
+    };
+
+    xhttp.send();
 }
