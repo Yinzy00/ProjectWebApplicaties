@@ -576,6 +576,7 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
 
 .CommentTextContainer {
     margin-top: 15px;
+    word-wrap:break-word;
 }
 
 .Sub.Comment {
