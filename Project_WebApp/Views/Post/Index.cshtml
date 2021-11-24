@@ -41,6 +41,9 @@
                     <div class="ShowPostTextContainer">
                         @Model.Text
                     </div>
+                    <div>
+                        @Model.AmountOfLikes Likes
+                    </div>
                     <div class="ShowPostLikeAndCommentButtonContainer">
                         <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
                             <i id="btLike_@Model.Id" class="@(Model.LikersIds.Contains(ViewData["CurrentUser"]) ? "fas" : "far") fa-thumbs-up ShowPostLikeAndComment" onclick="PostLike(this, @Model.Id)"></i>
@@ -85,6 +88,9 @@
                         <div class="CommentTextContainer">
                             @comment.Text
                         </div>
+                        <div>
+                            @comment.AmountOfLikes Likes
+                        </div>
                         <div class="ShowPostLikeAndCommentButtonContainer">
                             <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
                                 <i id="btLike_@Model.Id" class="@(comment.LikersIds.Contains(ViewData["CurrentUser"]) ? "fas" : "far") fa-thumbs-up ShowPostLikeAndComment" onclick="PostLike(this, @comment.Id)"></i>
@@ -117,6 +123,9 @@
                             <div class="CommentTextContainer">
                                 @subComment.Text
                             </div>
+                            <div>
+                                @subComment.AmountOfLikes Likes
+                            </div>
                             <div class="ShowPostLikeAndCommentButtonContainer">
                                 <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
                                     <i id="btLike_@subComment.Id" class="@(subComment.LikersIds.Contains(ViewData["CurrentUser"]) ? "fas" : "far") fa-thumbs-up ShowPostLikeAndComment" onclick="PostLike(this, @subComment.Id)"></i>
@@ -147,6 +156,9 @@
                                     </div>
                                     <div class="CommentTextContainer">
                                         @subSubComment.Text
+                                    </div>
+                                    <div>
+                                        @subSubComment.AmountOfLikes Likes
                                     </div>
                                     <div class="ShowPostLikeAndCommentButtonContainer">
                                         <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">

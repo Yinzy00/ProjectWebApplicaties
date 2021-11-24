@@ -31,6 +31,13 @@ namespace Project_WebApp
 
             }
         }
+        public int AmountOfLikes
+        {
+            get
+            {
+                return Likes.Count;
+            }
+        }
         //Methods
         public void Delete()
         {

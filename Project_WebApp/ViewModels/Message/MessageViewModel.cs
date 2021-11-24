@@ -39,7 +39,7 @@ namespace Project_WebApp.ViewModels.Message
             this.Created = m.Created;
             this.User = new UserViewModel(m.User);
             this.Images = images;
-            this.AmountOfLikes = m.AmountOfComments;
+            this.AmountOfLikes = m.AmountOfLikes;
             this.Comments = comments;
             
             m.Likes.ToList().ForEach(l=>LikersIds.Add(l.UserId));

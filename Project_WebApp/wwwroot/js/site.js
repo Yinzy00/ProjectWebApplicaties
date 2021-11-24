@@ -1,7 +1,7 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
-const { post } = require("jquery");
+//const { post } = require("jquery");
 
 //const { post } = require("jquery");
 
@@ -62,6 +62,8 @@ window.onresize = () => {
 
 window.onresize();
 
+//Post editor
+
 //Post editor SUBJECT DROPDOWNLIST
 let removed = [];
 let PostEditorSubjectSelect = document.querySelector("#PostEditorSubjectSelect");
@@ -94,7 +96,6 @@ function SetSubjectsValue() {
     removed.forEach(e => {
         document.querySelector("#PostEditorHiddenSubjectField").value += e.value + ",";
     });
-    console.log(document.querySelector("#PostEditorHiddenSubjectField").value);
 }
 
 //View post
@@ -102,7 +103,6 @@ function PostLike(element, postId) {
     //var parent = element.parentNode;
     //parent.removeChild(element);
     let classes = Array.from(element.classList);
-    console.log(classes);
     classes = classes.filter(c => c == "fas")
     let amount = classes.length;
     var xhttp = new XMLHttpRequest();
@@ -116,6 +116,11 @@ function PostLike(element, postId) {
         element.classList.add("fas");
         xhttp.open("POST", `/Post/PostLike/${postId}?up=true`, true);
     }
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            GetPosts(postId);
+        }
+    };
     xhttp.send();
     //alert("PostId = " + postId);
     //Add ajax call to add like to db
