@@ -204,3 +204,31 @@ function GetPosts(id) {
 
     xhttp.send();
 }
+
+//Subjects
+function GetSubjects() {
+    var xhttp = new XMLHttpRequest();
+    var form = document.querySelector("#Filter");
+    var data = new FormData(form);
+    var url = "Filter";
+    var firstRun = true;
+    for (var key of data.keys()) {
+        if (firstRun) {
+            url += '?';
+            firstRun = false;
+        }
+        else url += '&';
+        url += key + "=" + data.get(key);
+    }
+    xhttp.open("GET", url, true);
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let domParser = new DOMParser();
+            let doc = domParser.parseFromString(this.responseText, "text/html");
+            document.querySelector("#SubjectsListContainer").innerHTML = doc.querySelector("#SubjectsListContainer").innerHTML;
+        }
+    };
+
+    xhttp.send();
+}

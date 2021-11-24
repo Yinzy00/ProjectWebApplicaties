@@ -12,38 +12,29 @@
             Onderwerpen
         </h2>
     </div>
+    <div class="col-md-6">
+        <a id="btnNewSubject" asp-controller="Subject" asp-action="Editor" class="btn brandBtn">
+            Onderwerp aanmaken
+        </a>
+    </div>
+</div>
+<form id="Filter" action="#" onsubmit="return false">
+    <div class="row">
         <div class="col-md-6">
-            <a id="btnNewSubject" asp-controller="Subject" asp-action="Editor" class="btn brandBtn">
-                Onderwerp aanmaken
-            </a>
+            <input id="txtSearchValue" name="SearchValue" onkeyup="GetSubjects()" type="search" asp-for="SearchValue" class="form-control" placeholder="Zoeken..." />
+        </div>
+        <div class="col-md-6">
+            <select id="ddlFilter" name="FilterData" class="form-control" aria-label="Filter" asp-for="FilterData" onchange="GetSubjects()">
+                <option disabled>Selecteer een filter</option>
+                <option value="0" selected>Naam A-Z</option>
+                <option value="1">Naam Z-A</option>
+                <option value="2">Recent gemaakt</option>
+                <option value="3">Populair</option>
+            </select>
         </div>
     </div>
-    <form asp-controller="Subject" asp-action="Filter">
-        <div class="row">
-            <div class="col-md-6">
-                @*<div class="input-group mb-3">*@
-                <input name="SearchValue" type="search" asp-for="SearchValue" class="form-control" placeholder="Zoeken..." />
-                @*<div class="input-group-append">
-                            <input class="btn brandBtn" style="border:1px solid; border-color: #ced4da; border-left: none;" type="submit" value="Zoek" />
-                        </div>
-                    </div>*@
-            </div>
-            <div class="col-md-6">
-                <div class="input-group mb-3">
-                    <select name="FilterData" class="form-control" aria-label="Filter" asp-for="FilterData">
-                        <option disabled>Selecteer een filter</option>
-                        <option value="0" selected>Naam A-Z</option>
-                        <option value="1">Naam Z-A</option>
-                        <option value="2">Recent gemaakt</option>
-                        <option value="3">Populair</option>
-                    </select>
-                    <div class="input-group-append">
-                        <input class="btn brandBtn" style="border:1px solid; border-color: #ced4da; border-left: none;" type="submit" value="Filter" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+</form>
+<div id="SubjectsListContainer">
     @for (int i = 0; i < Model.SubjectViewModels.Count; i = i + 2)
     {
         <div class="row">
@@ -71,3 +62,5 @@
             }
         </div>
     }
+
+</div>

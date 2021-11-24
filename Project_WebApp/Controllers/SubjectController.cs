@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Project_WebApp.ViewModels.SubjectViewModels.SubjectListViewModel;
 
 namespace Project_WebApp.Controllers
 {
@@ -26,7 +27,7 @@ namespace Project_WebApp.Controllers
             SubjectListViewModel vm = new SubjectListViewModel(subjects.OrderBy(s=>s.Name).ToList());
             return View(vm);
         }
-        public IActionResult Filter(SubjectListViewModel _vm)
+        public IActionResult Filter(string SearchValue, string FilterData)
         {
             ////FilterViewModel _vm = new FilterViewModel()
             //{
@@ -34,9 +35,9 @@ namespace Project_WebApp.Controllers
             //    SearchValue = Request.Form["txtSearch"].ToString()
             //};
             List<Subject> subjects;
-            if (!string.IsNullOrEmpty(_vm.SearchValue))
+            if (!string.IsNullOrEmpty(SearchValue))
             {
-                subjects = _uow.SubjectRepository.Get(s => s.Name.Contains(_vm.SearchValue) || s.Description.Contains(_vm.SearchValue), s => s.PostSubjects).ToList();
+                subjects = _uow.SubjectRepository.Get(s => s.Name.Contains(SearchValue) || s.Description.Contains(SearchValue), s => s.PostSubjects).ToList();
             }
             else
             {
@@ -44,26 +45,26 @@ namespace Project_WebApp.Controllers
             }
 
 
-            switch (_vm.FilterData)
+            switch ((FilterType)Convert.ToInt32(FilterData))
             {
-                case SubjectListViewModel.FilterType.AZ:
+                case FilterType.AZ:
                     subjects = subjects.OrderBy(s => s.Name).ToList();
                     break;
-                case SubjectListViewModel.FilterType.ZA:
+                case FilterType.ZA:
                     subjects = subjects.OrderBy(s => s.Name).Reverse().ToList();
                     break;
-                case SubjectListViewModel.FilterType.Recent:
+                case FilterType.Recent:
                     subjects = subjects.OrderBy(s => s.Created).ToList();
                     break;
-                case SubjectListViewModel.FilterType.Popular:
+                case FilterType.Popular:
                     subjects = subjects.OrderBy(s => s.AmountOfPosts).Reverse().ToList();
                     break;
                 default:
                     break;
             }
             SubjectListViewModel vm = new SubjectListViewModel(subjects);
-            vm.SearchValue = _vm.SearchValue;
-            vm.FilterData = _vm.FilterData;
+            vm.SearchValue = SearchValue;
+            vm.FilterData = (FilterType)Convert.ToInt32(FilterData);
             return View("Index", vm);
         }
         public async Task<IActionResult> Editor(int? id)
