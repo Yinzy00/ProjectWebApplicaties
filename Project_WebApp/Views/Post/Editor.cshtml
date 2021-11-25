@@ -36,10 +36,10 @@
                 <input type="hidden" id="PostEditorHiddenSubjectField" asp-for="SubjectsString" value="@(Model != null ? Model.SubjectsString : "")" />
             </div>
             <div id="PostEditorTitleTxtContainer">
-                <input placeholder="Titel" type="text" class="form-control" asp-for="Title" />
+                <input id="txtPostTitle" placeholder="Titel" type="text" class="form-control" asp-for="Title" />
             </div>
             <div id="PostEditorTextContainer">
-                <textarea placeholder="Bericht..." class="form-control" asp-for="Text">
+                <textarea id="txtMessageField" placeholder="Bericht..." class="form-control" asp-for="Text">
 
             </textarea>
             </div>

@@ -27,11 +27,6 @@ namespace Project_WebApp.Controllers
         /// <returns></returns>
         public IActionResult Index(int id)
         {
-
-            //if(ViewBag.Subjects = null)
-            //{
-            //    ViewBag.Subjects = new List<Subject>();
-            //}
             ViewData["CurrentUser"] = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             Post p = _uow._PostRepository.GetPostByIdForPostViewMode(id);
             if (p != null)
@@ -87,52 +82,41 @@ namespace Project_WebApp.Controllers
         }
         public async Task<IActionResult> Create(CreateEditPostViewModel model)
         {
-            var CreatedPost = new Post();
+            var CreatedPost = new Post()
+            {
+                Created = DateTime.Now
+            };
             CreatedPost.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             CreatedPost = await FillPostObjectWithModel(CreatedPost, model);
             _uow.PostRepository.Create(CreatedPost);
             await _uow.Save();
-            return View("Index/" + CreatedPost.Id);
+            return Redirect("Index/" + CreatedPost.Id);
         }
-
         public async Task<Post> FillPostObjectWithModel(Post p, CreateEditPostViewModel model)
         {
             p.Title = model.Title;
             p.Text = model.Text;
             p.Public = model.Public;
-            p.Created = DateTime.Now;
-
-            foreach (var s in model.SubjectsString.Split(',').ToList())
+            if (!string.IsNullOrEmpty(model.SubjectsString))
             {
-                if (!string.IsNullOrEmpty(s))
+                foreach (var s in model.SubjectsString.Split(',').ToList())
                 {
-                    var subject = await _uow.SubjectRepository.getById(Convert.ToInt32(s));
-                    if (subject != null)
+                    if (!string.IsNullOrEmpty(s))
                     {
-                        p.PostSubjects.Add(new PostSubject()
+                        var subject = await _uow.SubjectRepository.getById(Convert.ToInt32(s));
+                        if (subject != null)
                         {
-                            Post = p,
-                            Subject = subject
-                        });
+                            p.PostSubjects.Add(new PostSubject()
+                            {
+                                Post = p,
+                                Subject = subject
+                            });
+                        }
                     }
                 }
             }
             return p;
         }
-        //public async Task<IActionResult> PostComment(CommentViewModel vm)
-        //{
-        //    Comment createdComment = new Comment()
-        //    {
-        //        UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value,
-        //        Created = DateTime.Now,
-        //        Text = vm.Text,
-        //        ParentId = vm.ParentId,
-        //        MessageImages = null
-        //    };
-        //    _uow.CommentRepository.Create(createdComment);
-        //    await _uow.Save();
-        //    return Redirect("../Index/" + vm.Id);
-        //}
         public async Task PostComment(string text, int postId)
         {
             Comment createdComment = new Comment()
