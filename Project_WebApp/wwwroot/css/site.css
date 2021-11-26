@@ -523,6 +523,7 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
 /*View Post*/
 .ShowPost {
     margin-top: 25px;
+    width:100%;
 }
 
 .ShowPostTitle {
@@ -535,6 +536,16 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
 
 .ShowPostTextContainer, .ShowPostLikeAndCommentButtonContainer {
     margin-top: 25px;
+}
+
+.MessageMenuButton{
+    position:absolute;
+    right:0px;
+    font-size:25px;
+    cursor:pointer;
+}
+.MessageMenu .dropdown-item {
+    cursor:pointer;
 }
 
 .ShowPostLikeAndComment {

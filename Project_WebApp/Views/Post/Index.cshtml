@@ -12,6 +12,18 @@
                     <img src="~/images/persoon.png" class="rounded-circle ShowPostUserImage" />
                 </div>
                 <div class="col-md-10 mt-4 mt-md-0">
+                    <div id="MessageMenuContainer">
+                        <div class="dropdown show ">
+                            <span class="MessageMenuButton" role="button" id="MessageMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-chevron-circle-down"></i>
+                            </span>
+
+                            <div class="dropdown-menu dropdown-menu-right MessageMenu" aria-labelledby="MessageMenu">
+                                <span class="dropdown-item"><i class="fas fa-edit"></i> Bewerken</span>
+                                <span class="dropdown-item"><i class="fas fa-trash-alt"></i> Verwijderen</span>
+                            </div>
+                        </div>
+                    </div>
                     <h4>
                         @Model.User.Username
                     </h4>
