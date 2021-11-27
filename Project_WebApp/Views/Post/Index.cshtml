@@ -25,7 +25,7 @@
                                 <a asp-controller="Post" asp-action="Delete" asp-route-id="@Model.Id" class="">
                                     <span class="dropdown-item"><i class="fas fa-trash-alt"></i> Verwijderen</span>
                                 </a>
-</div>
+                            </div>
                         </div>
                     </div>
                     <h4>
@@ -60,16 +60,19 @@
                     <div>
                         @Model.AmountOfLikes Likes
                     </div>
-                    <div class="ShowPostLikeAndCommentButtonContainer">
-                        <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
-                            <i id="btLike_@Model.Id" class="@(Model.LikersIds.Contains(ViewData["CurrentUser"]) ? "fas" : "far") fa-thumbs-up ShowPostLikeAndComment" onclick="PostLike(this, @Model.Id)"></i>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="ShowPostLikeAndCommentButtonContainer">
+                            <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
+                                <i id="btLike_@Model.Id" class="@(Model.LikersIds.Contains(ViewData["CurrentUser"]) ? "fas" : "far") fa-thumbs-up ShowPostLikeAndComment" onclick="PostLike(this, @Model.Id)"></i>
+                            </div>
+                            <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
+                                <span class="CommentButton" id="btnComment_@Model.Id" onclick="AddCommentBox(this, @Model.Id)">
+                                    <i class="far fa-comment ShowPostLikeAndComment"></i>
+                                </span>
+                            </div>
                         </div>
-                        <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
-                            <span class="CommentButton" id="btnComment_@Model.Id" onclick="AddCommentBox(this, @Model.Id)">
-                                <i class="far fa-comment ShowPostLikeAndComment"></i>
-                            </span>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
@@ -107,16 +110,19 @@
                         <div>
                             @comment.AmountOfLikes Likes
                         </div>
-                        <div class="ShowPostLikeAndCommentButtonContainer">
-                            <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
-                                <i id="btLike_@Model.Id" class="@(comment.LikersIds.Contains(ViewData["CurrentUser"]) ? "fas" : "far") fa-thumbs-up ShowPostLikeAndComment" onclick="PostLike(this, @comment.Id)"></i>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="ShowPostLikeAndCommentButtonContainer">
+                                <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
+                                    <i id="btLike_@Model.Id" class="@(comment.LikersIds.Contains(ViewData["CurrentUser"]) ? "fas" : "far") fa-thumbs-up ShowPostLikeAndComment" onclick="PostLike(this, @comment.Id)"></i>
+                                </div>
+                                <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
+                                    <span class="CommentButton" id="btComment_@comment.Id" onclick="AddCommentBox(this, @Model.Id)">
+                                        <i class="far fa-comment ShowPostLikeAndComment"></i>
+                                    </span>
+                                </div>
                             </div>
-                            <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
-                                <span class="CommentButton" id="btComment_@comment.Id" onclick="AddCommentBox(this, @Model.Id)">
-                                    <i class="far fa-comment ShowPostLikeAndComment"></i>
-                                </span>
-                            </div>
-                        </div>
+                        }
                     </div>
                     @foreach (var subComment in comment.Comments)
                     {
@@ -142,16 +148,19 @@
                             <div>
                                 @subComment.AmountOfLikes Likes
                             </div>
-                            <div class="ShowPostLikeAndCommentButtonContainer">
-                                <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
-                                    <i id="btLike_@subComment.Id" class="@(subComment.LikersIds.Contains(ViewData["CurrentUser"]) ? "fas" : "far") fa-thumbs-up ShowPostLikeAndComment" onclick="PostLike(this, @subComment.Id)"></i>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="ShowPostLikeAndCommentButtonContainer">
+                                    <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
+                                        <i id="btLike_@subComment.Id" class="@(subComment.LikersIds.Contains(ViewData["CurrentUser"]) ? "fas" : "far") fa-thumbs-up ShowPostLikeAndComment" onclick="PostLike(this, @subComment.Id)"></i>
+                                    </div>
+                                    <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
+                                        <span class="CommentButton" id="btComment_@subComment.Id" onclick="AddCommentBox(this, @Model.Id)">
+                                            <i class="far fa-comment ShowPostLikeAndComment"></i>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
-                                    <span class="CommentButton" id="btComment_@subComment.Id" onclick="AddCommentBox(this, @Model.Id)">
-                                        <i class="far fa-comment ShowPostLikeAndComment"></i>
-                                    </span>
-                                </div>
-                            </div>
+                            }
                             @foreach (var subSubComment in subComment.Comments)
                             {
                                 <div class="Sub Comment" id="Post_@subSubComment.Id">
@@ -176,16 +185,19 @@
                                     <div>
                                         @subSubComment.AmountOfLikes Likes
                                     </div>
-                                    <div class="ShowPostLikeAndCommentButtonContainer">
-                                        <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
-                                            <i id="btLike_@subSubComment.Id" class="@(subSubComment.LikersIds.Contains(ViewData["CurrentUser"]) ? "fas" : "far") fa-thumbs-up ShowPostLikeAndComment" onclick="PostLike(this, @subSubComment.Id)"></i>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <div class="ShowPostLikeAndCommentButtonContainer">
+                                            <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
+                                                <i id="btLike_@subSubComment.Id" class="@(subSubComment.LikersIds.Contains(ViewData["CurrentUser"]) ? "fas" : "far") fa-thumbs-up ShowPostLikeAndComment" onclick="PostLike(this, @subSubComment.Id)"></i>
+                                            </div>
+                                            <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
+                                                <span class="CommentButton" id="btComment_@subComment.Id" onclick="AddCommentBox(this, @Model.Id)">
+                                                    <i class="far fa-comment ShowPostLikeAndComment"></i>
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div class="ShowPostLikeAndCommentButtonContainerPart LikeButtonContainer">
-                                            <span class="CommentButton" id="btComment_@subComment.Id" onclick="AddCommentBox(this, @Model.Id)">
-                                                <i class="far fa-comment ShowPostLikeAndComment"></i>
-                                            </span>
-                                        </div>
-                                    </div>
+                                    }
                                 </div>
                             }
                         </div>
