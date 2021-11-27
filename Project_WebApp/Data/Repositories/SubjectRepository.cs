@@ -15,7 +15,11 @@ namespace Project_WebApp.Data.Repositories
         }
         public Subject GetSubjectByIdIncludePosts(int subjectId)
         {
-            return _dbContext.Set<Subject>().Where(s=>s.Id == subjectId).Include(s=>s.PostSubjects).ThenInclude(ps=>ps.Post).FirstOrDefault();
+            return _dbContext.Set<Subject>().Where(s => s.Id == subjectId)
+                .Include(s => s.PostSubjects)
+                .ThenInclude(ps => ps.Post)
+                .ThenInclude(p => p.Comments)
+                .FirstOrDefault();
         }
     }
 }
