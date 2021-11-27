@@ -27,7 +27,16 @@ namespace Project_WebApp.Controllers
         /// <returns></returns>
         public IActionResult Index(int id)
         {
-            ViewData["CurrentUser"] = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (User.FindFirst(ClaimTypes.NameIdentifier) != null)
+            {
+                ViewData["CurrentUser"] = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            }
+            else
+            {
+                ViewData["CurrentUser"] = null;
+
+            }
             Post p = _uow._PostRepository.GetPostByIdForPostViewMode(id);
             if (p != null)
             {
