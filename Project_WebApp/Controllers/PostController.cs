@@ -82,11 +82,11 @@ namespace Project_WebApp.Controllers
                 return Redirect("../Auth/NoAcces");
             }
         }
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             _uow.PostRepository.DeleteWhere(p=>p.Id == id);
-            _uow.Save();
-            return Redirect("./Home");
+            await _uow.Save();
+            return Redirect("~/Home");
         }
         public async Task<IActionResult> Update(CreateEditPostViewModel model)
         {
