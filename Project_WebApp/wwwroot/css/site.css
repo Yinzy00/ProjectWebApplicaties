@@ -521,6 +521,9 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
     }
 
 /*View Post*/
+.ShowPostTextContainer {
+    overflow-wrap: break-word;
+}
 .ShowPost {
     margin-top: 25px;
     width:100%;

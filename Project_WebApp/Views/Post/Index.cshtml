@@ -19,9 +19,13 @@
                             </span>
 
                             <div class="dropdown-menu dropdown-menu-right MessageMenu" aria-labelledby="MessageMenu">
-                                <span class="dropdown-item"><i class="fas fa-edit"></i> Bewerken</span>
-                                <span class="dropdown-item"><i class="fas fa-trash-alt"></i> Verwijderen</span>
-                            </div>
+                                <a asp-controller="Post" asp-action="Update" asp-route-id="@Model.Id" class="">
+                                    <span class="dropdown-item"><i class="fas fa-edit"></i> Bewerken</span>
+                                </a>
+                                <a asp-controller="Post" asp-action="Delete" asp-route-id="@Model.Id" class="">
+                                    <span class="dropdown-item"><i class="fas fa-trash-alt"></i> Verwijderen</span>
+                                </a>
+</div>
                         </div>
                     </div>
                     <h4>

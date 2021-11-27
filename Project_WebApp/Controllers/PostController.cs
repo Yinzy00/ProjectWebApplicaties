@@ -73,7 +73,12 @@ namespace Project_WebApp.Controllers
                 return Redirect("../Auth/NoAcces");
             }
         }
-
+        public IActionResult Delete(int id)
+        {
+            _uow.PostRepository.DeleteWhere(p=>p.Id == id);
+            _uow.Save();
+            return Redirect("./Home");
+        }
         public async Task<IActionResult> Update(CreateEditPostViewModel model)
         {
             var post = await _uow.PostRepository.getById((int)model.Id);
