@@ -71,8 +71,15 @@ namespace Project_WebApp.Controllers
                             PhoneNumber = model.phoneNumber
                         };
                         IdentityResult result = await UserManager.CreateAsync(user, model.password);
-                        ViewBag.RegisterMessage = "Account is aangemaakt!";
-                        return View("LogIn");
+                        if (result.Succeeded == true)
+                        {
+                            ViewBag.RegisterMessage = "Account is aangemaakt!";
+                            return View("LogIn");
+                        }
+                        else
+                        {
+                            ViewBag.RegisterMessage = "Wachtwoord is niet sterk genoeg!";
+                        }
                     }
                     else
                     {

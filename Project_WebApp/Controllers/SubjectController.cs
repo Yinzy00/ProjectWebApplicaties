@@ -105,7 +105,7 @@ namespace Project_WebApp.Controllers
             NewSubject.Created = DateTime.Now;
             _uow.SubjectRepository.Create(NewSubject);
             await _uow.Save();
-            return Redirect("Detail/" + model.Id);
+            return Redirect("Detail/" + NewSubject.Id);
         }
 
         public IActionResult Detail(int id)

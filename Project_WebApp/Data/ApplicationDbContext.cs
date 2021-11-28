@@ -25,6 +25,7 @@ namespace Project_WebApp.Data
             base.OnModelCreating(builder);
             //PostSubject
             builder.Entity<PostSubject>().HasKey(ps => new { ps.PostId, ps.SubjectId });
+            builder.Entity<PostSubject>().HasOne(ps => ps.Post).WithMany(p => p.PostSubjects).OnDelete(DeleteBehavior.ClientCascade);
             //PostImage
             builder.Entity<MessageImage>().HasKey(mi=> new { mi.ImageId, mi.MessageId});
             //Images
@@ -34,6 +35,7 @@ namespace Project_WebApp.Data
             //Message
             builder.Entity<Message>().HasMany(m => m.MessageImages).WithOne(mi => mi.Message).OnDelete(DeleteBehavior.Cascade);//.OnDelete(DeleteBehavior.Cascade);
             builder.Entity<Message>().HasMany(m => m.Likes).WithOne(l => l.Message).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Message>().HasMany(m => m.Comments).WithOne(c=>c.Parent).OnDelete(DeleteBehavior.ClientCascade);
             //builder.Entity<Message>().HasMany(m => m.Comments).WithOne(c => c.Parent).OnDelete(DeleteBehavior.Cascade);
             //builder.Entity<Post>().HasMany(p => p.Comments).WithOne(c => c.Parent as Post).OnDelete(DeleteBehavior.Cascade);
             //Post: Message
@@ -66,14 +68,14 @@ namespace Project_WebApp.Data
         {
 
 
-            IServiceCollection serviceCollection = new ServiceCollection();
-            serviceCollection.AddLogging(builder => builder
-                .AddConsole()
-                .AddFilter(level => level >= LogLevel.Debug)
-            );
-            var loggerFactory = serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
+            //IServiceCollection serviceCollection = new ServiceCollection();
+            //serviceCollection.AddLogging(builder => builder
+            //    .AddConsole()
+            //    .AddFilter(level => level >= LogLevel.Debug)
+            //);
+            //var loggerFactory = serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
 
-            optionsBuilder.UseLoggerFactory(loggerFactory);
+            //optionsBuilder.UseLoggerFactory(loggerFactory);
         }
     }
 }

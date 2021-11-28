@@ -27,16 +27,28 @@ namespace Project_WebApp.Data.Repositories
             var post = _dbContext.Set<Post>()
                 .Include(p => p.User)
                 .Include(p => p.Likes)
+                //Layer 1
                 .Include(p => p.Comments)
-                .ThenInclude(c=>c.Likes)//Layer 1
+                .ThenInclude(c=>c.Likes)
+                .Include(p => p.Comments)
+                .ThenInclude(c => c.User)
+                //Layer 2
                 .Include(p=>p.Comments)
                 .ThenInclude(c=>c.Comments)
                 .ThenInclude(c => c.Likes)
-                //.ThenInclude(c=>c.Likes)//Layer 2
+                .Include(p => p.Comments)
+                .ThenInclude(c => c.Comments)
+                .ThenInclude(c=>c.User)
+                //Layer 3 (Last layer)
                 .Include(p => p.Comments)
                 .ThenInclude(c => c.Comments)
                 .ThenInclude(c=>c.Comments)
-                .ThenInclude(c => c.Likes)//Layer 3 (Max layer)
+                .ThenInclude(c => c.Likes)
+                .Include(p => p.Comments)
+                .ThenInclude(c => c.Comments)
+                .ThenInclude(c => c.Comments)
+                .ThenInclude(c => c.User)
+                //
                 .Include(p => p.MessageImages)
                 .Include(p => p.PostSubjects)
                 .ThenInclude(ps => ps.Subject)

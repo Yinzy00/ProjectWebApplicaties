@@ -27,7 +27,16 @@ namespace Project_WebApp.Controllers
         /// <returns></returns>
         public IActionResult Index(int id)
         {
-            ViewData["CurrentUser"] = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (User.FindFirst(ClaimTypes.NameIdentifier) != null)
+            {
+                ViewData["CurrentUser"] = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            }
+            else
+            {
+                ViewData["CurrentUser"] = null;
+
+            }
             Post p = _uow._PostRepository.GetPostByIdForPostViewMode(id);
             if (p != null)
             {
@@ -73,7 +82,14 @@ namespace Project_WebApp.Controllers
                 return Redirect("../Auth/NoAcces");
             }
         }
-
+        public async Task<IActionResult> Delete(int id)
+        {
+            //Load all posts into memory for clientCascading to work
+            var x = _uow._PostRepository.GetPostByIdForPostViewMode(id);
+            _uow.PostRepository.Delete(x);
+            await _uow.Save();
+            return Redirect("~/Home");
+        }
         public async Task<IActionResult> Update(CreateEditPostViewModel model)
         {
             var post = await _uow.PostRepository.getById((int)model.Id);
