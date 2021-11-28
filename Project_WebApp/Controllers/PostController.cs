@@ -84,7 +84,9 @@ namespace Project_WebApp.Controllers
         }
         public async Task<IActionResult> Delete(int id)
         {
-            _uow.PostRepository.DeleteWhere(p=>p.Id == id);
+            //Load all posts into memory for clientCascading to work
+            var x = _uow._PostRepository.GetPostByIdForPostViewMode(id);
+            _uow.PostRepository.Delete(x);
             await _uow.Save();
             return Redirect("~/Home");
         }

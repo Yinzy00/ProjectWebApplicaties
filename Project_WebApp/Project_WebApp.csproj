@@ -64,6 +64,12 @@
     <Compile Remove="Migrations\20211028132202_FixedUserIdsAndImages.Designer.cs" />
     <Compile Remove="Migrations\20211028132320_FixedUserIdsAndImages.cs" />
     <Compile Remove="Migrations\20211028132320_FixedUserIdsAndImages.Designer.cs" />
+    <Compile Remove="Migrations\20211128150918_CascadingDeleteMessageComments.cs" />
+    <Compile Remove="Migrations\20211128150918_CascadingDeleteMessageComments.Designer.cs" />
+    <Compile Remove="Migrations\20211128151102_CascadingDeleteMessageComments.cs" />
+    <Compile Remove="Migrations\20211128151102_CascadingDeleteMessageComments.Designer.cs" />
+    <Compile Remove="Migrations\20211128153721_commentsCascadingDelete.cs" />
+    <Compile Remove="Migrations\20211128153721_commentsCascadingDelete.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -77,7 +83,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

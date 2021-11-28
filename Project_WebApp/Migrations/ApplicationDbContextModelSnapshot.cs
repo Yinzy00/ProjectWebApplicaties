@@ -509,7 +509,8 @@ namespace Project_WebApp.Migrations
                 {
                     b.HasOne("Project_WebApp.Message", "Parent")
                         .WithMany("Comments")
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
