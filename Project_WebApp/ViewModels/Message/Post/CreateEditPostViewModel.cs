@@ -33,7 +33,15 @@ namespace Project_WebApp.ViewModels.Message.Post
         public int? Id { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
-        public string SubjectsString { get; set; }
+        public string SubjectsString
+        {
+            get
+            {
+                var returnString = "";
+                Subjects.ForEach(s => returnString += s.Id + ",");
+                return returnString;
+            }
+        }
         public List<SubjectViewModel> Subjects { get; set; } = new List<SubjectViewModel>();
         public bool Public { get; set; }
     }

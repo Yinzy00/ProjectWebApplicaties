@@ -59,7 +59,7 @@ namespace Project_WebApp.Controllers
                 ViewBag.Subjects = _uow.SubjectRepository.Get();
                 if (id != null)
                 {
-                    Post p = await _uow.PostRepository.getById((int)id);
+                    Post p = _uow.PostRepository.Get(p=>p.Id== (int)id, p=>p.PostSubjects).FirstOrDefault();
                     if (p != null)
                     {
                         var vm = new CreateEditPostViewModel(p);

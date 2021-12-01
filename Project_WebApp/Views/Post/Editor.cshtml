@@ -3,54 +3,63 @@
     ViewData["Title"] = ViewBag.FormTitle;
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
-    <form asp-controller="Post" asp-action="@(ViewBag.New ? "Create" : "Update")">
-        <div id="PostEditorForm">
-            <div id="PostEditorTitleContainer">
-                <h2>
-                    @((ViewBag.New == true) ? "Nieuw bericht aanmaken" : "Bericht bewerken")
-                </h2>
-            </div>
-            <div id="PostEditorSubjectDdlContainer">
-                <select id="PostEditorSubjectSelect" class="form-control">
-                    <option disabled selected> -- Selecteer onderwerp(en) -- </option>
-                    @foreach (var subject in ViewBag.Subjects)
-                    {
-                        <option value="@subject.Id">@subject.Name</option>
-                    }
-                </select>
-            </div>
-            <div id="PostEditorSubjects">
-                @if (Model != null)
+<form asp-controller="Post" asp-action="@(ViewBag.New ? "Create" : "Update")">
+    @if (Model.Id != null)
+    {
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+    }
+    <div id="PostEditorForm">
+        <div id="PostEditorTitleContainer">
+            <h2>
+                @((ViewBag.New == true) ? "Nieuw bericht aanmaken" : "Bericht bewerken")
+            </h2>
+        </div>
+        <div id="PostEditorSubjectDdlContainer">
+            <select id="PostEditorSubjectSelect" class="form-control">
+                <option disabled selected> -- Selecteer onderwerp(en) -- </option>
+                @foreach (Subject subject in ViewBag.Subjects)
                 {
-                    if (Model.Subjects != null)
+
+
+                    @*@if (Model.Subjects.Where(s => s.Id == subject.Id).Count() <= 0)
+                    {*@
+                        <option value="@subject.Id">@subject.Name</option>
+                        //}
+                }
+            </select>
+        </div>
+        <div id="PostEditorSubjects">
+            @*@if (Model != null)
+            {
+                if (Model.Subjects != null)
+                {
+                    foreach (var subj in Model.Subjects)
                     {
-                        foreach (var subj in Model.Subjects)
-                        {
-                            <span value="@subj.Id" class="SubjectTag brandColorBg">
-                                @subj.Name
-                            </span>
-                        }
+            <span id="Subject_@subj.Id" class="SubjectTag brandColorBg">
+                @subj.Name &nbsp;&nbsp;<span class="SubjectTagDeleteButton" onClick="RemoveSubjectFromPost(@subj.Id)">X</span>
+            </span>
                     }
                 }
+            }*@
 
-                <input type="hidden" id="PostEditorHiddenSubjectField" asp-for="SubjectsString" value="@(Model != null ? Model.SubjectsString : "")" />
-            </div>
-            <div id="PostEditorTitleTxtContainer">
-                <input id="txtPostTitle" placeholder="Titel" type="text" class="form-control" asp-for="Title" />
-            </div>
-            <div id="PostEditorTextContainer">
-                <textarea id="txtMessageField" placeholder="Bericht..." class="form-control" asp-for="Text">
+            <input type="hidden" id="PostEditorHiddenSubjectField" asp-for="SubjectsString" value="@(Model != null ? Model.SubjectsString : "")" />
+        </div>
+        <div id="PostEditorTitleTxtContainer">
+            <input id="txtPostTitle" placeholder="Titel" type="text" class="form-control" asp-for="Title" />
+        </div>
+        <div id="PostEditorTextContainer">
+            <textarea id="txtMessageField" placeholder="Bericht..." class="form-control" asp-for="Text">
 
             </textarea>
-            </div>
-            <div id="PostEditorPublicContainer">
-                <input type="checkbox" asp-for="Public" class="form-check-inline" id="cbPublic" />
-                <label for="cbPublic" class="form-check-label">
-                    Openbaar bericht
-                </label>
-            </div>
-            <div id="PostEditorSubmitContainer">
-                <input type="submit" class="btn brandBtn float-right mt-4" />
-            </div>
         </div>
-    </form>
+        <div id="PostEditorPublicContainer">
+            <input type="checkbox" asp-for="Public" class="form-check-inline" id="cbPublic" />
+            <label for="cbPublic" class="form-check-label">
+                Openbaar bericht
+            </label>
+        </div>
+        <div id="PostEditorSubmitContainer">
+            <input type="submit" class="btn brandBtn float-right mt-4" />
+        </div>
+    </div>
+</form>
