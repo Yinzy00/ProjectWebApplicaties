@@ -30,10 +30,29 @@ namespace Project_WebApp.ViewModels.Message.Post
                 this.Subjects.Add(new SubjectViewModel(s.Subject));
             }
         }
+        private string _SubjectsString = "";
         public int? Id { get; set; }
         public string Title { get; set; }
         public string Text { get; set; }
-        public string SubjectsString { get; set; }
+        public string SubjectsString
+        {
+            get
+            {
+                if (_SubjectsString.Length == 0)
+                {
+                    if (Subjects.Count > 0)
+                    {
+                        Subjects.ForEach(s => _SubjectsString += s.Id + ",");
+                    }
+                }
+                
+                return _SubjectsString;
+            }
+            set
+            {
+                _SubjectsString = value;
+            }
+        }
         public List<SubjectViewModel> Subjects { get; set; } = new List<SubjectViewModel>();
         public bool Public { get; set; }
     }

@@ -67,20 +67,41 @@ window.onresize();
 //Post editor SUBJECT DROPDOWNLIST
 let removed = [];
 let PostEditorSubjectSelect = document.querySelector("#PostEditorSubjectSelect");
+
+
 if (PostEditorSubjectSelect != null) {
     PostEditorSubjectSelect.addEventListener("change", () => {
         let selected = PostEditorSubjectSelect.options[PostEditorSubjectSelect.selectedIndex];
-        document.querySelector("#PostEditorSubjects").innerHTML += `<span id="Subject_${selected.value}" class="SubjectTag brandColorBg">
+        if (!selected.value.includes("Selecteer onderwerp(en)")) {
+            document.querySelector("#PostEditorSubjects").innerHTML += `<span id="Subject_${selected.value}" class="SubjectTag brandColorBg">
                     ${selected.text}
                 &nbsp;&nbsp;<span class="SubjectTagDeleteButton" onClick="RemoveSubjectFromPost(${selected.value})">X</span></span>`
 
-        removed.push(selected);
-        selected.style.display = "none";
-        PostEditorSubjectSelect.selectedIndex = 0;
+            removed.push(selected);
+            selected.style.display = "none";
+            PostEditorSubjectSelect.selectedIndex = 0;
+        }
         SetSubjectsValue();
-
     });
 }
+//OnLoad Editor
+var x = document.querySelector("#PostEditorHiddenSubjectField");
+if (x != null) {
+    var y = x.value.split(',')
+    y.forEach(sId => {
+        if (sId != "") {
+            var children = PostEditorSubjectSelect.childNodes;
+            var child = PostEditorSubjectSelect.querySelector(`option[value="${sId}"]`);
+            if (child != null) {
+                //var child = children.querySelector(cn => cn.value == sId)
+                removed.push(child);
+                child.style.display = "none";
+                PostEditorSubjectSelect.dispatchEvent(new Event('change'));
+            }
+        }
+    });
+}
+//
 
 function RemoveSubjectFromPost(id) {
     var element = removed.find(i => i.value == id);
@@ -149,21 +170,6 @@ function AddCommentBox(element, mainPostId) {
     </div>
 </div>
 `;
-//        element.innerHTML += `
-//<div class="row CommentSectionContainer">
-//    <div class="col">
-//        <div class="CommentSection">
-//            <div class="ShowPostNewCommentContainerPart">
-//                <form action="/Post/PostComment/${mainPostId}" method="post">
-//                    <textarea name="Text" class="form-control CommentSectionTextarea" placeholder="Comment..."></textarea>
-//                    <input type="submit" class="btn brandBtn float-right mt-3" value="Plaatsen" />
-//                    <input type="hidden" value="${postId}" name="ParentId" />
-//                </form>
-//            </div>
-//        </div>
-//    </div>
-//</div>
-//`;
         currentCommentContainer = document.querySelector(".CommentSectionContainer");
     }
     currentCommentContainer.scrollIntoView(false);
