@@ -95,7 +95,7 @@ if (x != null) {
             if (child != null) {
                 //var child = children.querySelector(cn => cn.value == sId)
                 removed.push(child);
-                PostEditorSubjectSelect.removeChild(child);
+                child.style.display = "none";
                 PostEditorSubjectSelect.dispatchEvent(new Event('change'));
             }
         }
@@ -170,21 +170,6 @@ function AddCommentBox(element, mainPostId) {
     </div>
 </div>
 `;
-        //        element.innerHTML += `
-        //<div class="row CommentSectionContainer">
-        //    <div class="col">
-        //        <div class="CommentSection">
-        //            <div class="ShowPostNewCommentContainerPart">
-        //                <form action="/Post/PostComment/${mainPostId}" method="post">
-        //                    <textarea name="Text" class="form-control CommentSectionTextarea" placeholder="Comment..."></textarea>
-        //                    <input type="submit" class="btn brandBtn float-right mt-3" value="Plaatsen" />
-        //                    <input type="hidden" value="${postId}" name="ParentId" />
-        //                </form>
-        //            </div>
-        //        </div>
-        //    </div>
-        //</div>
-        //`;
         currentCommentContainer = document.querySelector(".CommentSectionContainer");
     }
     currentCommentContainer.scrollIntoView(false);

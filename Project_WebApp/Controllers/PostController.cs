@@ -59,7 +59,7 @@ namespace Project_WebApp.Controllers
                 ViewBag.Subjects = _uow.SubjectRepository.Get();
                 if (id != null)
                 {
-                    Post p = _uow.PostRepository.Get(p=>p.Id== (int)id, p=>p.PostSubjects).FirstOrDefault();
+                    Post p = _uow.PostRepository.Get(p => p.Id == (int)id, p => p.PostSubjects).FirstOrDefault();
                     if (p != null)
                     {
                         var vm = new CreateEditPostViewModel(p);
@@ -92,8 +92,11 @@ namespace Project_WebApp.Controllers
         }
         public async Task<IActionResult> Update(CreateEditPostViewModel model)
         {
-            var post = await _uow.PostRepository.getById((int)model.Id);
+            var post = _uow.PostRepository.Get(p => p.Id == (int)model.Id, p => p.PostSubjects).First();
             post = await FillPostObjectWithModel(post, model);
+
+            _uow.PostRepository.Update(post);
+            await _uow.Save();
             return Redirect("Index/" + post.Id);
         }
         public async Task<IActionResult> Create(CreateEditPostViewModel model)
@@ -115,6 +118,7 @@ namespace Project_WebApp.Controllers
             p.Public = model.Public;
             if (!string.IsNullOrEmpty(model.SubjectsString))
             {
+                p.PostSubjects = new List<PostSubject>();
                 foreach (var s in model.SubjectsString.Split(',').ToList())
                 {
                     if (!string.IsNullOrEmpty(s))
@@ -159,7 +163,7 @@ namespace Project_WebApp.Controllers
             }
             else
             {
-                _uow.LikeRepository.DeleteWhere(l=>l.MessageId == like.MessageId && l.UserId == like.UserId);
+                _uow.LikeRepository.DeleteWhere(l => l.MessageId == like.MessageId && l.UserId == like.UserId);
             }
             await _uow.Save();
         }

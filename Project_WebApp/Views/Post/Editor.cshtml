@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
 <form asp-controller="Post" asp-action="@(ViewBag.New ? "Create" : "Update")">
-    @if (Model.Id != null)
+    @if (Model != null)
     {
         <input type="hidden" asp-for="Id" value="@Model.Id" />
     }
@@ -22,25 +22,25 @@
 
 
                     @*@if (Model.Subjects.Where(s => s.Id == subject.Id).Count() <= 0)
-                    {*@
-                        <option value="@subject.Id">@subject.Name</option>
-                        //}
+                        {*@
+                    <option value="@subject.Id">@subject.Name</option>
+                    //}
                 }
             </select>
         </div>
         <div id="PostEditorSubjects">
-            @*@if (Model != null)
+            @if (Model != null)
             {
                 if (Model.Subjects != null)
                 {
                     foreach (var subj in Model.Subjects)
                     {
-            <span id="Subject_@subj.Id" class="SubjectTag brandColorBg">
-                @subj.Name &nbsp;&nbsp;<span class="SubjectTagDeleteButton" onClick="RemoveSubjectFromPost(@subj.Id)">X</span>
-            </span>
+                        <span id="Subject_@subj.Id" class="SubjectTag brandColorBg">
+                            @subj.Name &nbsp;&nbsp;<span class="SubjectTagDeleteButton" onClick="RemoveSubjectFromPost(@subj.Id)">X</span>
+                        </span>
                     }
                 }
-            }*@
+            }
 
             <input type="hidden" id="PostEditorHiddenSubjectField" asp-for="SubjectsString" value="@(Model != null ? Model.SubjectsString : "")" />
         </div>
