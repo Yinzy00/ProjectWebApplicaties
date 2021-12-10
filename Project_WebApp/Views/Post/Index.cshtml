@@ -30,6 +30,22 @@
                                         </a>
                                     </div>
                                 }
+                            }@if (User.Identity.IsAuthenticated)
+                            {
+                                @if (Model.User.Id == ViewData["CurrentUser"].ToString())
+                                {
+                                    <span class="MessageMenuButton" role="button" id="MessageMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-chevron-circle-down"></i>
+                                    </span>
+                                    <div class="dropdown-menu dropdown-menu-right MessageMenu" aria-labelledby="MessageMenu">
+                                        <a asp-controller="Post" asp-action="Editor" asp-route-id="@Model.Id" class="">
+                                            <span class="dropdown-item"><i class="fas fa-edit"></i> Bewerken</span>
+                                        </a>
+                                        <a asp-controller="Post" asp-action="Delete" asp-route-id="@Model.Id" class="">
+                                            <span class="dropdown-item"><i class="fas fa-trash-alt"></i> Verwijderen</span>
+                                        </a>
+                                    </div>
+                                }
                             }
                         </div>
                     </div>
@@ -96,6 +112,20 @@
                     <div class="Comment" id="Post_@comment.Id">
                         <div>
                             <div class="row">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    @if (comment.User.Id == ViewData["CurrentUser"].ToString())
+                                    {
+                                        <span class="MessageMenuButton" role="button" id="MessageMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-chevron-circle-down"></i>
+                                        </span>
+                                        <div class="dropdown-menu dropdown-menu-right MessageMenu" aria-labelledby="MessageMenu">
+                                            <a onclick="DeleteComment('@comment.Id', '@Model.Id')">
+                                                <span class="dropdown-item"><i class="fas fa-trash-alt"></i> Verwijderen</span>
+                                            </a>
+                                        </div>
+                                    }
+                                }
                                 <div class="col-md-2">
                                     <img src="~/images/persoon.png" class="rounded-circle ShowPostUserImage" />
                                 </div>
@@ -134,6 +164,20 @@
                         <div class="Sub Comment" id="Post_@subComment.Id">
                             <div>
                                 <div class="row">
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        @if (subComment.User.Id == ViewData["CurrentUser"].ToString())
+                                        {
+                                            <span class="MessageMenuButton" role="button" id="MessageMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-chevron-circle-down"></i>
+                                            </span>
+                                            <div class="dropdown-menu dropdown-menu-right MessageMenu" aria-labelledby="MessageMenu">
+                                                <a onclick="DeleteComment('@subComment.Id', '@Model.Id')">
+                                                    <span class="dropdown-item"><i class="fas fa-trash-alt"></i> Verwijderen</span>
+                                                </a>
+                                            </div>
+                                        }
+                                    }
                                     <div class="col-md-2">
                                         <img src="~/images/persoon.png" class="rounded-circle ShowPostUserImage" />
                                     </div>
@@ -171,6 +215,20 @@
                                 <div class="Sub Comment" id="Post_@subSubComment.Id">
                                     <div>
                                         <div class="row">
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                @if (subSubComment.User.Id == ViewData["CurrentUser"].ToString())
+                                                {
+                                                    <span class="MessageMenuButton" role="button" id="MessageMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-chevron-circle-down"></i>
+                                                    </span>
+                                                    <div class="dropdown-menu dropdown-menu-right MessageMenu" aria-labelledby="MessageMenu">
+                                                        <a onclick="DeleteComment('@subSubComment.Id', '@Model.Id')">
+                                                            <span class="dropdown-item"><i class="fas fa-trash-alt"></i> Verwijderen</span>
+                                                        </a>
+                                                    </div>
+                                                }
+                                            }
                                             <div class="col-md-2">
                                                 <img src="~/images/persoon.png" class="rounded-circle ShowPostUserImage" />
                                             </div>

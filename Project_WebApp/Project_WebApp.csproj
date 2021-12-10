@@ -70,6 +70,10 @@
     <Compile Remove="Migrations\20211128151102_CascadingDeleteMessageComments.Designer.cs" />
     <Compile Remove="Migrations\20211128153721_commentsCascadingDelete.cs" />
     <Compile Remove="Migrations\20211128153721_commentsCascadingDelete.Designer.cs" />
+    <Compile Remove="Migrations\20211209145038_test.cs" />
+    <Compile Remove="Migrations\20211209145038_test.Designer.cs" />
+    <Compile Remove="Migrations\20211209145146_Fix2.cs" />
+    <Compile Remove="Migrations\20211209145146_Fix2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

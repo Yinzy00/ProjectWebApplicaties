@@ -156,7 +156,7 @@ function AddCommentBox(element, mainPostId) {
     }
     if (!element.innerHTML.includes("class=\"CommentSection\"")) {
         element.innerHTML += `
-<div class="row CommentSectionContainer">
+<div class="row CommentSectionContainer mb-5 pb-5">
     <div class="col">
         <div class="CommentSection">
             <div class="ShowPostNewCommentContainerPart">
@@ -187,6 +187,20 @@ function PostComment(mainPostId) {
         if (this.readyState == 4 && this.status == 200) {
             currentCommentContainer.parentNode.removeChild(currentCommentContainer);
             currentCommentContainer = null;
+            GetPosts(mainPostId);
+        }
+    };
+    xhttp.send(formData);
+}
+
+function DeleteComment(commentId, mainPostId) {
+    var xhttp = new XMLHttpRequest();
+    let formData = new FormData();
+    formData.append('id', commentId);
+    formData.append('parentId', mainPostId);
+    xhttp.open("POST", `/Post/DeleteComment`, true);
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
             GetPosts(mainPostId);
         }
     };
