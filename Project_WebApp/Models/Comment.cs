@@ -8,7 +8,7 @@ namespace Project_WebApp
     public class Comment : Message
     {
         //props
-        public int? ParentId { get; set; }
+        public int ParentId { get; set; }
         //Nav props
         public Message Parent { get; set; }
         //Constructor

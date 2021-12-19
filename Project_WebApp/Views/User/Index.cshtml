@@ -1,11 +1,76 @@
 ﻿@model Project_WebApp.ViewModels.User.UserProfileViewModel
 @{
-    ViewData["Title"] = "Profiel Page";
+    ViewData["Title"] = @Model.Username;
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
-
-profiel pagina
-<br/>
-<a asp-area="" asp-controller="User" asp-action="EditProfile">
+<div class="row mt-5">
+    <div class="col-md-5">
+        <img class="rounded-circle ProfilePicture" src="@(!string.IsNullOrEmpty(Model.ProfilePicture) ? Model.ProfilePicture : @"\images\persoon.png")" />
+    </div>
+    <div class="col-md-7">
+        <h2>
+            @Model.Username
+        </h2>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-md-6">
+        <h2>
+            Meest recente berichten<span class="brandColor">.</span>
+        </h2>
+        <div id="HomeRecentPosts">
+            @foreach (var post in Model.MostRecentPosts)
+            {
+                <div class="RecentPost">
+                    <div class="RecentPostTitle">
+                        <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id" class="NoStyleUrl">
+                            @post.Title
+                        </a>
+                    </div>
+                    <div class="RecentPostSubjects">
+                        @foreach (var subject in post.Subjects)
+                        {
+                            <span class="SubjectTag brandColorBg" id="Subject_@subject.Id">
+                                <a class="SubjectTagTooltip" asp-controller="Subject" asp-action="Detail" asp-route-id="@subject.Id">
+                                    @subject.Name
+                                    <span class="SubjectTagTooltipText">
+                                        Bevat @subject.AmountOfPosts berichten
+                                    </span>
+                                </a>
+                            </span>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h2>
+            Totaal aantal bijdragen<span class="brandColor">.</span>
+        </h2>
+        <div class="ProfielTotaleBijdragen">
+            Totaal aantal geplaatste berichten
+            <span class="brandColor ProfielTotaleBijdragenAantalTag">
+                @Model.AmountOfPosts Berichten
+            </span>
+        </div>
+        <div class="ProfielTotaleBijdragen">
+            Totaal aantal geplaatste reacties
+            <span class="brandColor ProfielTotaleBijdragenAantalTag">
+                @Model.AmountOfComments Comments
+            </span>
+        </div>
+         <div class="ProfielTotaleBijdragen">
+            Totaal aantal likes
+            <span class="brandColor ProfielTotaleBijdragenAantalTag">
+                @Model.AmountOfLikes Likes
+            </span>
+        </div>
+    </div>
+</div>
+@*
+    profiel pagina
+    <br/>
+    <a asp-area="" asp-controller="User" asp-action="EditProfile">
     Profiel wijzigen
-</a>
+    </a>*@

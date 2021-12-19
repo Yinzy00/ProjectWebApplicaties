@@ -20,6 +20,7 @@ namespace Project_WebApp.Data.UnitOfWork
         //Custom
         IPostRepository _PostRepository { get; }
         ISubjectRepository _SubjectRepository { get; }
+        ICommentRepository _CommentRepository { get; }
         Task Save();
     }
 }

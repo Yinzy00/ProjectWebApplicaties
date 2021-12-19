@@ -30,9 +30,9 @@ namespace Project_WebApp
 
         //Navigatieproperties
         //public Image ProfilePicture { get; set; }
-        public ICollection<Image> Images { get; set; }
-        public ICollection<Message> Messages { get; set; }
-        public ICollection<Like> Likes { get; set; }
+        public ICollection<Image> Images { get; set; } = new List<Image>();
+        public ICollection<Message> Messages { get; set; } = new List<Message>();
+        public ICollection<Like> Likes { get; set; } = new List<Like>();
         //Extra getters & setters
         public int AmountOfLikes
         {

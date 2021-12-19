@@ -30,6 +30,7 @@ namespace Project_WebApp.Data.UnitOfWork
 
         private IRepository<Comment> commentRepository;
 
+
         public IRepository<User> UserRepository
         {
             get
@@ -139,6 +140,7 @@ namespace Project_WebApp.Data.UnitOfWork
         //CUSTOM
         private IPostRepository _postRepository;
         private ISubjectRepository _subjectRepository;
+        private ICommentRepository _commentRepository;
         public IPostRepository _PostRepository
         {
             get
@@ -159,6 +161,18 @@ namespace Project_WebApp.Data.UnitOfWork
                     this._subjectRepository = new SubjectRepository(DbContext);
                 }
                 return this._subjectRepository;
+            }
+        }
+
+        public ICommentRepository _CommentRepository
+        {
+            get
+            {
+                if (this._commentRepository == null)
+                {
+                    this._commentRepository = new CommentRepository(DbContext);
+                }
+                return this._commentRepository;
             }
         }
     }

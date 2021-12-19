@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_WebApp.ViewModels.Message.Post;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +9,11 @@ namespace Project_WebApp.ViewModels.User
     public class UserProfileViewModel : UserViewModel
     {
         //props
-        public int AmountOfPosts { get; set; }
-        public int AmountOfComments { get; set; }
-        public int AmountOfLikes { get; set; }
+        public List<RecentPostViewModel> MostRecentPosts { get; set; } = new List<RecentPostViewModel>();
         //Constructor
-        public UserProfileViewModel(Project_WebApp.User u): base(u)
+        public UserProfileViewModel(Project_WebApp.User u) : base(u)
         {
-            this.AmountOfLikes = u.Messages.Where(m => m.GetType() == typeof(Post)).Count();
-            this.AmountOfComments = u.Messages.Where(m => m.GetType() == typeof(Comment)).Count();
-            this.AmountOfLikes = u.AmountOfLikes;
+            //u.Messages.Where(u => u.GetType() == typeof(Post)).ToList().ForEach(p => { MostRecentPosts.Add(new RecentPostViewModel((Post)p)); });
         }
     }
 }

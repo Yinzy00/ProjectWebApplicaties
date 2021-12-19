@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Project_WebApp.Data.UnitOfWork;
 using Project_WebApp.ViewModels.Forms;
+using Project_WebApp.ViewModels.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace Project_WebApp.Controllers
@@ -100,8 +103,41 @@ namespace Project_WebApp.Controllers
             //ViewBag.Message = userName + " - " + firstName + " - " + lastName + " " + password;
             return View();
         }
-        public IActionResult ForgotPassword()
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
+            if (!string.IsNullOrEmpty(model.Email))
+            {
+                var user = _uow.UserRepository.Get(u => u.Email == model.Email).FirstOrDefault();
+                if (user != null)
+                {
+                    //Send mail & open login view
+                    SmtpClient smtpClient = new SmtpClient("send.one.com", 587)
+                    {
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        EnableSsl = true,
+                        Credentials = new NetworkCredential("school@yarimarien.be", "School123_"),
+                    };
+                    MailAddress emailSender = new MailAddress("school@yarimarien.be", "Project Web Apps");
+                    MailAddress emailReceiver = new MailAddress(model.Email, user.UserName);
+                    var newPass = Guid.NewGuid().ToString().Split('-')[0];
+                    var identityUser = await UserManager.FindByIdAsync(user.Id);
+                    var token = await UserManager.GeneratePasswordResetTokenAsync(identityUser);
+                    var result = await UserManager.ResetPasswordAsync(identityUser, token, newPass);
+                    MailMessage mailMessage = new MailMessage(emailSender, emailReceiver)
+                    {
+                        Subject = "Email test",
+                        Body = $"Beste {user.UserName}, <br/><br/>Uw tijdelijk wachtwoord is {newPass}.<br/>Meld u aan en wijzig het zo snel mogelijk.<br/>Indien u dit verzoek niet zelf heeft ingevuld heeft wijzig ook zo snel mogelijk uw wachtwoord. Iemand probeerde zich aan te melden met uw account.<br/><br/>Met vriendelijke groeten<br/>Het Question.be Team",
+                        IsBodyHtml = true
+                    };
+                    smtpClient.Send(mailMessage);
+                    return Redirect("LogIn");
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Er bestaat geen account met dit email adres.";
+                }
+            }
             return View();
         }
         public IActionResult RestorePassword()

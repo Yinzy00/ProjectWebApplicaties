@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Project_WebApp.Data.Repositories
@@ -13,7 +14,7 @@ namespace Project_WebApp.Data.Repositories
         {
             _dbContext = dbContext;
         }
-        public IEnumerable<Post> GetAllPostsIncludeSubjects()
+        public IEnumerable<Post> GetAllPostsIncludeSubjects(Expression<Func<Post, bool>> conditions = null)
         {
             var list = _dbContext.Set<Post>()
                 .Include(p=>p.PostSubjects)

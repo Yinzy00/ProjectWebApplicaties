@@ -90,6 +90,15 @@ namespace Project_WebApp.Controllers
             await _uow.Save();
             return Redirect("~/Home");
         }
+        public async Task DeleteComment(int id, int parentId)
+        {
+            //Load all posts into memory for clientCascading to work
+            var x = _uow._CommentRepository.GetFullCommentById(id);
+            _uow.CommentRepository.Delete(x);
+            await _uow.Save();
+           
+            //return Redirect($"~/Post/Index/{parentId}");
+        }
         public async Task<IActionResult> Update(CreateEditPostViewModel model)
         {
             var post = _uow.PostRepository.Get(p => p.Id == (int)model.Id, p => p.PostSubjects).First();

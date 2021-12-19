@@ -449,6 +449,7 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
 }
 /*RecentPost*/
 .RecentPost {
+    height:100px;
     width: 100%;
     background-color: #F9F9F9;
     border: 1px solid #AFAFAF;
@@ -524,9 +525,10 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
 .ShowPostTextContainer {
     overflow-wrap: break-word;
 }
+
 .ShowPost {
     margin-top: 25px;
-    width:100%;
+    width: 100%;
 }
 
 .ShowPostTitle {
@@ -541,14 +543,16 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
     margin-top: 25px;
 }
 
-.MessageMenuButton{
-    position:absolute;
-    right:0px;
-    font-size:25px;
-    cursor:pointer;
+.MessageMenuButton {
+    position: absolute;
+    right: 0px;
+    font-size: 25px;
+    cursor: pointer;
+    z-index: 1000;
 }
+
 .MessageMenu .dropdown-item {
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .ShowPostLikeAndComment {
@@ -568,6 +572,10 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
 
 .ShowPostHr {
     margin: 25px 0px;
+}
+
+.CommentSectionContainer {
+    height: 450px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -590,7 +598,7 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
 
 .CommentTextContainer {
     margin-top: 15px;
-    word-wrap:break-word;
+    word-wrap: break-word;
 }
 
 .Sub.Comment {
@@ -656,4 +664,29 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
     width: 200px;
     position: relative;
     float: right;
+}
+
+
+/*Profile*/
+
+.ProfilePicture {
+    height: 250px;
+}
+
+
+.ProfielTotaleBijdragen {
+    width: 100%;
+    background-color: #F9F9F9;
+    border: 1px solid #AFAFAF;
+    padding: 5px;
+    margin-top: 15px;
+    height: 100px;
+    position:relative;
+}
+
+.ProfielTotaleBijdragenAantalTag{
+    position:absolute;
+    right:10px;
+    bottom:10px;
+    font-weight:bold;
 }

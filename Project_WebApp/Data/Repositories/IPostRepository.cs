@@ -14,7 +14,7 @@ namespace Project_WebApp.Data.Repositories
         /// <param name="include"></param>
         /// <param name="thenInclude"></param>
         /// <returns></returns>
-        public IEnumerable<Post> GetAllPostsIncludeSubjects();
+        public IEnumerable<Post> GetAllPostsIncludeSubjects(Expression<Func<Post, bool>> conditions = null);
         /// <summary>
         /// /// Get post by id from db include postSubjects thenInclude Subjects
         /// </summary>
