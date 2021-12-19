@@ -1,4 +1,4 @@
-﻿namespace Project_WebApp.ViewModels.User
+﻿namespace Project_WebApp.ViewModels.Auth
 {
     public class ForgotPasswordViewModel
     {

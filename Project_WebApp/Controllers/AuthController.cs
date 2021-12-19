@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Project_WebApp.Data.UnitOfWork;
+using Project_WebApp.Handlers;
+using Project_WebApp.ViewModels.Auth;
 using Project_WebApp.ViewModels.Forms;
 using Project_WebApp.ViewModels.User;
 using System;
@@ -29,7 +31,7 @@ namespace Project_WebApp.Controllers
             return View();
         }
 
-        
+
 
         [HttpPost]
         //public async Task<IActionResult> LogIn(string userName, string password)
@@ -100,46 +102,25 @@ namespace Project_WebApp.Controllers
             {
                 ViewBag.RegisterMessage = ex.Message;
             }
-            //ViewBag.Message = userName + " - " + firstName + " - " + lastName + " " + password;
             return View();
         }
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        public IActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
             if (!string.IsNullOrEmpty(model.Email))
             {
                 var user = _uow.UserRepository.Get(u => u.Email == model.Email).FirstOrDefault();
                 if (user != null)
                 {
-                    //Send mail & open login view
-                    SmtpClient smtpClient = new SmtpClient("send.one.com", 587)
-                    {
-                        DeliveryMethod = SmtpDeliveryMethod.Network,
-                        UseDefaultCredentials = false,
-                        EnableSsl = true,
-                        Credentials = new NetworkCredential("school@yarimarien.be", "School123_"),
-                    };
-                    MailAddress emailSender = new MailAddress("school@yarimarien.be", "Project Web Apps");
-                    MailAddress emailReceiver = new MailAddress(model.Email, user.UserName);
-                    var newPass = Guid.NewGuid().ToString().Split('-')[0];
-                    user.RestorePasswordKey = Guid.NewGuid().ToString();
-                    _uow.UserRepository.Update(user);
-                    await _uow.Save();
-                    //var identityUser = await UserManager.FindByIdAsync(user.Id);
-                    //var token = await UserManager.GeneratePasswordResetTokenAsync(identityUser);
-                    //var result = await UserManager.ResetPasswordAsync(identityUser, token, newPass);
-                    string url = $"https://{Request.Host.Value}/Auth/RestorePassword?userId={user.Id}&key={user.RestorePasswordKey}";
+                    string url = $"https://{Request.Host.Value}/Auth/RestorePassword?UserId={user.Id}&RestoreKey={user.RestorePasswordKey}";
                     string urlTag = $"<a href=\"{url}\">Klik hier</a>";
-                   MailMessage mailMessage = new MailMessage(emailSender, emailReceiver)
-                    {
-                        Subject = "Email test",
-                        Body = $"Beste {user.UserName}, <br/><br/>" +
-                        $"U kan uw password wijzigen via onderstaande link:<br/>" +
-                        $"{urlTag}<br/><br/>" +
-                        $"Met vriendelijke groeten<br/>" +
-                        $"Het Question.be Team",
-                        IsBodyHtml = true
-                    };
-                    smtpClient.Send(mailMessage);
+
+                    string msg = $"Beste {user.UserName}, <br/><br/>" +
+                 $"U kan uw password wijzigen via onderstaande link:<br/>" +
+                 $"{urlTag}<br/><br/>" +
+                 $"Met vriendelijke groeten<br/>" +
+                 $"Het Question.be Team";
+                    EmailHandler emh = new EmailHandler();
+                    emh.SendMail(user.Email, user.UserName, "Wachtwoord vergeten", msg);
                     return Redirect("LogIn");
                 }
                 else
@@ -149,9 +130,46 @@ namespace Project_WebApp.Controllers
             }
             return View();
         }
-        public IActionResult RestorePassword(string userId, string key)
+        public IActionResult RestorePassword(RestorePasswordViewModel model)
         {
-            return View();
+            return View(model);
+        }
+        public async Task<IActionResult> RestorePasswordSend(RestorePasswordViewModel model)
+        {
+            if (!string.IsNullOrEmpty(model.UserId) && !string.IsNullOrEmpty(model.RestoreKey))
+            {
+                if (!string.IsNullOrEmpty(model.NewPass) && !string.IsNullOrEmpty(model.NewPassRepeat) && model.NewPass == model.NewPassRepeat)
+                {
+                    var user = _uow.UserRepository.Get(u => u.Id == model.UserId).First();
+                    var token = await UserManager.GeneratePasswordResetTokenAsync(user);
+                    var result = await UserManager.ResetPasswordAsync(user, token, model.NewPass);
+                    if (result.Succeeded)
+                    {
+                        EmailHandler emh = new EmailHandler();
+                        emh.SendMail(
+                            user.Email,
+                            user.UserName,
+                            "Wachtwoord gewijzigd", $"Beste {user.UserName}, <br/><br/>" +
+                            $"Uw wachtwoord is gewijzigd!<br/><br/>" +
+                            $"Met vriendelijke groeten<br/>" +
+                            $"Het Question.be Team"
+                            );
+                        user.RestorePasswordKey = null;
+                        _uow.UserRepository.Update(user);
+                        return Redirect("Login");
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Wachtwoord voldoet niet aan de voorwaarden.";
+                    }
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Beide wachtwoord velden zijn verplicht en moeten het zelfde zijn!";
+                }
+            }
+            return View("RestorePassword", model);
+
         }
         public async Task<IActionResult> LogOut()
         {
