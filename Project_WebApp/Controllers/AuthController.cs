@@ -121,13 +121,22 @@ namespace Project_WebApp.Controllers
                     MailAddress emailSender = new MailAddress("school@yarimarien.be", "Project Web Apps");
                     MailAddress emailReceiver = new MailAddress(model.Email, user.UserName);
                     var newPass = Guid.NewGuid().ToString().Split('-')[0];
-                    var identityUser = await UserManager.FindByIdAsync(user.Id);
-                    var token = await UserManager.GeneratePasswordResetTokenAsync(identityUser);
-                    var result = await UserManager.ResetPasswordAsync(identityUser, token, newPass);
-                    MailMessage mailMessage = new MailMessage(emailSender, emailReceiver)
+                    user.RestorePasswordKey = Guid.NewGuid().ToString();
+                    _uow.UserRepository.Update(user);
+                    await _uow.Save();
+                    //var identityUser = await UserManager.FindByIdAsync(user.Id);
+                    //var token = await UserManager.GeneratePasswordResetTokenAsync(identityUser);
+                    //var result = await UserManager.ResetPasswordAsync(identityUser, token, newPass);
+                    string url = $"https://{Request.Host.Value}/Auth/RestorePassword?userId={user.Id}&key={user.RestorePasswordKey}";
+                    string urlTag = $"<a href=\"{url}\">Klik hier</a>";
+                   MailMessage mailMessage = new MailMessage(emailSender, emailReceiver)
                     {
                         Subject = "Email test",
-                        Body = $"Beste {user.UserName}, <br/><br/>Uw tijdelijk wachtwoord is {newPass}.<br/>Meld u aan en wijzig het zo snel mogelijk.<br/>Indien u dit verzoek niet zelf heeft ingevuld heeft wijzig ook zo snel mogelijk uw wachtwoord. Iemand probeerde zich aan te melden met uw account.<br/><br/>Met vriendelijke groeten<br/>Het Question.be Team",
+                        Body = $"Beste {user.UserName}, <br/><br/>" +
+                        $"U kan uw password wijzigen via onderstaande link:<br/>" +
+                        $"{urlTag}<br/><br/>" +
+                        $"Met vriendelijke groeten<br/>" +
+                        $"Het Question.be Team",
                         IsBodyHtml = true
                     };
                     smtpClient.Send(mailMessage);
@@ -140,7 +149,7 @@ namespace Project_WebApp.Controllers
             }
             return View();
         }
-        public IActionResult RestorePassword()
+        public IActionResult RestorePassword(string userId, string key)
         {
             return View();
         }

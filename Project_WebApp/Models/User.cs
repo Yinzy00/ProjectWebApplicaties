@@ -27,6 +27,7 @@ namespace Project_WebApp
         public DateTime DateOfBirth { get; set; }
         [Required]
         public DateTime Created { get; set; }
+        public string RestorePasswordKey { get; set; }
 
         //Navigatieproperties
         //public Image ProfilePicture { get; set; }
