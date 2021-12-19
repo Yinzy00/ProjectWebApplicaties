@@ -66,7 +66,7 @@
                         @foreach (var subject in Model.Subjects)
                         {
                             <span class="SubjectTag brandColorBg" id="Subject_@subject.Id">
-                                <a class="SubjectTagTooltip" asp-controller="Subject" asp-action="Detail">
+                                <a class="SubjectTagTooltip" asp-controller="Subject" asp-action="Detail" asp-route-id="@subject.Id">
                                     @subject.Name
                                     <span class="SubjectTagTooltipText">
                                         Bevat @subject.AmountOfPosts berichten
