@@ -6,7 +6,7 @@
 <div class="row mt-5">
     <div class="col-md-5">
         <img class="rounded-circle ProfilePicture"
-             src="@(!string.IsNullOrEmpty(Model.ProfilePicture) ? Model.ProfilePicture : @"\images\persoon.png")" />
+             src="@(!string.IsNullOrEmpty(Model.ProfilePicture) ? $"/UPLOADS/{Model.Id}/{Model.ProfilePicture}" : @"\images\persoon.png")" />
     </div>
     <div class="col-md-7">
         <h2>
@@ -19,11 +19,11 @@
                 <i class="fas fa-chevron-circle-down"></i>
             </span>
             <div class="dropdown-menu dropdown-menu-right ProfileMenu" aria-labelledby="ProfileMenu">
-                <a asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id" class="">
-                    <span class="dropdown-item"><i class="fas fa-edit"></i> Bewerken</span>
+                <a asp-controller="User" asp-action="EditProfile" asp-route-id="@Model.Id" class="">
+                    <span class="dropdown-item"><i class="fas fa-edit"></i> Profiel bewerken</span>
                 </a>
                 <a asp-controller="User" asp-action="Delete" asp-route-id="@Model.Id" class="">
-                    <span class="dropdown-item"><i class="fas fa-trash-alt"></i> Verwijderen</span>
+                    <span style="color:red;" class="dropdown-item"><i class="fas fa-trash-alt"></i> Profiel verwijderen</span>
                 </a>
             </div>
         }

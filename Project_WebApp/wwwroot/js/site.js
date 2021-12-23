@@ -252,3 +252,23 @@ function GetSubjects() {
 
     xhttp.send();
 }
+
+//Edit Profile
+function ProfilePictureEditProfileTextBtn_Click() {
+    var fi = document.querySelector("#fiProfilePicture");
+    fi.click();
+}
+
+async function fiProfilePicture_Changed() {
+    var fi = document.querySelector("#fiProfilePicture");
+    const file = fi.files[0];
+
+    document.querySelector("#imgProfilePicture").src = await toBase64(file);
+}
+//new Promise((resolve, reject) => {
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});

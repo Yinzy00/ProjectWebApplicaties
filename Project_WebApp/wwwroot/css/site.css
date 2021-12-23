@@ -671,6 +671,8 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
 
 .ProfilePicture {
     height: 250px;
+    width: 250px;
+    object-fit: cover;
 }
 
 
@@ -703,3 +705,26 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
     .ProfileMenuButton .dropdown-item {
         cursor: pointer;
     }
+
+
+/*Edit profile*/
+img.ProfilePictureEditProfile {
+    opacity: 0.1;
+    object-fit: cover;
+    height: 250px;
+    width: 250px;
+}
+div.ProfilePictureEditProfile {
+    position: absolute;
+    text-decoration: underline;
+    top: 0px;
+    height: 250px;
+    width: 250px;
+}
+.ProfilePictureEditProfileText {
+    position:absolute;
+    width: 70%;
+    transform: translateX(25%);
+    top:40%;
+    cursor:pointer;
+}
