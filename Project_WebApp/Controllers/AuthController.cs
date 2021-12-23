@@ -26,13 +26,10 @@ namespace Project_WebApp.Controllers
             UserManager = userManager;
             SignInManager = signInManager;
         }
-        public IActionResult LogIn()
+        public IActionResult LogIn(string ReturnUrl)
         {
-            return View();
+            return View(new LoginFormModel() { ReturnUrl = ReturnUrl});
         }
-
-
-
         [HttpPost]
         //public async Task<IActionResult> LogIn(string userName, string password)
         public async Task<IActionResult> LogIn(LoginFormModel model)
@@ -40,13 +37,17 @@ namespace Project_WebApp.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.userName, model.password, false, false);
             if (result.Succeeded)
             {
+                if (!string.IsNullOrEmpty(model.ReturnUrl))
+                    return Redirect(model.ReturnUrl);
+                else
                 return RedirectToAction("Index", "Home");
+
             }
             else
             {
                 ViewBag.LoginMessage = "Foute gebruikersnaam of wachtwoord";
             }
-            return View();
+                return View();
         }
         public IActionResult Register()
         {

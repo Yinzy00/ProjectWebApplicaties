@@ -9,5 +9,6 @@ namespace Project_WebApp.ViewModels.Forms
     {
         public string userName { get; set; }
         public string password { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

@@ -35,6 +35,11 @@ namespace Project_WebApp
 
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Auth/Login";
+            });
             services.AddControllersWithViews();
             services.AddRazorPages();
 
