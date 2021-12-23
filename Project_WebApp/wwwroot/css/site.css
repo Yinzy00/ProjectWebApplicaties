@@ -684,9 +684,22 @@ a.NoStyleUrl, a.NoStyleUrl:hover, a.NoStyleUrl:focus, a.NoStyleUrl:active {
     position:relative;
 }
 
-.ProfielTotaleBijdragenAantalTag{
-    position:absolute;
-    right:10px;
-    bottom:10px;
-    font-weight:bold;
+.ProfielTotaleBijdragenAantalTag {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-weight: bold;
 }
+
+.ProfileMenuButton {
+    position: absolute;
+    right: 0px;
+    font-size: 25px;
+    cursor: pointer;
+    z-index: 1000;
+    top: 0px;
+}
+
+    .ProfileMenuButton .dropdown-item {
+        cursor: pointer;
+    }

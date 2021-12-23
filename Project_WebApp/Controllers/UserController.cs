@@ -8,6 +8,7 @@ using Project_WebApp.ViewModels.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Project_WebApp.Controllers
@@ -55,6 +56,7 @@ namespace Project_WebApp.Controllers
                 vm.MostRecentPosts.Add(new RecentPostViewModel(p));
             }
             );
+            ViewData["CurrentUser"] = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return View(vm);
             //if (id != null)
             //{
@@ -74,23 +76,23 @@ namespace Project_WebApp.Controllers
             return View(new UserEditProfileViewModel(await _usermanager.GetUserAsync(User)));
         }
 
-        public class EditProfileFormModel
-        {
-            public string userName { get; set; }
-            public string lastName { get; set; }
-            public string firstName { get; set; }
-            public string email { get; set; }
-            public DateTime dateOfBirth { get; set; }
-        }
+        //public class EditProfileFormModel
+        //{
+        //    public string userName { get; set; }
+        //    public string lastName { get; set; }
+        //    public string firstName { get; set; }
+        //    public string email { get; set; }
+        //    public DateTime dateOfBirth { get; set; }
+        //}
         [HttpPost]
-        public async Task<IActionResult> EditProfile(EditProfileFormModel model)
+        public async Task<IActionResult> SaveProfile(UserEditProfileViewModel model)
         {
             var currentUser = await _usermanager.GetUserAsync(User);
-            currentUser.UserName = model.userName;
-            currentUser.LastName = model.lastName;
-            currentUser.FirstName = model.firstName;
-            currentUser.Email = model.email;
-            currentUser.DateOfBirth = model.dateOfBirth;
+            currentUser.UserName = model.Username;
+            currentUser.LastName = model.LastName;
+            currentUser.FirstName = model.FirstName;
+            currentUser.Email = model.Email;
+            currentUser.DateOfBirth = model.DateOfBirth;
             _uow.UserRepository.Update(currentUser);
             return View("Index");
         }

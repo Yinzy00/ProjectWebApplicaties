@@ -5,12 +5,28 @@
 }
 <div class="row mt-5">
     <div class="col-md-5">
-        <img class="rounded-circle ProfilePicture" src="@(!string.IsNullOrEmpty(Model.ProfilePicture) ? Model.ProfilePicture : @"\images\persoon.png")" />
+        <img class="rounded-circle ProfilePicture"
+             src="@(!string.IsNullOrEmpty(Model.ProfilePicture) ? Model.ProfilePicture : @"\images\persoon.png")" />
     </div>
     <div class="col-md-7">
         <h2>
             @Model.Username
         </h2>
+
+        @if (Model.Id == ViewData["CurrentUser"].ToString())
+        {
+            <span class="ProfileMenuButton" role="button" id="ProfileMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-chevron-circle-down"></i>
+            </span>
+            <div class="dropdown-menu dropdown-menu-right ProfileMenu" aria-labelledby="ProfileMenu">
+                <a asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id" class="">
+                    <span class="dropdown-item"><i class="fas fa-edit"></i> Bewerken</span>
+                </a>
+                <a asp-controller="User" asp-action="Delete" asp-route-id="@Model.Id" class="">
+                    <span class="dropdown-item"><i class="fas fa-trash-alt"></i> Verwijderen</span>
+                </a>
+            </div>
+        }
     </div>
 </div>
 <div class="row mt-5">
