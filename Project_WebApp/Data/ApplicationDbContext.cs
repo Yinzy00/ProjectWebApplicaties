@@ -45,14 +45,9 @@ namespace Project_WebApp.Data
             builder.Entity<Subject>().HasMany(s => s.PostSubjects).WithOne(ps => ps.Subject).OnDelete(DeleteBehavior.Cascade);
             //User
             builder.Entity<User>().ToTable("User");
-            //Set profile picture to null
-            //builder.Entity<User>().HasOne(u => u.ProfilePicture).WithOne(pp=>pp.IsProfilePictureOf).OnDelete(DeleteBehavior.SetNull);
-            //Remove all pictures on delete user
-            builder.Entity<User>().HasMany(u => u.Images).WithOne(i => i.User).OnDelete(DeleteBehavior.Cascade);
-            //Remove all likes on delete user
-            builder.Entity<User>().HasMany(u => u.Likes).WithOne(l => l.User);//.OnDelete(DeleteBehavior.Cascade);
-            //Delete all messages of that user
-            builder.Entity<User>().HasMany(u => u.Messages).WithOne(m => m.User);
+            builder.Entity<User>().HasMany(u => u.Messages).WithOne(m => m.User).OnDelete(DeleteBehavior.ClientCascade);
+            builder.Entity<User>().HasMany(u => u.Images).WithOne(i => i.User).OnDelete(DeleteBehavior.ClientCascade);
+            builder.Entity<User>().HasMany(u => u.Likes).WithOne(l => l.User).OnDelete(DeleteBehavior.ClientCascade);
 
 
             builder.Entity<Like>().ToTable("Like");

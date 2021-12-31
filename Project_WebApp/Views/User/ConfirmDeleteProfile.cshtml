@@ -1,0 +1,22 @@
+﻿@model Project_WebApp.ViewModels.User.UserDeleteProfileViewModel
+@{
+    ViewData["Title"] = "Profiel verwijderen";
+    Layout = "~/Views/Shared/ProjectLayout.cshtml";
+}
+<form asp-controller="Auth" asp-action="RestorePasswordSend" asp-route-UserId="@Model.UserId">
+    <div class="row">
+        <div class="col">
+            <input type="password" class="form-control" asp-for="Password" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input type="checkbox" asp-for="Confirmed" class="form-check" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <input type="submit" class="btn brandBtn" />
+        </div>
+    </div>
+</form>

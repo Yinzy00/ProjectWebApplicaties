@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Project_WebApp.Data;
 using Project_WebApp.Data.UnitOfWork;
+using Project_WebApp.Handlers;
 using Project_WebApp.ViewModels.Message.Post;
 using Project_WebApp.ViewModels.User;
 using System;
@@ -20,12 +21,14 @@ namespace Project_WebApp.Controllers
         IUnitOfWork _uow;
         UserManager<User> _usermanager;
         private readonly IHostingEnvironment _appEnvironment;
+        private PasswordHasher<User> _hasher;
         //User LoggedInUser;
-        public UserController(IUnitOfWork uow, UserManager<User> um, IHostingEnvironment appEnvironment)
+        public UserController(IUnitOfWork uow, UserManager<User> um, IHostingEnvironment appEnvironment, PasswordHasher<User> hasher)
         {
             _usermanager = um;
             _uow = uow;
             _appEnvironment = appEnvironment;
+            _hasher = hasher;
         }
         [Authorize]
         public async Task<IActionResult> Index(string id)
@@ -51,7 +54,7 @@ namespace Project_WebApp.Controllers
         {
             return View(new UserEditProfileViewModel(await _usermanager.GetUserAsync(User)));
         }
-
+        [Authorize]
         public async Task<IActionResult> SaveProfile(UserEditProfileViewModel model)
         {
             var currentUser = _uow.UserRepository.Get(u => u.Id == User.FindFirst(ClaimTypes.NameIdentifier).Value, u => u.Images).First();
@@ -93,6 +96,82 @@ namespace Project_WebApp.Controllers
             _uow.UserRepository.Update(currentUser);
             await _uow.Save();
             return Redirect("Index");
+        }
+        [Authorize]
+        public async Task<IActionResult> DeleteProfile()
+        {
+            var currentUser = _uow.UserRepository.Get(u => u.Id == User.FindFirst(ClaimTypes.NameIdentifier).Value, u => u.Images).First();
+
+            string url = $"https://{Request.Host.Value}/User/ConfirmDeleteProfile?UserId={currentUser.Id}";
+            string urlTag = $"<a href=\"{url}\">Klik hier</a>";
+
+            EmailHandler emh = new EmailHandler();
+            emh.SendMail(currentUser.Email, currentUser.UserName, "Delete account", $"Beste {currentUser.UserName},<br/><br/>" +
+                $"Indien u uw account wil verwijderen ga dan verder via onderstaande link:<br/>" +
+                $"{urlTag}<br/> <br/>" +
+                $"Indien u dit niet was raden wij u aan zo snel mogelijk uw wachtwoord te wijzigen.<br/><br/>" +
+                $"Met vriendelijke groeten<br/>" +
+                $"Het Question.be team  "
+                );
+
+            ViewData["Message"] = "Er is een mail verstuurd naar uw email adres.";
+            ViewData["CurrentUser"] = currentUser.Id;
+            return View("Index", new UserProfileViewModel(currentUser));
+        }
+
+        [Authorize]
+        public async Task<IActionResult> ConfirmDeleteProfile(string userId)
+        {
+            var currentUser = _uow.UserRepository.Get(u => u.Id == User.FindFirst(ClaimTypes.NameIdentifier).Value, u => u.Images).First();
+            if (userId == currentUser.Id)
+            {
+                return View();
+            }
+            return Redirect("/Home/Index");
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ConfirmDeleteProfile(UserDeleteProfileViewModel vm)
+        {
+            var currentUser = _uow.UserRepository.Get(u => u.Id == User.FindFirst(ClaimTypes.NameIdentifier).Value, u => u.Images, u=>u.Messages, u=>u.Likes, u=>u.Images).First();
+            if (vm.UserId == currentUser.Id)
+            {
+                if (vm.Confirmed)
+                {
+                    if (!string.IsNullOrEmpty(vm.Password))
+                    {
+                        if (_hasher.VerifyHashedPassword(currentUser, currentUser.PasswordHash, vm.Password) != PasswordVerificationResult.Failed)
+                        {
+                            var folderPath = Path.Combine(_appEnvironment.WebRootPath, "UPLOADS", currentUser.Id);
+                            currentUser.Images.ToList().ForEach(i =>
+                            {
+                             System.IO.File.Delete(Path.Combine(folderPath, i.Path));
+                            });
+                            _uow.UserRepository.Delete(currentUser);
+                            return Redirect("Home/Index");
+                        }
+                        else
+                        {
+                            ViewBag.Message = "Incorrect wachtwoord.";
+                            return View();
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Wachtwoord is een verplicht veld.";
+                        return View();
+                    }
+                }
+                else
+                {
+                    ViewBag.Message = "U moet de bevestiging aanduiden.";
+                    return View();
+                }
+            }
+            else
+            {
+                return Redirect("/Home/Index");
+            }
         }
     }
 }

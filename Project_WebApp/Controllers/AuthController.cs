@@ -28,7 +28,7 @@ namespace Project_WebApp.Controllers
         }
         public IActionResult LogIn(string ReturnUrl)
         {
-            return View(new LoginFormModel() { ReturnUrl = ReturnUrl});
+            return View(new LoginFormModel() { ReturnUrl = ReturnUrl });
         }
         [HttpPost]
         //public async Task<IActionResult> LogIn(string userName, string password)
@@ -80,7 +80,7 @@ namespace Project_WebApp.Controllers
                         if (result.Succeeded == true)
                         {
                             ViewBag.RegisterMessage = "Account is aangemaakt!";
-                            return View("LogIn");
+                            return Redirect("LogIn");
                         }
                         else
                         {
