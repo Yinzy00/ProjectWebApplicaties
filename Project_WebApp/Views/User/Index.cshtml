@@ -3,6 +3,11 @@
     ViewData["Title"] = @Model.Username;
     Layout = "~/Views/Shared/ProjectLayout.cshtml";
 }
+<div class="row">
+    <div classs="col">
+            @ViewData["Message"]
+    </div>
+</div>
 <div class="row mt-5">
     <div class="col-md-5">
         <img class="rounded-circle ProfilePicture"
@@ -22,7 +27,7 @@
                 <a asp-controller="User" asp-action="EditProfile" asp-route-id="@Model.Id" class="">
                     <span class="dropdown-item"><i class="fas fa-edit"></i> Profiel bewerken</span>
                 </a>
-                <a asp-controller="User" asp-action="Delete" asp-route-id="@Model.Id" class="">
+                <a asp-controller="User" asp-action="DeleteProfile" asp-route-id="@Model.Id" class="">
                     <span style="color:red;" class="dropdown-item"><i class="fas fa-trash-alt"></i> Profiel verwijderen</span>
                 </a>
             </div>

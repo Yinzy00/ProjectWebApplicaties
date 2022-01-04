@@ -48,7 +48,7 @@
             </div>
         </div>
         <div id="LoginButtonContainer">
-            <input type="submit" asp-route-ReturnUrl="@Model.ReturnUrl" class="btn brandBtn w-100" id="btnLogin" value="Aanmelden" />
+            <input type="submit" asp-route-ReturnUrl=@(Model!=null?@Model.ReturnUrl:"") class="btn brandBtn w-100" id="btnLogin" value="Aanmelden" />
         </div>
     </div>
     <div class="AuthDriehoekContainer">

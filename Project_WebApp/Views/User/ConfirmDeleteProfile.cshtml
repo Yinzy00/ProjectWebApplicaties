@@ -1,0 +1,36 @@
+﻿@model Project_WebApp.ViewModels.User.UserDeleteProfileViewModel
+@{
+    ViewData["Title"] = "Profiel verwijderen";
+    Layout = "~/Views/Shared/ProjectLayout.cshtml";
+}
+<form asp-controller="User" asp-action="ConfirmDeleteProfile" asp-route-UserId="@Model.UserId">
+    <div class="DeleteProfileForm">
+        <div>
+            @ViewBag.Message
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col">
+                <h2>
+                    Wachtwoord verwijderen
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="password" placeholder="Wachtwoord" class="form-control" asp-for="Password" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input id="cbConfirm" type="checkbox" asp-for="Confirmed" class="" />
+                <label for="cbConfirm">Hierbij bevestig ik dat ik mijn account wil verwijderen.</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="submit" class="btn brandBtn float-right" />
+            </div>
+        </div>
+    </div>
+</form>
