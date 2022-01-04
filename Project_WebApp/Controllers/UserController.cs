@@ -23,12 +23,12 @@ namespace Project_WebApp.Controllers
         private readonly IHostingEnvironment _appEnvironment;
         private PasswordHasher<User> _hasher;
         //User LoggedInUser;
-        public UserController(IUnitOfWork uow, UserManager<User> um, IHostingEnvironment appEnvironment, PasswordHasher<User> hasher)
+        public UserController(IUnitOfWork uow, UserManager<User> um, IHostingEnvironment appEnvironment)
         {
             _usermanager = um;
             _uow = uow;
             _appEnvironment = appEnvironment;
-            _hasher = hasher;
+            _hasher = new PasswordHasher<User>();
         }
         [Authorize]
         public async Task<IActionResult> Index(string id)
@@ -125,7 +125,7 @@ namespace Project_WebApp.Controllers
             var currentUser = _uow.UserRepository.Get(u => u.Id == User.FindFirst(ClaimTypes.NameIdentifier).Value, u => u.Images).First();
             if (userId == currentUser.Id)
             {
-                return View();
+                return View(new UserDeleteProfileViewModel() { UserId = userId});
             }
             return Redirect("/Home/Index");
         }
@@ -143,29 +143,27 @@ namespace Project_WebApp.Controllers
                         if (_hasher.VerifyHashedPassword(currentUser, currentUser.PasswordHash, vm.Password) != PasswordVerificationResult.Failed)
                         {
                             var folderPath = Path.Combine(_appEnvironment.WebRootPath, "UPLOADS", currentUser.Id);
-                            currentUser.Images.ToList().ForEach(i =>
-                            {
-                             System.IO.File.Delete(Path.Combine(folderPath, i.Path));
-                            });
+                            Directory.Delete(folderPath, true);
                             _uow.UserRepository.Delete(currentUser);
-                            return Redirect("Home/Index");
+                            await _uow.Save();
+                            return Redirect("/Auth/LogOut");
                         }
                         else
                         {
                             ViewBag.Message = "Incorrect wachtwoord.";
-                            return View();
+                            return View(vm);
                         }
                     }
                     else
                     {
                         ViewBag.Message = "Wachtwoord is een verplicht veld.";
-                        return View();
+                        return View(vm);
                     }
                 }
                 else
                 {
                     ViewBag.Message = "U moet de bevestiging aanduiden.";
-                    return View();
+                    return View(vm);
                 }
             }
             else
