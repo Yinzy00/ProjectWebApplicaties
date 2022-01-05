@@ -20,7 +20,7 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
                     <img src="~/images/logo.png" id="HeaderLogo" alt="Logo" />
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -39,16 +39,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark @(ViewData["Active"] == "Onderwerpen" ? "active" : "")" asp-area="" asp-controller="Subject" asp-action="Index">Onderwerpen</a>
                         </li>
+                        @if(User.IsInRole("Admin")){
+                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Admin">ADMIN</a>
+                        </li>   
+                        }
                     </ul>
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         @{
                             if (!this.User.Identity.IsAuthenticated)
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Register">Registreren</a>
+                                    <a class="nav-link text-dark" asp-controller="Auth" asp-action="Register">Registreren</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Aanmelden</a>
+                                    <a class="nav-link text-dark" asp-controller="Auth" asp-action="Login">Aanmelden</a>
                                 </li>
                             }
                         }
@@ -61,10 +66,10 @@
                                     </a>
                                     <ul class="dropdown-menu" id="navbarDropdownMenu" aria-labelledby="navbarDropdown">
                                         <li>
-                                            <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Profiel</a>
+                                            <a class="dropdown-item" asp-controller="User" asp-action="Index">Profiel</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" asp-area="" asp-controller="Auth" asp-action="LogOut">Afmelden</a>
+                                            <a class="dropdown-item" asp-controller="Auth" asp-action="LogOut">Afmelden</a>
                                         </li>
                                     </ul>
                                 </li>

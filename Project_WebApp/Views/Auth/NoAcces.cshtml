@@ -5,13 +5,13 @@
 <div id="NoAccesContainer" class="Center50">
     <div id="NoAccesTitleContainer">
         <h2>
-            Om deze content te bekijken moet je aangemeld zijn<span class="brandColor">!</span>
+            Jij hebt geen rechten om deze content te bekijken<span class="brandColor">!</span> Aangemeld met de juiste account<span class="brandColor">?</span>
         </h2>
     </div>
     <div>
-        <a asp-controller="Auth" asp-action="Login" class="btn brandBtn">Aanmelden</a>
+        <a class="btn brandBtn" asp-controller="Home" asp-action="Index">Home scherm</a>
     </div>
     <div>
-        <a>Terug</a>
+        <a asp-controller="Auth" asp-action="LogOut">@(this.User.Identity.IsAuthenticated ? "Aanmelden met een andere account" : "Aanmelden")</a>
     </div>
 </div>

@@ -42,6 +42,7 @@ namespace Project_WebApp
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Auth/Login";
+                options.AccessDeniedPath = "/Auth/NoAcces";
             });
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -96,7 +97,7 @@ namespace Project_WebApp
             var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
             ApplicationDbContext context = serviceProvider.GetRequiredService<ApplicationDbContext>();
 
-            string[] roleNames = { "Admin", "User"};
+            string[] roleNames = { "Admin"};
             IdentityResult roleResult;
 
             foreach (var roleName in roleNames)
