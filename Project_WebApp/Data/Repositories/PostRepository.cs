@@ -16,11 +16,22 @@ namespace Project_WebApp.Data.Repositories
         }
         public IEnumerable<Post> GetAllPostsIncludeSubjects(Expression<Func<Post, bool>> conditions = null)
         {
-            var list = _dbContext.Set<Post>()
-                .Include(p=>p.PostSubjects)
-                .ThenInclude(ps=>ps.Subject)
-                .ToList();
-            return list;
+
+            if (conditions!=null)
+            {
+                var query = _dbContext.Set<Post>()
+               .Include(p => p.PostSubjects)
+               .ThenInclude(ps => ps.Subject)
+               .Where(conditions);
+                return query.ToList();
+            }
+            else
+            {
+                var query = _dbContext.Set<Post>()
+               .Include(p => p.PostSubjects)
+               .ThenInclude(ps => ps.Subject);
+                return query.ToList();
+            }
         }
         public Post GetPostByIdForPostViewMode(int id)
         
