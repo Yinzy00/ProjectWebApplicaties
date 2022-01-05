@@ -21,7 +21,7 @@ My application has three types of users: non user, user and admin.
 * Edit and delete all messages
 
 ## Example accounts in my school database:
-|Gebruiker |Username ||Email |Wachtwoord|
-|--|--------|--------|----------------|
-|User|User|user@user.be|Usér123__|
-|Admin|Admin|admin@admin.be|Adm!n123__|
+| Gebruiker | Email          | Wachtwoord |
+| --------- |:--------------:| ----------:|
+| User      | user@user.be   | Usér123__  |
+| Admin     | admin@admin.be | Adm!n123__ |
