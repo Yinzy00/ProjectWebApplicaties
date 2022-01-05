@@ -22,6 +22,6 @@ My application has three types of users: non user, user and admin.
 
 ## Example accounts in my school database:
 |Gebruiker |Username ||Email |Wachtwoord|
-|--|--------|----------------|
+|--|--------|--------|----------------|
 |User|User|user@user.be|Usér123__|
 |Admin|Admin|admin@admin.be|Adm!n123__|
