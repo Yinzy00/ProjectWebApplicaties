@@ -16,7 +16,7 @@
                         <div class="dropdown show ">
                             @if (User.Identity.IsAuthenticated)
                             {
-                                @if (Model.User.Id == ViewData["CurrentUser"].ToString())
+                                @if (Model.User.Id == ViewData["CurrentUser"].ToString() || User.IsInRole("Admin"))
                                 {
                                     <span class="MessageMenuButton" role="button" id="MessageMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-chevron-circle-down"></i>
@@ -32,7 +32,7 @@
                                 }
                             }@if (User.Identity.IsAuthenticated)
                             {
-                                @if (Model.User.Id == ViewData["CurrentUser"].ToString())
+                                @if (Model.User.Id == ViewData["CurrentUser"].ToString() || User.IsInRole("Admin"))
                                 {
                                     <span class="MessageMenuButton" role="button" id="MessageMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-chevron-circle-down"></i>
@@ -114,7 +114,7 @@
                             <div class="row">
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    @if (comment.User.Id == ViewData["CurrentUser"].ToString())
+                                    @if (comment.User.Id == ViewData["CurrentUser"].ToString() || User.IsInRole("Admin"))
                                     {
                                         <span class="MessageMenuButton" role="button" id="MessageMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-chevron-circle-down"></i>
@@ -166,7 +166,7 @@
                                 <div class="row">
                                     @if (User.Identity.IsAuthenticated)
                                     {
-                                        @if (subComment.User.Id == ViewData["CurrentUser"].ToString())
+                                        @if (subComment.User.Id == ViewData["CurrentUser"].ToString() || User.IsInRole("Admin"))
                                         {
                                             <span class="MessageMenuButton" role="button" id="MessageMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fas fa-chevron-circle-down"></i>
@@ -217,7 +217,7 @@
                                         <div class="row">
                                             @if (User.Identity.IsAuthenticated)
                                             {
-                                                @if (subSubComment.User.Id == ViewData["CurrentUser"].ToString())
+                                                @if (subSubComment.User.Id == ViewData["CurrentUser"].ToString() || User.IsInRole("Admin"))
                                                 {
                                                     <span class="MessageMenuButton" role="button" id="MessageMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <i class="fas fa-chevron-circle-down"></i>
